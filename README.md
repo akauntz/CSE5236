@@ -1,9 +1,7 @@
-Tic-Tac-Toe for Android
+iCyou for Android
 =======================
 
-Play Tic-Tac-Toe on your Android smartphone! This app also demonstrates how to use various Android 
-programming techniques. It's the main reference for the course:
-[CSE 5236: Mobile Application Development](http://web.cse.ohio-state.edu/~champion/5236).
+A dating app for programmers on your Android smartphone!
 
 License
 =======
