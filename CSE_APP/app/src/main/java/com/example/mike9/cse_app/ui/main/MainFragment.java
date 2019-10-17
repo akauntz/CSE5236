@@ -3,6 +3,8 @@ package com.example.mike9.cse_app.ui.main;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,7 +17,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.mike9.cse_app.MainActivity;
 import com.example.mike9.cse_app.R;
+import com.example.mike9.cse_app.SignUpActivity;
 
 public class MainFragment extends Fragment implements View.OnClickListener {
 
@@ -55,9 +59,11 @@ public class MainFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.signUp_button:
                 //signUp
-                FragmentManager fm = getFragmentManager();
-                Fragment fragment = new SignUpFragment();
-                fm.beginTransaction().replace(R.id.container,fragment).commit(); //addToBackStack("signup_fragment")?
+                Activity activity = getActivity();
+                startActivity(new Intent(activity, SignUpActivity.class));
+//                FragmentManager fm = getFragmentManager();
+//                Fragment fragment = new SignUpFragment();
+//                fm.beginTransaction().replace(R.id.container,fragment).commit(); //addToBackStack("signup_fragment")?
                 break;
             case R.id.matches_button:
                 Log.d("buttonClick", "clicked Button");
