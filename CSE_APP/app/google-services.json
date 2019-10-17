@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "931682225693",
+    "firebase_url": "https://plusplus-92528.firebaseio.com",
+    "project_id": "plusplus-92528",
+    "storage_bucket": "plusplus-92528.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:931682225693:android:f0174795064ef9f72540f4",
+        "android_client_info": {
+          "package_name": "com.example.mike9.cse_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "931682225693-vspkau9c5vj55j4h5o6kc8f0cbasbi2q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC16I-p9MyAtrnj-nCg-tLo7H646FVwzA8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "931682225693-vspkau9c5vj55j4h5o6kc8f0cbasbi2q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
