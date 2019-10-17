@@ -1,5 +1,6 @@
 package com.example.mike9.cse_app.ui.main;
 
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
@@ -32,6 +33,9 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         View v = inflater.inflate(R.layout.main_fragment, container, false);
         Button matchesButton = v.findViewById(R.id.matches_button);
         matchesButton.setOnClickListener((View.OnClickListener) this);
+        Button signUpButton = v.findViewById(R.id.signUp_button);
+        signUpButton.setOnClickListener(this);
+        Button logInButton = v.findViewById(R.id.login_button);
         return v;
     }
 
@@ -45,13 +49,27 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v){
-        Log.d("buttonClick", "clicked Button");
-        int test_int = 7;
-        Log.d("checkpoint3", "Look at the step through here 1");
-        test_int = 12;
-        Log.d("checkpoint3", "Now we step here to 2");
-        test_int = 5;
-        Log.d("checkpoint3", "Now we step here to 3");
+        switch (v.getId()){
+            case R.id.login_button:
+                //logIn
+                break;
+            case R.id.signUp_button:
+                //signUp
+                FragmentManager fm = getFragmentManager();
+                Fragment fragment = new SignUpFragment();
+                fm.beginTransaction().replace(R.id.container,fragment).commit(); //addToBackStack("signup_fragment")?
+                break;
+            case R.id.matches_button:
+                Log.d("buttonClick", "clicked Button");
+                int test_int = 7;
+                Log.d("checkpoint3", "Look at the step through here 1");
+                test_int = 12;
+                Log.d("checkpoint3", "Now we step here to 2");
+                test_int = 5;
+                Log.d("checkpoint3", "Now we step here to 3");
+                break;
+        }
+
     }
 
 }
