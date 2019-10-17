@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.mike9.cse_app.HomeActivity;
 import com.example.mike9.cse_app.MainActivity;
 import com.example.mike9.cse_app.R;
 import com.example.mike9.cse_app.SignUpActivity;
@@ -40,6 +41,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         Button signUpButton = v.findViewById(R.id.signUp_button);
         signUpButton.setOnClickListener(this);
         Button logInButton = v.findViewById(R.id.login_button);
+        logInButton.setOnClickListener(this);
         return v;
     }
 
@@ -53,13 +55,14 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v){
+        Activity activity = getActivity();
         switch (v.getId()){
             case R.id.login_button:
                 //logIn
+                startActivity(new Intent(activity, HomeActivity.class));
                 break;
             case R.id.signUp_button:
                 //signUp
-                Activity activity = getActivity();
                 startActivity(new Intent(activity, SignUpActivity.class));
 //                FragmentManager fm = getFragmentManager();
 //                Fragment fragment = new SignUpFragment();
