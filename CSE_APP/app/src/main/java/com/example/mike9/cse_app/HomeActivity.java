@@ -11,15 +11,18 @@ import com.example.mike9.cse_app.ui.main.HomeFragment;
 import com.example.mike9.cse_app.ui.main.MainFragment;
 
 public class HomeActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle bundle = new Bundle();
+        bundle.putString("EMAIL", getIntent().getExtras().getString("EMAIL"));
+        HomeFragment fragment = new HomeFragment();
+        fragment.setArguments(bundle);
         setContentView(R.layout.main_activity);
         Log.d("onCreate", "Log the onCreate");
-        if (savedInstanceState == null) {
+        if (savedInstanceState == null) { //HomeFragment.newInstance()
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, HomeFragment.newInstance())
+                    .replace(R.id.container, fragment)
                     .commitNow();
         }
     }

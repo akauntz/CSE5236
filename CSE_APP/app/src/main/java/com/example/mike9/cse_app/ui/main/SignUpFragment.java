@@ -43,7 +43,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener  {
         Editable fb_password = password.getText();
         Log.d("data",fb_email.toString());
         Log.d("data",fb_password.toString());
-        //Would create account on firebase here
+        //Would create account on firebase here (insert account fb_email and fb_password email to
         Activity activity = getActivity();
         startActivity(new Intent(activity, MainActivity.class));
     }

@@ -79,5 +79,13 @@
         android:text = "Sign Out"
         android:layout_gravity = "center"/>
 
+    <EditText
+        android:id = "@+id/updatePass_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint = "Enter Updated Password Here"
+        android:layout_gravity="center"
+        android:inputType = "textPassword"/>
+
 
 </LinearLayout>

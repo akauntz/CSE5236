@@ -21,6 +21,8 @@ import com.example.mike9.cse_app.SignUpActivity;
 
 public class HomeFragment extends Fragment implements View.OnClickListener  {
 
+    private String email;
+    private EditText updatePass;
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
@@ -36,6 +38,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener  {
         deleteAccountButton.setOnClickListener(this);
         Button signOutButton = v.findViewById(R.id.signOut_button);
         signOutButton.setOnClickListener(this);
+        email = getArguments().getString("EMAIL");
+        updatePass = v.findViewById(R.id.updatePass_text);
         return v;
     }
 
@@ -44,10 +48,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener  {
         Activity activity = getActivity();
         switch (v.getId()){
             case R.id.updatePass_button:
-                //updatePass
+                //update password assoicated with email in firebase to newPass
+                String newPass = updatePass.getText().toString();
                 break;
             case R.id.deleteAcct_button:
-                //deleteAcct in firebase
+                //delete account associated with email in firebase (delete row with id email)
                 startActivity(new Intent(activity, MainActivity.class));
                 break;
             case R.id.signOut_button:
