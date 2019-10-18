@@ -16,7 +16,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
+import com.example.mike9.cse_app.HomeActivity;
 import com.example.mike9.cse_app.MainActivity;
 import com.example.mike9.cse_app.R;
 import com.example.mike9.cse_app.SignUpActivity;
@@ -24,6 +26,7 @@ import com.example.mike9.cse_app.SignUpActivity;
 public class MainFragment extends Fragment implements View.OnClickListener {
 
     private MainViewModel mViewModel;
+    private EditText email;
 
     public static MainFragment newInstance() {
         return new MainFragment();
@@ -40,6 +43,8 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         Button signUpButton = v.findViewById(R.id.signUp_button);
         signUpButton.setOnClickListener(this);
         Button logInButton = v.findViewById(R.id.login_button);
+        logInButton.setOnClickListener(this);
+        email = v.findViewById(R.id.userLogin);
         return v;
     }
 
@@ -53,13 +58,16 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v){
+        Activity activity = getActivity();
         switch (v.getId()){
             case R.id.login_button:
                 //logIn
+                Intent logInIntent = new Intent(activity, HomeActivity.class);
+                logInIntent.putExtra("EMAIL", email.getText().toString());
+                startActivity(logInIntent);
                 break;
             case R.id.signUp_button:
                 //signUp
-                Activity activity = getActivity();
                 startActivity(new Intent(activity, SignUpActivity.class));
 //                FragmentManager fm = getFragmentManager();
 //                Fragment fragment = new SignUpFragment();

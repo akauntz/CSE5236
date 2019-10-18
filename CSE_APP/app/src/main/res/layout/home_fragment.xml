@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity = "center">
+        <Button
+            android:id = "@+id/updatePass_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update Password"/>
+        <Button
+            android:id="@+id/deleteAcct_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete Account"/>
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "Some cool intro here"
+        android:layout_gravity = "center"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "Settings"
+        android:layout_gravity = "center"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Interested in:"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft = "50dp"
+        android:orientation = "vertical">
+    <CheckBox
+        android:id = "@+id/women_checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Women"/>
+    <CheckBox
+        android:id = "@+id/men_checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Men"/>
+    <CheckBox
+        android:id = "@+id/other_checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Other"/>
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "Profile:"/>
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textOn = "Visible"
+        android:textOff="Invisible"
+        android:layout_gravity = "center"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "Age Range:"/>
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max = "40"
+        android:min = "18"/>
+    <Button
+        android:id = "@+id/signOut_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "Sign Out"
+        android:layout_gravity = "center"/>
+
+    <EditText
+        android:id = "@+id/updatePass_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint = "Enter Updated Password Here"
+        android:layout_gravity="center"
+        android:inputType = "textPassword"/>
+
+
+</LinearLayout>

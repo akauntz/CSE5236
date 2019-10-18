@@ -58,7 +58,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener  {
         Log.d("data",fb_password.toString());
         
         Map<Object, Object> user = new HashMap<>();
-        user.put(email, password);
+        user.put(fb_email, fb_password);
         db.collection("users")
                 .add(user)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -73,7 +73,6 @@ public class SignUpFragment extends Fragment implements View.OnClickListener  {
                         Log.w(TAG, "Error adding document", e);
                     }
                 });
-
 
         Activity activity = getActivity();
         startActivity(new Intent(activity, MainActivity.class));
