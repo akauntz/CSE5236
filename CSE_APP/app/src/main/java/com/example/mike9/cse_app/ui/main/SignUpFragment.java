@@ -47,6 +47,16 @@ public class SignUpFragment extends Fragment implements View.OnClickListener  {
         email = v.findViewById(R.id.signUp_email);
         password = v.findViewById(R.id.signUp_password);
 
+        return v;
+    }
+
+    @Override
+    public void onClick(View v){
+        Editable fb_email = email.getText();
+        Editable fb_password = password.getText();
+        Log.d("data",fb_email.toString());
+        Log.d("data",fb_password.toString());
+        
         Map<Object, Object> user = new HashMap<>();
         user.put(email, password);
         db.collection("users")
@@ -64,16 +74,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener  {
                     }
                 });
 
-        return v;
-    }
 
-    @Override
-    public void onClick(View v){
-        Editable fb_email = email.getText();
-        Editable fb_password = password.getText();
-        Log.d("data",fb_email.toString());
-        Log.d("data",fb_password.toString());
-        //Would create account on firebase here
         Activity activity = getActivity();
         startActivity(new Intent(activity, MainActivity.class));
     }
