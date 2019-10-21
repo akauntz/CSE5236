@@ -20,6 +20,7 @@ import android.widget.EditText;
 
 import com.example.mike9.cse_app.HomeActivity;
 import com.example.mike9.cse_app.MainActivity;
+import com.example.mike9.cse_app.QuestionsActivity;
 import com.example.mike9.cse_app.R;
 import com.example.mike9.cse_app.SignUpActivity;
 
@@ -62,9 +63,13 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()){
             case R.id.login_button:
                 //logIn
-                Intent logInIntent = new Intent(activity, HomeActivity.class);
-                logInIntent.putExtra("EMAIL", email.getText().toString());
-                startActivity(logInIntent);
+//                Intent logInIntent = new Intent(activity, HomeActivity.class);
+//                logInIntent.putExtra("EMAIL", email.getText().toString());
+//                startActivity(logInIntent);
+                Intent questionsIntent = new Intent(activity, QuestionsActivity.class);
+                questionsIntent.putExtra("EMAIL", email.getText().toString());
+                Log.d("myDebug","Starting questions");
+                startActivity(questionsIntent);
                 break;
             case R.id.signUp_button:
                 //signUp
