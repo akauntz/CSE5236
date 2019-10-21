@@ -9,8 +9,11 @@ import android.widget.Button;
 
 import com.example.mike9.cse_app.ui.main.MainFragment;
 import com.example.mike9.cse_app.ui.main.SignUpFragment;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class SignUpActivity extends AppCompatActivity {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
