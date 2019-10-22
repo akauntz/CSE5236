@@ -32,7 +32,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener  {
 
     private String email;
     private EditText updatePass;
-    private Map<Object, Object> user;
+    public Map<String, String> user;
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
@@ -63,7 +63,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener  {
 
                 String newPass = updatePass.getText().toString();
 
-                user.put(v.getId(), newPass);
+                //user.replace(v.getId(), newPass);
                 db.collection("users")
                         .add(user)
                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {

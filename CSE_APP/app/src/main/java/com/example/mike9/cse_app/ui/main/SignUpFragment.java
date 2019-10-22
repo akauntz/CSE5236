@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,7 +31,8 @@ import static android.content.ContentValues.TAG;
 
 public class SignUpFragment extends Fragment implements View.OnClickListener  {
 
-    public EditText email, password;
+    public EditText email, password, age, name;
+    public String gender;
 
     public static SignUpFragment newInstance() {
         return new SignUpFragment();
@@ -37,6 +40,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener  {
 
     // Access a Cloud Firestore instance from your Activity
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    public Map<String, String> user = new HashMap<>();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -46,6 +50,26 @@ public class SignUpFragment extends Fragment implements View.OnClickListener  {
         createAccountButton.setOnClickListener(this);
         email = v.findViewById(R.id.signUp_email);
         password = v.findViewById(R.id.signUp_password);
+        age = v.findViewById(R.id.signUp_age);
+        name = v.findViewById(R.id.signUp_name);
+        /*RadioGroup rg = (R.layout.signup_fragment,container,false);
+        boolean checked = ((RadioButton) rg).isChecked();
+
+        // Check which radio button was clicked
+        switch(rg.getId()) {
+            case R.id.radioFemale:
+                if (checked)
+                    gender="Female";
+                    break;
+            case R.id.radioMale:
+                if (checked)
+                    gender="Male";
+                    break;
+            case R.id.radioOther:
+                if (checked)
+                    gender="Other";
+                    break;
+        }*/
 
         return v;
     }
@@ -54,23 +78,32 @@ public class SignUpFragment extends Fragment implements View.OnClickListener  {
     public void onClick(View v){
         Editable fb_email = email.getText();
         Editable fb_password = password.getText();
+        Editable fb_age = age.getText();
+        Editable fb_name = name.getText();
+        //Editable fb_gender = gender.getText();
         Log.d("data",fb_email.toString());
         Log.d("data",fb_password.toString());
-        
-        Map<Object, Object> user = new HashMap<>();
-        user.put(fb_email.toString(), fb_password.toString());
-        db.collection("users")
-                .add(user)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+        Log.d("data",fb_name.toString());
+        Log.d("data",fb_age.toString());
+       // Log.d("data",gender.toString());
+
+        user.put("email", fb_email.toString());
+        user.put("password", fb_password.toString());
+        user.put("name", fb_name.toString());
+        user.put("age", fb_age.toString());
+       // user.put("gender", gender);
+        db.collection("users").document(fb_email.toString())
+                .set(user)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error adding document", e);
+                        Log.w(TAG, "Error writing document", e);
                     }
                 });
 
