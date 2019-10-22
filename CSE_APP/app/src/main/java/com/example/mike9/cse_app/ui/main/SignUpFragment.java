@@ -58,7 +58,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener  {
         Log.d("data",fb_password.toString());
         
         Map<Object, Object> user = new HashMap<>();
-        user.put(fb_email, fb_password);
+        user.put(fb_email.toString(), fb_password.toString());
         db.collection("users")
                 .add(user)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {

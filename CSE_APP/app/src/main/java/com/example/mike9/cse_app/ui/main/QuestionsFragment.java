@@ -37,7 +37,6 @@ public class QuestionsFragment extends Fragment implements View.OnClickListener 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState){
-        Log.d("myDebug","Questions fragment");
         View v = inflater.inflate(R.layout.questions_fragment,container,false);
         questions  = getResources().getStringArray(R.array.matching_questions);
         questionNum = 0;

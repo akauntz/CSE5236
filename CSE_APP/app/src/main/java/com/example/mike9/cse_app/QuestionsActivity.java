@@ -15,9 +15,7 @@ import com.example.mike9.cse_app.ui.main.SignUpFragment;
 public class QuestionsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d("myDebug","before super");
         super.onCreate(savedInstanceState);
-        Log.d("myDebug","after super");
         Bundle bundle = new Bundle();
         bundle.putString("EMAIL", getIntent().getExtras().getString("EMAIL"));
         QuestionsFragment fragment = new QuestionsFragment();
@@ -27,7 +25,6 @@ public class QuestionsActivity extends AppCompatActivity {
 //        HomeFragment fragment = new HomeFragment();
 //        fragment.setArguments(bundle);
         setContentView(R.layout.main_activity);
-        Log.d("myDebug", "Starting questionsFragment");
         if (savedInstanceState == null) { //HomeFragment.newInstance()
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, fragment)

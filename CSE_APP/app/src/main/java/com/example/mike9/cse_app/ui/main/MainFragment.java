@@ -68,7 +68,6 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 //                startActivity(logInIntent);
                 Intent questionsIntent = new Intent(activity, QuestionsActivity.class);
                 questionsIntent.putExtra("EMAIL", email.getText().toString());
-                Log.d("myDebug","Starting questions");
                 startActivity(questionsIntent);
                 break;
             case R.id.signUp_button:
