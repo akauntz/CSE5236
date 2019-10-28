@@ -61,41 +61,21 @@ public class HomeFragment extends Fragment implements View.OnClickListener  {
         switch (v.getId()){
             case R.id.updatePass_button:
 
-                String newPass = updatePass.getText().toString();
+                //String newPass = updatePass.getText().toString();
+                String newPass = "hello";
 
-                //user.replace(v.getId(), newPass);
-                db.collection("users")
-                        .add(user)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.w(TAG, "Error adding document", e);
-                            }
-                        });
+                user.put("password", newPass);
+                db.collection("users").document("g")
+                        .delete();
+                db.collection("users").document("g").set(user);
+
+
 
                 break;
             case R.id.deleteAcct_button:
-                user.remove(v.getId());
-                db.collection("users")
-                        .add(user)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.w(TAG, "Error adding document", e);
-                            }
-                        });
+                //user.remove(v.getId());
+                db.collection("users").document("g")
+                        .delete();
 
 
                 startActivity(new Intent(activity, MainActivity.class));
