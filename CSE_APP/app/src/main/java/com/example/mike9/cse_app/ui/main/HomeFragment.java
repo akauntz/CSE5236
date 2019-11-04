@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.mike9.cse_app.MainActivity;
+import com.example.mike9.cse_app.MatchesActivity;
 import com.example.mike9.cse_app.R;
 import com.example.mike9.cse_app.SignUpActivity;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -50,6 +51,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener  {
         deleteAccountButton.setOnClickListener(this);
         Button signOutButton = v.findViewById(R.id.signOut_button);
         signOutButton.setOnClickListener(this);
+        Button getMatchesButton = v.findViewById(R.id.check_matches_button);
+        getMatchesButton.setOnClickListener(this);
         email = getArguments().getString("EMAIL");
         updatePass = v.findViewById(R.id.updatePass_text);
         return v;
@@ -103,6 +106,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener  {
             case R.id.signOut_button:
                 startActivity(new Intent(activity, MainActivity.class));
                 break;
+
+            case R.id.check_matches_button:
+                startActivity(new Intent(activity, MatchesActivity.class));
+                break;
+
         }
     }
 }
