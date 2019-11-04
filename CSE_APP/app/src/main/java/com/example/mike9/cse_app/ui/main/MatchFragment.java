@@ -16,7 +16,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.mike9.cse_app.MainActivity;
-import com.example.mike9.cse_app.MatchActivity;
 import com.example.mike9.cse_app.R;
 import com.example.mike9.cse_app.SignUpActivity;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -29,14 +28,14 @@ import java.util.Map;
 
 import static android.content.ContentValues.TAG;
 
-public class MatchesFragment extends Fragment implements View.OnClickListener  {
+public class MatchFragment extends Fragment implements View.OnClickListener  {
 
     private String email;
     private EditText updatePass;
     private Map<Object, Object> user;
 
-    public static MatchesFragment newInstance() {
-        return new MatchesFragment();
+    public static MatchFragment newInstance() {
+        return new MatchFragment();
     }
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -45,8 +44,7 @@ public class MatchesFragment extends Fragment implements View.OnClickListener  {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState){
         Log.d("matches","hereee");
-        View v = inflater.inflate(R.layout.matches_fragment,container,false);
-        startActivity(new Intent(getActivity(), MatchActivity.class));
+        View v = inflater.inflate(R.layout.match_fragment,container,false);;
         return v;
     }
 

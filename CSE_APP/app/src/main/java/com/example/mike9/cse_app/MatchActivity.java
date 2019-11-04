@@ -9,9 +9,10 @@ import android.widget.Button;
 
 import com.example.mike9.cse_app.ui.main.HomeFragment;
 import com.example.mike9.cse_app.ui.main.MainFragment;
+import com.example.mike9.cse_app.ui.main.MatchFragment;
 import com.example.mike9.cse_app.ui.main.MatchesFragment;
 
-public class MatchesActivity extends AppCompatActivity {
+public class MatchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,12 +20,12 @@ public class MatchesActivity extends AppCompatActivity {
         //bundle.putString("EMAIL", getIntent().getExtras().getString("EMAIL"));
         //HomeFragment fragment = new HomeFragment();
         //fragment.setArguments(bundle);
-        setContentView(R.layout.main_activity);
+        setContentView(R.layout.matches_fragment);
         Log.d("onCreate", "Log the onCreate Matches");
         if (savedInstanceState == null) { //HomeFragment.newInstance()
             Log.d("here", "hereMatch");
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, MatchesFragment.newInstance())
+                    .replace(R.id.matches, MatchFragment.newInstance())
                     .commitNow();
 
         }
