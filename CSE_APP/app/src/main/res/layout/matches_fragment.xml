@@ -7,8 +7,9 @@
     android:layout_height="wrap_content"
     android:text = "Top Matches"
     android:gravity="center"/>
-    <FrameLayout
+    <LinearLayout
         android:id="@+id/matches"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"/>
 </LinearLayout>
