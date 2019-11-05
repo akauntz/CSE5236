@@ -11,6 +11,17 @@ import com.example.mike9.cse_app.ui.main.HomeFragment;
 import com.example.mike9.cse_app.ui.main.MainFragment;
 import com.example.mike9.cse_app.ui.main.MatchFragment;
 import com.example.mike9.cse_app.ui.main.MatchesFragment;
+/*
+*
+*
+*
+*
+*NOTE: I THINK WE DO NOT NEED THIS ACTIVITY ANYMORE, BUT TOO SCARED TO DELETE RN
+*
+*
+*
+*
+*/
 
 public class MatchActivity extends AppCompatActivity {
     @Override

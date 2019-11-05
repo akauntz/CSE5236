@@ -10,9 +10,11 @@ import android.widget.Button;
 import com.example.mike9.cse_app.ui.main.HomeFragment;
 import com.example.mike9.cse_app.ui.main.MainFragment;
 import com.example.mike9.cse_app.ui.main.MatchFragment;
+import com.example.mike9.cse_app.ui.main.MatchedFragment;
+import com.example.mike9.cse_app.ui.main.MatchedPairFragment;
 import com.example.mike9.cse_app.ui.main.MatchesFragment;
 
-public class MatchesActivity extends AppCompatActivity {
+public class MatchedActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +27,7 @@ public class MatchesActivity extends AppCompatActivity {
         if (savedInstanceState == null) { //HomeFragment.newInstance()
             Log.d("here", "hereMatch");
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, MatchesFragment.newInstance())
+                    .replace(R.id.container, MatchedFragment.newInstance())
                     .commitNow();
             showMatches();
 
@@ -49,21 +51,24 @@ public class MatchesActivity extends AppCompatActivity {
         Log.d("Match", "in showMatches");
         int num_matches = 3;
         String first_name;
+        String email;
         int percent_match;
         Bundle bundle;
-        MatchFragment fragment;
+        MatchedPairFragment fragment;
         //setUp bundle of name and match %
         //fragment.setArguments(bundle);
         for(int i = 0; i<num_matches; i++){
-            fragment = new MatchFragment();
+            fragment = new MatchedPairFragment();
             bundle = new Bundle();
             //get actual name and percent
             first_name = "first";
             percent_match = 76;
+            email = "email@osu.edu";
             bundle.putString("FIRSTNAME", first_name);
             bundle.putInt("PERCENT", percent_match);
+            bundle.putString("EMAIL", email);
             fragment.setArguments(bundle);
-            getSupportFragmentManager().beginTransaction().add(R.id.matches, fragment).commitNow();
+            getSupportFragmentManager().beginTransaction().add(R.id.matched_list, fragment).commitNow();
         }
     }
 }

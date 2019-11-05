@@ -15,8 +15,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.mike9.cse_app.HomeActivity;
 import com.example.mike9.cse_app.MainActivity;
 import com.example.mike9.cse_app.MatchActivity;
+import com.example.mike9.cse_app.MatchedActivity;
 import com.example.mike9.cse_app.R;
 import com.example.mike9.cse_app.SignUpActivity;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -40,21 +42,36 @@ public class MatchesFragment extends Fragment implements View.OnClickListener  {
     }
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    Button returnHomeButton;
+    Button seeMatchedButton;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState){
         Log.d("matches","hereee");
         View v = inflater.inflate(R.layout.matches_fragment,container,false);
-        startActivity(new Intent(getActivity(), MatchActivity.class));
+        returnHomeButton = v.findViewById(R.id.return_home_button);
+        seeMatchedButton = v.findViewById(R.id.check_matched_button);
+        returnHomeButton.setOnClickListener(this);
+        seeMatchedButton.setOnClickListener(this);
+        //startActivity(new Intent(getActivity(), MatchActivity.class));
         return v;
     }
 
     @Override
     public void onClick(View v){
         Activity activity = getActivity();
+        Log.d("matches","did the onclick");
         switch (v.getId()){
-
+            case R.id.return_home_button:
+                Intent homeIntent = new Intent(activity, HomeActivity.class);
+                homeIntent.putExtra("EMAIL", "test"); // fill in actual email
+                Log.d("matches","got the ID");
+                startActivity(homeIntent);
+                break;
+            case R.id.check_matched_button:
+                startActivity(new Intent(activity, MatchedActivity.class));
+                break;
         }
     }
 }

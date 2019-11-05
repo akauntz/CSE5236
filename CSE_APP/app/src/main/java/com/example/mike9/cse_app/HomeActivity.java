@@ -20,7 +20,7 @@ public class HomeActivity extends AppCompatActivity {
         fragment.setArguments(bundle);
         setContentView(R.layout.main_activity);
         Log.d("onCreate", "Log the onCreate");
-        if (savedInstanceState == null) { //HomeFragment.newInstance()
+        if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, fragment)
                     .commitNow();
