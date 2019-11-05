@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.mike9.cse_app.MainActivity;
+import com.example.mike9.cse_app.MatchesActivity;
 import com.example.mike9.cse_app.R;
 import com.example.mike9.cse_app.SignUpActivity;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -43,6 +44,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener  {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState){
+        //TODO: fix the screen + check the default preferences for the user/move those to separate screen
         View v = inflater.inflate(R.layout.home_fragment,container,false);
         Button updatePasswordButton = v.findViewById(R.id.updatePass_button);
         updatePasswordButton.setOnClickListener(this);
@@ -50,6 +52,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener  {
         deleteAccountButton.setOnClickListener(this);
         Button signOutButton = v.findViewById(R.id.signOut_button);
         signOutButton.setOnClickListener(this);
+        Button getMatchesButton = v.findViewById(R.id.check_matches_button);
+        getMatchesButton.setOnClickListener(this);
         email = getArguments().getString("EMAIL");
         updatePass = v.findViewById(R.id.updatePass_text);
         return v;
@@ -103,6 +107,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener  {
             case R.id.signOut_button:
                 startActivity(new Intent(activity, MainActivity.class));
                 break;
+
+            case R.id.check_matches_button:
+                Intent matchesIntent = new Intent(activity, MatchesActivity.class);
+                matchesIntent.putExtra("EMAIL", email);
+                startActivity(matchesIntent);
+                break;
+
         }
     }
 }

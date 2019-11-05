@@ -18,12 +18,9 @@ public class QuestionsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Bundle bundle = new Bundle();
         bundle.putString("EMAIL", getIntent().getExtras().getString("EMAIL"));
+        bundle.putInt("NUMQUESTIONS", getIntent().getExtras().getInt("NUMQUESTIONS"));
         QuestionsFragment fragment = new QuestionsFragment();
         fragment.setArguments(bundle);
-//        Bundle bundle = new Bundle();
-//        bundle.putString("EMAIL", getIntent().getExtras().getString("EMAIL"));
-//        HomeFragment fragment = new HomeFragment();
-//        fragment.setArguments(bundle);
         setContentView(R.layout.main_activity);
         if (savedInstanceState == null) { //HomeFragment.newInstance()
             getSupportFragmentManager().beginTransaction()

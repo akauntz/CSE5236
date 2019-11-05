@@ -39,17 +39,18 @@ public class QuestionsFragment extends Fragment implements View.OnClickListener 
                              @Nullable Bundle savedInstanceState){
         View v = inflater.inflate(R.layout.questions_fragment,container,false);
         questions  = getResources().getStringArray(R.array.matching_questions);
-        questionNum = 0;
+        email = getArguments().getString("EMAIL");
+        questionNum = getArguments().getInt("NUMQUESTIONS");
         questionText = v.findViewById(R.id.questionText);
         questionText.setText(questions[questionNum]);
         Button submitButton = v.findViewById(R.id.submitQuestion_button);
         submitButton.setOnClickListener(this);
-        email = getArguments().getString("EMAIL");
         return v;
     }
 
     @Override
     public void onClick(View v){
+        //TODO: make sure they selected an answer
         Activity activity = getActivity();
         questionNum++;
         if(questionNum < questions.length){
