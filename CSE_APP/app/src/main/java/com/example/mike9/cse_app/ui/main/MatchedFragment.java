@@ -33,8 +33,7 @@ import static android.content.ContentValues.TAG;
 public class MatchedFragment extends Fragment implements View.OnClickListener  {
 
     private String email;
-    private EditText updatePass;
-    private Map<Object, Object> user;
+
 
     public static MatchedFragment newInstance() {
         return new MatchedFragment();
@@ -46,22 +45,20 @@ public class MatchedFragment extends Fragment implements View.OnClickListener  {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState){
-        Log.d("matches","hereee");
         View v = inflater.inflate(R.layout.matched_fragment,container,false);
         returnHomeButton = v.findViewById(R.id.return_home_button_2);
         returnHomeButton.setOnClickListener(this);
+        email = getArguments().getString("EMAIL");
         return v;
     }
 
     @Override
     public void onClick(View v){
         Activity activity = getActivity();
-        Log.d("matches","did the onclick");
         switch (v.getId()){
             case R.id.return_home_button_2:
                 Intent homeIntent = new Intent(activity, HomeActivity.class);
-                homeIntent.putExtra("EMAIL", "test"); // fill in actual email
-                Log.d("matches","got the ID");
+                homeIntent.putExtra("EMAIL",email);
                 startActivity(homeIntent);
                 break;
         }

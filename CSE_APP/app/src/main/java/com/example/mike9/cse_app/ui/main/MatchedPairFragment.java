@@ -50,7 +50,6 @@ public class MatchedPairFragment extends Fragment implements View.OnClickListene
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState){
-        Log.d("matches","hereee");
         View v = inflater.inflate(R.layout.matched_pair_fragment,container,false);;
         String name = getArguments().getString("FIRSTNAME");
         int percent = getArguments().getInt("PERCENT");
@@ -58,7 +57,6 @@ public class MatchedPairFragment extends Fragment implements View.OnClickListene
         nameText = v.findViewById(R.id.matched_first_name);
         percentText = v.findViewById(R.id.matched_match_percent);
         emailText = v.findViewById(R.id.matched_contact);
-        Log.d("matches","b4 set");
         setMatch(name,email,percent);
         return v;
     }
@@ -78,12 +76,8 @@ public class MatchedPairFragment extends Fragment implements View.OnClickListene
     }
 
     public void setMatch(String name, String email, int percent) {
-        Log.d("matches","inSet");
         nameText.setText(name);
-        Log.d("matches","didName");
         emailText.setText(email);
-        Log.d("matches", "didEmail");
         percentText.setText(Integer.toString(percent));
-        Log.d("matches","didPercent");
     }
 }

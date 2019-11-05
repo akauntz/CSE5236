@@ -44,6 +44,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener  {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState){
+        //TODO: fix the screen + check the default preferences for the user/move those to separate screen
         View v = inflater.inflate(R.layout.home_fragment,container,false);
         Button updatePasswordButton = v.findViewById(R.id.updatePass_button);
         updatePasswordButton.setOnClickListener(this);

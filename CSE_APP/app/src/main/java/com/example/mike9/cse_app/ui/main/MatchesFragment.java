@@ -33,7 +33,7 @@ import static android.content.ContentValues.TAG;
 
 public class MatchesFragment extends Fragment implements View.OnClickListener  {
 
-    //private String email;
+    private String email;
 
 
     public static MatchesFragment newInstance() {
@@ -47,30 +47,28 @@ public class MatchesFragment extends Fragment implements View.OnClickListener  {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState){
-        Log.d("matches","hereee");
         View v = inflater.inflate(R.layout.matches_fragment,container,false);
         returnHomeButton = v.findViewById(R.id.return_home_button);
         seeMatchedButton = v.findViewById(R.id.check_matched_button);
         returnHomeButton.setOnClickListener(this);
         seeMatchedButton.setOnClickListener(this);
-        //email = getArguments().getString("EMAIL");
-        //startActivity(new Intent(getActivity(), MatchActivity.class));
+        email = getArguments().getString("EMAIL");
         return v;
     }
 
     @Override
     public void onClick(View v){
         Activity activity = getActivity();
-        Log.d("matches","did the onclick");
         switch (v.getId()){
             case R.id.return_home_button:
                 Intent homeIntent = new Intent(activity, HomeActivity.class);
-                homeIntent.putExtra("EMAIL", "test"); // fill in actual email
-                Log.d("matches","got the ID");
+                homeIntent.putExtra("EMAIL", email);
                 startActivity(homeIntent);
                 break;
             case R.id.check_matched_button:
-                startActivity(new Intent(activity, MatchedActivity.class));
+                Intent matchedIntent = new Intent(activity, MatchedActivity.class);
+                matchedIntent.putExtra("EMAIL", email);
+                startActivity(matchedIntent);
                 break;
         }
     }

@@ -13,21 +13,22 @@ import com.example.mike9.cse_app.ui.main.MatchFragment;
 import com.example.mike9.cse_app.ui.main.MatchesFragment;
 
 public class MatchesActivity extends AppCompatActivity {
+    String email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*Bundle bundle = new Bundle();
-        bundle.putString("EMAIL", getIntent().getExtras().getString("EMAIL"));
+        Bundle bundle = new Bundle();
+        email = getIntent().getExtras().getString("EMAIL");
+        bundle.putString("EMAIL", email);
         MatchesFragment fragment = new MatchesFragment();
-        fragment.setArguments(bundle);*/
+        fragment.setArguments(bundle);
         setContentView(R.layout.main_activity);
         Log.d("onCreate", "Log the onCreate Matches");
-        if (savedInstanceState == null) { //HomeFragment.newInstance()
-            Log.d("here", "hereMatch");
+        if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, MatchesFragment.newInstance())
+                    .replace(R.id.container, fragment)
                     .commitNow();
-            showMatches(getIntent().getExtras().getString("EMAIL"));
+            showMatches(email);
 
         }
     }
@@ -44,10 +45,9 @@ public class MatchesActivity extends AppCompatActivity {
         Log.d("onResume", "Log the onResume");
     }
 
-    protected void showMatches(String email){
+    protected void showMatches(String userEmail){
         //CHANGE TO GET ACTUAL NUMBER OF MATCHES
-        Log.d("Match", "in showMatches");
-        int num_matches = 3; //TODO: change to find total number of potential matches with email
+        int num_matches = 3; //TODO: change to find total number of potential matches with userEmail
         String first_name;
         int percent_match;
         Bundle bundle;

@@ -15,21 +15,22 @@ import com.example.mike9.cse_app.ui.main.MatchedPairFragment;
 import com.example.mike9.cse_app.ui.main.MatchesFragment;
 
 public class MatchedActivity extends AppCompatActivity {
+    String email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Bundle bundle = new Bundle();
-        //bundle.putString("EMAIL", getIntent().getExtras().getString("EMAIL"));
-        //HomeFragment fragment = new HomeFragment();
-        //fragment.setArguments(bundle);
+        email = getIntent().getExtras().getString("EMAIL");
+        Bundle bundle = new Bundle();
+        bundle.putString("EMAIL", getIntent().getExtras().getString("EMAIL"));
+        MatchedFragment fragment = new MatchedFragment();
+        fragment.setArguments(bundle);
         setContentView(R.layout.main_activity);
         Log.d("onCreate", "Log the onCreate Matches");
-        if (savedInstanceState == null) { //HomeFragment.newInstance()
-            Log.d("here", "hereMatch");
+        if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, MatchedFragment.newInstance())
+                    .replace(R.id.container, fragment)
                     .commitNow();
-            showMatches();
+            showMatches(email);
 
         }
     }
@@ -46,12 +47,12 @@ public class MatchedActivity extends AppCompatActivity {
         Log.d("onResume", "Log the onResume");
     }
 
-    protected void showMatches(){
+    protected void showMatches(String userEmail){
         //CHANGE TO GET ACTUAL NUMBER OF MATCHES
         Log.d("Match", "in showMatches");
-        int num_matches = 3;
+        int num_matches = 3; //TODO: change to get the number of actual matches with userEmail
         String first_name;
-        String email;
+        String matchedEmail;
         int percent_match;
         Bundle bundle;
         MatchedPairFragment fragment;
@@ -61,12 +62,12 @@ public class MatchedActivity extends AppCompatActivity {
             fragment = new MatchedPairFragment();
             bundle = new Bundle();
             //get actual name and percent
-            first_name = "first";
-            percent_match = 76;
-            email = "email@osu.edu";
+            first_name = "first"; //TODO: change to get the first name of match i
+            percent_match = 76; //TODO: change to get the match % of match i
+            matchedEmail = "email@osu.edu"; //TODO: change to get the (other) email of match i
             bundle.putString("FIRSTNAME", first_name);
             bundle.putInt("PERCENT", percent_match);
-            bundle.putString("EMAIL", email);
+            bundle.putString("EMAIL", matchedEmail);
             fragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().add(R.id.matched_list, fragment).commitNow();
         }

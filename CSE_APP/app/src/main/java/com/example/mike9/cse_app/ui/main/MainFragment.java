@@ -37,7 +37,6 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        Log.d("onCreate", "Log the onCreateView MainFragment");
         View v = inflater.inflate(R.layout.main_fragment, container, false);
         Button matchesButton = v.findViewById(R.id.matches_button);
         matchesButton.setOnClickListener((View.OnClickListener) this);
@@ -51,24 +50,32 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        Log.d("onCreate", "Log the onActivityCreated MainFragment");
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
-        // TODO: Use the ViewModel
+        // TODO: Use the ViewModel? -> not my TODO but leaving in case one of you two
+        //I think this was just part of the template, so don't think we need anything here
     }
 
     @Override
     public void onClick(View v){
+        //TODO: need to verify that the user has acct, right password before signing in
         Activity activity = getActivity();
         switch (v.getId()){
             case R.id.login_button:
-                //logIn
-//                Intent logInIntent = new Intent(activity, HomeActivity.class);
-//                logInIntent.putExtra("EMAIL", email.getText().toString());
-//                startActivity(logInIntent);
-                Intent questionsIntent = new Intent(activity, QuestionsActivity.class);
-                questionsIntent.putExtra("EMAIL", email.getText().toString());
-                startActivity(questionsIntent);
+                String userEmail = email.getText().toString();
+                String questions[]  = getResources().getStringArray(R.array.matching_questions);
+                int questionNum = 3; //TODO: change this to the num questions answered by the user
+                if(questionNum < questions.length){
+                    Intent questionsIntent = new Intent(activity, QuestionsActivity.class);
+                    questionsIntent.putExtra("EMAIL", email.getText().toString());
+                    questionsIntent.putExtra("NUMQUESTIONS", questionNum);
+                    startActivity(questionsIntent);
+                } else {
+                    //logIn
+                Intent logInIntent = new Intent(activity, HomeActivity.class);
+                logInIntent.putExtra("EMAIL", email.getText().toString());
+                startActivity(logInIntent);
+                }
                 break;
             case R.id.signUp_button:
                 //signUp
