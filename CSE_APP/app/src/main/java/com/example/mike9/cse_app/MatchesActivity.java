@@ -16,10 +16,10 @@ public class MatchesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Bundle bundle = new Bundle();
-        //bundle.putString("EMAIL", getIntent().getExtras().getString("EMAIL"));
-        //HomeFragment fragment = new HomeFragment();
-        //fragment.setArguments(bundle);
+        /*Bundle bundle = new Bundle();
+        bundle.putString("EMAIL", getIntent().getExtras().getString("EMAIL"));
+        MatchesFragment fragment = new MatchesFragment();
+        fragment.setArguments(bundle);*/
         setContentView(R.layout.main_activity);
         Log.d("onCreate", "Log the onCreate Matches");
         if (savedInstanceState == null) { //HomeFragment.newInstance()
@@ -27,7 +27,7 @@ public class MatchesActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, MatchesFragment.newInstance())
                     .commitNow();
-            showMatches();
+            showMatches(getIntent().getExtras().getString("EMAIL"));
 
         }
     }
@@ -44,10 +44,10 @@ public class MatchesActivity extends AppCompatActivity {
         Log.d("onResume", "Log the onResume");
     }
 
-    protected void showMatches(){
+    protected void showMatches(String email){
         //CHANGE TO GET ACTUAL NUMBER OF MATCHES
         Log.d("Match", "in showMatches");
-        int num_matches = 3;
+        int num_matches = 3; //TODO: change to find total number of potential matches with email
         String first_name;
         int percent_match;
         Bundle bundle;
@@ -58,8 +58,8 @@ public class MatchesActivity extends AppCompatActivity {
             fragment = new MatchFragment();
             bundle = new Bundle();
             //get actual name and percent
-            first_name = "first";
-            percent_match = 76;
+            first_name = "first"; //TODO: change to get firstname of match #i
+            percent_match = 76; //TODO: change to get match % of match #i
             bundle.putString("FIRSTNAME", first_name);
             bundle.putInt("PERCENT", percent_match);
             fragment.setArguments(bundle);

@@ -108,7 +108,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener  {
                 break;
 
             case R.id.check_matches_button:
-                startActivity(new Intent(activity, MatchesActivity.class));
+                Intent matchesIntent = new Intent(activity, MatchesActivity.class);
+                matchesIntent.putExtra("EMAIL", email);
+                startActivity(matchesIntent);
                 break;
 
         }
