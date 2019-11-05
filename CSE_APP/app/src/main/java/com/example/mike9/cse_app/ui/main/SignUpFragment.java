@@ -52,6 +52,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener  {
         password = v.findViewById(R.id.signUp_password);
         age = v.findViewById(R.id.signUp_age);
         name = v.findViewById(R.id.signUp_name);
+        //gender = v.findViewById(R.id.signUp_name);
         /*RadioGroup rg = (R.layout.signup_fragment,container,false);
         boolean checked = ((RadioButton) rg).isChecked();
 
@@ -72,6 +73,9 @@ public class SignUpFragment extends Fragment implements View.OnClickListener  {
         }*/
 
         return v;
+    }
+    public void onRadioButtonClicked(View v){
+
     }
 
     @Override
