@@ -56,9 +56,9 @@ public class MatchFragment extends Fragment implements View.OnClickListener  {
         int percent = getArguments().getInt("PERCENT");
         nameText = v.findViewById(R.id.first_name);
         percentText = v.findViewById(R.id.match_percent);
-        noMatchButton = v.findViewById(R.id.no_match_button);
+        //noMatchButton = v.findViewById(R.id.no_match_button);
         yesMatchButton = v.findViewById(R.id.matched_button);
-        noMatchButton.setOnClickListener(this);
+        //noMatchButton.setOnClickListener(this);
         yesMatchButton.setOnClickListener(this);
         setMatch(name,percent);
         return v;
@@ -68,12 +68,13 @@ public class MatchFragment extends Fragment implements View.OnClickListener  {
     public void onClick(View v){
         Activity activity = getActivity();
         switch (v.getId()){
-            case R.id.no_match_button:
-                startActivity(new Intent(getActivity(), MatchActivity.class));
+            //case R.id.no_match_button:
+                //startActivity(new Intent(getActivity(), MatchActivity.class));
                 //delete/flag potential match as nada
-                break;
+                //break;
             case R.id.matched_button:
                 //flag as lovebirds and move to different match
+
                 break;
         }
     }

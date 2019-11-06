@@ -103,7 +103,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener  {
             //startActivity(new Intent(activity, SignUpActivity.class));
         } else if (!fb_email.toString().contains("@")) {
 
-        //} else if (Integer.getInteger(fb_age.toString()) < 18) {
+        } else if (Integer.parseInt(fb_age.toString()) < 18) {
 
         } else {
 

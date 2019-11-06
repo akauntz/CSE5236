@@ -19,7 +19,7 @@ import static android.content.ContentValues.TAG;
 
 public class MatchCalculator {
 
-    static public void Calc (String loc, String email){
+    static public void Calc (String loc, final String email){
 
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -47,13 +47,13 @@ public class MatchCalculator {
                                             Map<String, Float> top10 = new HashMap<>();
 
                                             for (QueryDocumentSnapshot document2 : task.getResult()) {
-                                                if (document2.get("answered?").equals("true")) {
+                                                String otherEmail = document2.get("email").toString();
+                                                if (document2.get("answered?").equals("true") && !otherEmail.equals(email)) {
                                                     Log.d(TAG, document2.getId() + " => " + document2.getData());
 
                                                     String q1 = document2.get("q1").toString();
                                                     String q2 = document2.get("q2").toString();
                                                     String q3 = document2.get("q3").toString();
-                                                    String otherEmail = document2.get("email").toString();
 
                                                     float comp = 0;
                                                     if (userQ1.equals(q1)) {
@@ -66,6 +66,7 @@ public class MatchCalculator {
                                                         comp += 100;
                                                     }
                                                     comp /= 300;
+                                                    comp *= 100;
 
                                                     float minVal = 400;
                                                     String keyReplace = "";
@@ -84,6 +85,7 @@ public class MatchCalculator {
                                                         top10.put(otherEmail, comp);
                                                     }
                                                     docRef.update("top10", top10);
+                                                    docRef.update("matchSize", top10.size());
 
                                                 }
                                             }
