@@ -23,15 +23,28 @@ import com.example.mike9.cse_app.MainActivity;
 import com.example.mike9.cse_app.QuestionsActivity;
 import com.example.mike9.cse_app.R;
 import com.example.mike9.cse_app.SignUpActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Map;
+
+import static android.content.ContentValues.TAG;
 
 public class MainFragment extends Fragment implements View.OnClickListener {
 
     private MainViewModel mViewModel;
-    private EditText email;
+    private EditText email, password;
 
     public static MainFragment newInstance() {
         return new MainFragment();
     }
+    public Map<String, String> user;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Nullable
     @Override
@@ -45,6 +58,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         Button logInButton = v.findViewById(R.id.login_button);
         logInButton.setOnClickListener(this);
         email = v.findViewById(R.id.userLogin);
+        password = v.findViewById(R.id.userPassword);
         return v;
     }
 
@@ -58,24 +72,46 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v){
-        //TODO: need to verify that the user has acct, right password before signing in
-        Activity activity = getActivity();
+        final Activity activity = getActivity();
         switch (v.getId()){
             case R.id.login_button:
-                String userEmail = email.getText().toString();
-                String questions[]  = getResources().getStringArray(R.array.matching_questions);
-                int questionNum = 3; //TODO: change this to the num questions answered by the user
-                if(questionNum < questions.length){
-                    Intent questionsIntent = new Intent(activity, QuestionsActivity.class);
-                    questionsIntent.putExtra("EMAIL", email.getText().toString());
-                    questionsIntent.putExtra("NUMQUESTIONS", questionNum);
-                    startActivity(questionsIntent);
-                } else {
-                    //logIn
-                Intent logInIntent = new Intent(activity, HomeActivity.class);
-                logInIntent.putExtra("EMAIL", email.getText().toString());
-                startActivity(logInIntent);
-                }
+                final String userEmail = email.getText().toString();
+                DocumentReference docRef = db.collection("users").document(userEmail);
+                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>(){
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                                String storedPassword = document.get("password").toString();
+
+                                if(storedPassword.equals(password.getText().toString())) {
+                                    Log.d(TAG, "Correct password");
+                                    String questions[] = getResources().getStringArray(R.array.matching_questions);
+                                    int questionNum = 1; //TODO: change this to the num questions answered by the user
+                                    if (questionNum < questions.length) {
+                                        Intent questionsIntent = new Intent(activity, QuestionsActivity.class);
+                                        questionsIntent.putExtra("EMAIL", email.getText().toString());
+                                        questionsIntent.putExtra("NUMQUESTIONS", questionNum);
+                                        startActivity(questionsIntent);
+                                    } else {
+                                        //logIn
+                                        Intent logInIntent = new Intent(activity, HomeActivity.class);
+                                        logInIntent.putExtra("EMAIL", email.getText().toString());
+                                        startActivity(logInIntent);
+                                    }
+                                } else{
+                                    Log.d(TAG, "Password Mismatch");
+                                }
+
+                            } else {
+                                Log.d(TAG, "No such document");
+                            }
+                        } else {Log.d(TAG, "get failed with ", task.getException());
+                        }
+                    }
+                });
+
                 break;
             case R.id.signUp_button:
                 //signUp

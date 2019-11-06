@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,9 +20,11 @@ import com.example.mike9.cse_app.MainActivity;
 import com.example.mike9.cse_app.MatchesActivity;
 import com.example.mike9.cse_app.R;
 import com.example.mike9.cse_app.SignUpActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -33,7 +36,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener  {
 
     private String email;
     private EditText updatePass;
-    public Map<String, String> user;
+    TextView locationText;
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
@@ -67,37 +70,24 @@ public class HomeFragment extends Fragment implements View.OnClickListener  {
 
                 String newPass = updatePass.getText().toString();
 
-                //user.replace(v.getId(), newPass);
-                db.collection("users")
-                        .add(user)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.w(TAG, "Error adding document", e);
-                            }
-                        });
+                DocumentReference docRef = db.collection("users").document(email);
+                docRef.update("password", newPass);
 
                 break;
+
             case R.id.deleteAcct_button:
-                user.remove(v.getId());
-                db.collection("users")
-                        .add(user)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                db.collection("users").document(email)
+                        .delete()
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                            public void onSuccess(Void aVoid) {
+                                Log.d(TAG, "DocumentSnapshot successfully deleted!");
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Log.w(TAG, "Error adding document", e);
+                                Log.w(TAG, "Error deleting document", e);
                             }
                         });
 
@@ -112,6 +102,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener  {
                 Intent matchesIntent = new Intent(activity, MatchesActivity.class);
                 matchesIntent.putExtra("EMAIL", email);
                 startActivity(matchesIntent);
+                break;
+
+            case R.id.location_button:
+                locationText.setText("location2");
                 break;
 
         }

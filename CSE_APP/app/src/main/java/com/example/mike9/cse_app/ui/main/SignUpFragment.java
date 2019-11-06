@@ -19,9 +19,13 @@ import androidx.fragment.app.Fragment;
 
 import com.example.mike9.cse_app.MainActivity;
 import com.example.mike9.cse_app.R;
+import com.example.mike9.cse_app.SignUpActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -31,7 +35,9 @@ import static android.content.ContentValues.TAG;
 
 public class SignUpFragment extends Fragment implements View.OnClickListener  {
 
-    public EditText email, password, age, name;
+    public EditText email, password, age, name, passwordCheck;
+    public RadioButton male,female, other;
+    public RadioGroup genderGroup;
     public String gender;
 
     public static SignUpFragment newInstance() {
@@ -52,66 +58,97 @@ public class SignUpFragment extends Fragment implements View.OnClickListener  {
         password = v.findViewById(R.id.signUp_password);
         age = v.findViewById(R.id.signUp_age);
         name = v.findViewById(R.id.signUp_name);
-        //gender = v.findViewById(R.id.signUp_name);
-        /*RadioGroup rg = (R.layout.signup_fragment,container,false);
-        boolean checked = ((RadioButton) rg).isChecked();
+        passwordCheck=v.findViewById(R.id.signUp_passwordConfirmation);
 
-        // Check which radio button was clicked
-        switch(rg.getId()) {
-            case R.id.radioFemale:
-                if (checked)
-                    gender="Female";
-                    break;
-            case R.id.radioMale:
-                if (checked)
-                    gender="Male";
-                    break;
-            case R.id.radioOther:
-                if (checked)
-                    gender="Other";
-                    break;
-        }*/
+        male = v.findViewById(R.id.radioMale);
+        other = v.findViewById(R.id.radioOther);
+        female = v.findViewById(R.id.radioFemale);
+        genderGroup = v.findViewById(R.id.radioGender);
 
+        genderGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if(male.isChecked()) {
+                   gender="male";
+                } else if(female.isChecked()) {
+                    gender="female";
+                } else {
+                    gender="other";
+                }
+            }
+        });
         return v;
-    }
-    public void onRadioButtonClicked(View v){
-
     }
 
     @Override
-    public void onClick(View v){
-        Editable fb_email = email.getText();
-        Editable fb_password = password.getText();
-        Editable fb_age = age.getText();
-        Editable fb_name = name.getText();
-        //Editable fb_gender = gender.getText();
-        Log.d("data",fb_email.toString());
-        Log.d("data",fb_password.toString());
-        Log.d("data",fb_name.toString());
-        Log.d("data",fb_age.toString());
-       // Log.d("data",gender.toString());
+    public void onClick(View v) {
+        final Editable fb_email = email.getText();
+        final Editable fb_password = password.getText();
+        final Editable fb_age = age.getText();
+        final Editable fb_name = name.getText();
+        final Editable fb_passwordCheck = passwordCheck.getText();
 
-        user.put("email", fb_email.toString());
-        user.put("password", fb_password.toString());
-        user.put("name", fb_name.toString());
-        user.put("age", fb_age.toString());
-       // user.put("gender", gender);
-        db.collection("users").document(fb_email.toString())
-                .set(user)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "DocumentSnapshot successfully written!");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error writing document", e);
-                    }
-                });
+        Log.d("data", fb_email.toString());
+        Log.d("data", fb_password.toString());
+        Log.d("data", fb_name.toString());
+        Log.d("data", fb_age.toString());
+        Log.d("data", fb_passwordCheck.toString());
+        Log.d("data", gender);
 
-        Activity activity = getActivity();
-        startActivity(new Intent(activity, MainActivity.class));
+        if (fb_name.toString().equals("") || fb_password.toString().equals("") || fb_age.toString().equals("") || fb_email.toString().equals("") || gender.equals("")) {
+            //Activity activity = getActivity();
+            //startActivity(new Intent(activity, SignUpActivity.class));
+        } else if (!fb_password.toString().equals(fb_passwordCheck.toString())) {
+            //startActivity(new Intent(activity, SignUpActivity.class));
+        } else if (!fb_email.toString().contains("@")) {
+
+        //} else if (Integer.getInteger(fb_age.toString()) < 18) {
+
+        } else {
+
+            DocumentReference docRef = db.collection("users").document(fb_email.toString());
+            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>(){
+                //@Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                        } else {
+                            Log.d(TAG, "No such document");
+                            user.put("email", fb_email.toString());
+                            user.put("password", fb_password.toString());
+                            user.put("name", fb_name.toString());
+                            user.put("age", fb_age.toString());
+                            user.put("gender", gender);
+                            db.collection("users").document(fb_email.toString())
+                                    .set(user)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Log.d(TAG, "DocumentSnapshot successfully written!");
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.w(TAG, "Error writing document", e);
+                                        }
+                                    });
+                            Activity activity = getActivity();
+                            startActivity(new Intent(activity, MainActivity.class));
+
+                        }
+                    } else {Log.d(TAG, "get failed with ", task.getException());
+                    }
+                }
+            });
+
+
+
+        }
     }
+
 }
+
