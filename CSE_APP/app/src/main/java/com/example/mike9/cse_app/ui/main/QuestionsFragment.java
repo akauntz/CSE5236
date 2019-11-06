@@ -106,7 +106,8 @@ public class QuestionsFragment extends Fragment implements View.OnClickListener 
 
     @Override
     public void onClick(View v){
-        //TODO: make sure they selected an answer
+
+        if(!answer1.equals("") && !answer2.equals("") && !answer3.equals("")){
         Activity activity = getActivity();
         //questionNum++;
         //if(questionNum < questions.length){
@@ -122,6 +123,6 @@ public class QuestionsFragment extends Fragment implements View.OnClickListener 
         Intent homeIntent = new Intent(activity, HomeActivity.class);
             homeIntent.putExtra("EMAIL", email.toString());
             startActivity(homeIntent);
-        //}
+        }
     }
 }
