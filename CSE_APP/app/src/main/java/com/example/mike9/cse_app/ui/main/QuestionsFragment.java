@@ -117,7 +117,7 @@ public class QuestionsFragment extends Fragment implements View.OnClickListener 
         docRef.update("q1", answer1);
         docRef.update("q2", answer2);
         docRef.update("q3", answer3);
-
+        docRef.update("answered?", "true");
 
         Intent homeIntent = new Intent(activity, HomeActivity.class);
             homeIntent.putExtra("EMAIL", email.toString());

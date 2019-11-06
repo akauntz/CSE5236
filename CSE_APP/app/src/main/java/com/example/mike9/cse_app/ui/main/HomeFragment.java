@@ -24,6 +24,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.mike9.cse_app.MainActivity;
+import com.example.mike9.cse_app.MatchCalculator;
 import com.example.mike9.cse_app.MatchesActivity;
 import com.example.mike9.cse_app.R;
 import com.example.mike9.cse_app.SignUpActivity;
@@ -69,6 +70,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener  {
         getMatchesButton.setOnClickListener(this);
         email = getArguments().getString("EMAIL");
         updatePass = v.findViewById(R.id.updatePass_text);
+        MatchCalculator.Calc("", email);
         return v;
     }
 
@@ -115,7 +117,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener  {
                 break;
 
             case R.id.location_button:
-                
+
 
 
 

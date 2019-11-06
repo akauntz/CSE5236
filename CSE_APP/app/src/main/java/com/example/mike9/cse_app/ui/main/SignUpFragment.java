@@ -122,6 +122,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener  {
                             user.put("name", fb_name.toString());
                             user.put("age", fb_age.toString());
                             user.put("gender", gender);
+                            user.put("answered?", "false");
                             db.collection("users").document(fb_email.toString())
                                     .set(user)
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
