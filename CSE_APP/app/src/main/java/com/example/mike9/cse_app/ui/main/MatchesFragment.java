@@ -42,16 +42,16 @@ public class MatchesFragment extends Fragment implements View.OnClickListener  {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     Button returnHomeButton;
-    Button seeMatchedButton;
+    //Button seeMatchedButton;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState){
         View v = inflater.inflate(R.layout.matches_fragment,container,false);
         returnHomeButton = v.findViewById(R.id.return_home_button);
-        seeMatchedButton = v.findViewById(R.id.check_matched_button);
+        //seeMatchedButton = v.findViewById(R.id.check_matched_button);
         returnHomeButton.setOnClickListener(this);
-        seeMatchedButton.setOnClickListener(this);
+        //seeMatchedButton.setOnClickListener(this);
         email = getArguments().getString("EMAIL");
         return v;
     }
@@ -65,11 +65,11 @@ public class MatchesFragment extends Fragment implements View.OnClickListener  {
                 homeIntent.putExtra("EMAIL", email);
                 startActivity(homeIntent);
                 break;
-            case R.id.check_matched_button:
-                Intent matchedIntent = new Intent(activity, MatchedActivity.class);
-                matchedIntent.putExtra("EMAIL", email);
-                startActivity(matchedIntent);
-                break;
+            //case R.id.check_matched_button:
+                //Intent matchedIntent = new Intent(activity, MatchedActivity.class);
+                //matchedIntent.putExtra("EMAIL", email);
+                //startActivity(matchedIntent);
+                //break;
         }
     }
 }
