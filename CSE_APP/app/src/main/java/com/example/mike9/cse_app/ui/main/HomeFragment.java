@@ -209,9 +209,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             Log.d("GPS", "Name GPS_PRovider:" + LocationManager.GPS_PROVIDER + "isEnabled? " +locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER));
             if(location == null){
                 Log.d("GPS","No Location Found");
+                locationText.setText("Location Not Found");
             }
             if (location != null){
                 Log.d("GPS","Location found" + location);
+                locationText.setText(location.toString());
             }
         }
 
