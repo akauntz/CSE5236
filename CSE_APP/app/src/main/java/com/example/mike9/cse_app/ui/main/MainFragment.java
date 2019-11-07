@@ -87,12 +87,13 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 
                                 if(storedPassword.equals(password.getText().toString())) {
                                     Log.d(TAG, "Correct password");
-                                    String questions[] = getResources().getStringArray(R.array.matching_questions);
-                                    int questionNum = 1; //TODO: change this to the num questions answered by the user
-                                    if (questionNum < questions.length) {
+                                    //String questions[] = getResources().getStringArray(R.array.matching_questions);
+                                    //int questionNum = 1;
+
+                                    if (document.get("answered?").toString().equals("false")) {
                                         Intent questionsIntent = new Intent(activity, QuestionsActivity.class);
                                         questionsIntent.putExtra("EMAIL", email.getText().toString());
-                                        questionsIntent.putExtra("NUMQUESTIONS", questionNum);
+                                        //questionsIntent.putExtra("NUMQUESTIONS", questionNum);
                                         startActivity(questionsIntent);
                                     } else {
                                         //logIn

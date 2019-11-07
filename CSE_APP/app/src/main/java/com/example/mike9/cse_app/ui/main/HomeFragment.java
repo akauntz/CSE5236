@@ -31,6 +31,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.mike9.cse_app.GetLocation;
 import com.example.mike9.cse_app.MainActivity;
+import com.example.mike9.cse_app.MatchCalculator;
 import com.example.mike9.cse_app.MatchesActivity;
 import com.example.mike9.cse_app.R;
 import com.example.mike9.cse_app.SignUpActivity;
@@ -97,6 +98,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         criteria.setVerticalAccuracy(Criteria.ACCURACY_HIGH);
         //locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
         looper = null;
+        MatchCalculator.Calc("", email);
+
         return v;
     }
 
@@ -119,6 +122,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.deleteAcct_button:
+
                 db.collection("users").document(email)
                         .delete()
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -142,12 +146,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.check_matches_button:
+                MatchCalculator.Calc("", email);
                 Intent matchesIntent = new Intent(activity, MatchesActivity.class);
                 matchesIntent.putExtra("EMAIL", email);
                 startActivity(matchesIntent);
                 break;
 
             case R.id.location_button:
+
                 Log.d("test", "here");
 
                 Log.d("test", "there");
@@ -161,12 +167,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     Log.d("GPS", "Denied");
                     ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION}, 1);
                 }
-                //gets here immediately when askign for gps
+                //gets here immediately when asking for gps
                 Log.d("GPS", "here");
 
-
-                //locationText.setText("location2");
                 break;
+
 
         }
     }
