@@ -36,12 +36,13 @@ public class MatchFragment extends Fragment implements View.OnClickListener  {
     private String email;
     private EditText updatePass;
     private Map<Object, Object> user;
+    //FirebaseFirestore db = FirebaseFirestore.getInstance();
+
 
     public static MatchFragment newInstance() {
         return new MatchFragment();
     }
 
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
     TextView nameText;
     TextView percentText;
     Button noMatchButton;
@@ -57,9 +58,9 @@ public class MatchFragment extends Fragment implements View.OnClickListener  {
         nameText = v.findViewById(R.id.first_name);
         percentText = v.findViewById(R.id.match_percent);
         //noMatchButton = v.findViewById(R.id.no_match_button);
-        yesMatchButton = v.findViewById(R.id.matched_button);
+        //yesMatchButton = v.findViewById(R.id.matched_button);
         //noMatchButton.setOnClickListener(this);
-        yesMatchButton.setOnClickListener(this);
+        //yesMatchButton.setOnClickListener(this);
         setMatch(name,percent);
         return v;
     }
@@ -72,10 +73,13 @@ public class MatchFragment extends Fragment implements View.OnClickListener  {
                 //startActivity(new Intent(getActivity(), MatchActivity.class));
                 //delete/flag potential match as nada
                 //break;
-            case R.id.matched_button:
+            //case R.id.matched_button:
                 //flag as lovebirds and move to different match
+                //DocumentReference docRef = db.collection("users").document();
+                //docRef.update("password", newPass);
 
-                break;
+
+                //break;
         }
     }
 

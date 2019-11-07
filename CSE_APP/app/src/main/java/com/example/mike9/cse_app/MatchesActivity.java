@@ -70,11 +70,12 @@ public class MatchesActivity extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                        String sizeStr = document.get("matchSize").toString();
-                        int num_matches= Integer.parseInt(sizeStr);
+                        //String sizeStr = document.get("matchSize").toString();
+                        //int num_matches= Integer.parseInt(sizeStr);
                         String top10Str = document.get("top10").toString();
 
                         HashMap<String,Float> top10 = new HashMap<>();
+                        int num_matches= top10.size();
                         String em="";
                         String emAdd="";
                         String com="";
