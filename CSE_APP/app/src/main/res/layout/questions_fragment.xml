@@ -3,27 +3,79 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
-        android:id = "@+id/questionText"
+        android:id = "@+id/questionText1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text = "Test Question"
+        android:text = "You prefer C over Java"
         android:gravity = "center"
         android:paddingTop = "50dp"/>
 
     <RadioGroup
-        android:id = "@+id/radioGender"
+        android:id = "@+id/radioGroup1"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:orientation = "vertical"
         android:paddingTop = "40dp"
         android:gravity = "center">
         <RadioButton
-            android:id="@+id/radioTrue"
+            android:id="@+id/radioTrue1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text = "True"/>
         <RadioButton
-            android:id="@+id/radioFalse"
+            android:id="@+id/radioFalse1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text = "False"/>
+    </RadioGroup>
+    <TextView
+        android:id = "@+id/questionText2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text = "You get your memes from Reddit, not Instagram"
+        android:gravity = "center"
+        android:paddingTop = "50dp"/>
+
+    <RadioGroup
+        android:id = "@+id/radioGroup2"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation = "vertical"
+        android:paddingTop = "40dp"
+        android:gravity = "center">
+        <RadioButton
+            android:id="@+id/radioTrue2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text = "True"/>
+        <RadioButton
+            android:id="@+id/radioFalse2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text = "False"/>
+    </RadioGroup>
+    <TextView
+        android:id = "@+id/questionText3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text = "You tend to comment as you code, not at the end"
+        android:gravity = "center"
+        android:paddingTop = "50dp"/>
+
+    <RadioGroup
+        android:id = "@+id/radioGroup3"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation = "vertical"
+        android:paddingTop = "40dp"
+        android:gravity = "center">
+        <RadioButton
+            android:id="@+id/radioTrue3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text = "True"/>
+        <RadioButton
+            android:id="@+id/radioFalse3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text = "False"/>

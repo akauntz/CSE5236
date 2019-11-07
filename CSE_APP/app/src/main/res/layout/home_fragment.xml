@@ -8,10 +8,10 @@
         android:orientation="horizontal"
         android:gravity = "center">
         <Button
-            android:id = "@+id/updatePass_button"
+            android:id = "@+id/signOut_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Update Password"/>
+            android:text = "Sign Out"/>
         <Button
             android:id="@+id/deleteAcct_button"
             android:layout_width="wrap_content"
@@ -21,14 +21,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text = "Some cool intro here"
+        android:text = "Welcome to +Plus"
         android:layout_gravity = "center"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text = "Settings"
         android:layout_gravity = "center"/>
-    <TextView
+    <!--<TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Interested in:"/>
@@ -71,20 +71,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:max = "40"
-        android:min = "18"/>
+        android:min = "18"/> -->
     <Button
         android:id="@+id/check_matches_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Check Matches"
         android:layout_gravity="center"/>
-    <Button
-        android:id = "@+id/signOut_button"
+    <TextView
+        android:id="@+id/locationText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text = "Sign Out"
+        android:text = "location"
         android:layout_gravity = "center"/>
-
+    <Button
+        android:id = "@+id/location_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Get Location"/>
     <EditText
         android:id = "@+id/updatePass_text"
         android:layout_width="wrap_content"
@@ -92,6 +97,11 @@
         android:hint = "Enter Updated Password Here"
         android:layout_gravity="center"
         android:inputType = "textPassword"/>
-
+    <Button
+        android:id = "@+id/updatePass_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Update Password"/>
 
 </LinearLayout>
