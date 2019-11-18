@@ -217,8 +217,19 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 locationText.setText("Location Not Found");
             }
             if (location != null){
-                Log.d("GPS","Location found" + location);
-                locationText.setText(location.toString());
+                try {
+                    Log.d("GPS", "Location found" + location);
+                    Geocoder geocoder;
+                    List<Address> addresses;
+                    geocoder = new Geocoder(getActivity(), Locale.getDefault());
+                    addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+                    locationText.setText(addresses.get(0).getLocality()+" ,"+addresses.get(0).getAdminArea());
+                    //TODO: Add state/city/whatever to database
+                    //addresses.get(0).getLocality() -> returns city
+                    //addresses.get(0).getAdminArea() -> returns state
+                }catch (IOException e){
+                    locationText.setText("GPS failed. Try again.");
+                }
             }
         }
 
