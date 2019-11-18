@@ -56,10 +56,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private String email;
     private EditText updatePass;
     TextView locationText;
-    GetLocation locationListener;
-    Criteria criteria;
-    LocationManager locationManager;
-    Looper looper;
+
 
 
     public static HomeFragment newInstance() {
@@ -86,18 +83,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         locationText = v.findViewById(R.id.locationText);
         email = getArguments().getString("EMAIL");
         updatePass = v.findViewById(R.id.updatePass_text);
-        locationListener = new GetLocation();
-        criteria = new Criteria();
-        criteria.setAccuracy(Criteria.ACCURACY_COARSE);
-        criteria.setPowerRequirement(Criteria.POWER_LOW);
-        criteria.setAltitudeRequired(false);
-        criteria.setBearingRequired(false);
-        criteria.setSpeedRequired(false);
-        criteria.setCostAllowed(true);
-        criteria.setHorizontalAccuracy(Criteria.ACCURACY_HIGH);
-        criteria.setVerticalAccuracy(Criteria.ACCURACY_HIGH);
-        //locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-        looper = null;
         MatchCalculator.Calc("", email);
 
         return v;
@@ -159,10 +144,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 Log.d("test", "there");
                 if(locationAllowed()){
                     Log.d("GPS", "Allowed");
-                    //LocationManager myLocation = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-                    //locationListener.getLocation(criteria, looper, getActivity());
-                    //locationText.setText(getCityLocation());
-                    setUpLocationListener();
+
+                    locationText.setText(GetLocation.getCityState(getActivity()));
                 } else {
                     Log.d("GPS", "Denied");
                     ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION}, 1);
@@ -194,67 +177,4 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         return (getActivity().checkCallingOrSelfPermission("android.permission.ACCESS_COARSE_LOCATION") == PackageManager.PERMISSION_GRANTED && getActivity().checkCallingOrSelfPermission("android.permission.ACCESS_FINE_LOCATION") == PackageManager.PERMISSION_GRANTED);
     }
 
-    public String getCityLocation(){
-        LocationManager locationManager = (LocationManager) locationListener.getSystemService(LOCATION_SERVICE);
-        if(locationAllowed()){
-            return "city";
-        }
-        return "city";
-    }
-
-    public void setUpLocationListener(){
-        LocationManager locationManager = (LocationManager) getActivity().getSystemService(LOCATION_SERVICE);
-        /*if(locationAllowed()){
-            return;
-        }*/
-        Criteria criteria = new Criteria();
-        String bestProvider = locationManager.getBestProvider(criteria,true);
-        if(ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            Log.d("GPS", "Name GPS_PRovider:" + LocationManager.GPS_PROVIDER + "isEnabled? " +locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER));
-            if(location == null){
-                Log.d("GPS","No Location Found");
-                locationText.setText("Location Not Found");
-            }
-            if (location != null){
-                try {
-                    Log.d("GPS", "Location found" + location);
-                    Geocoder geocoder;
-                    List<Address> addresses;
-                    geocoder = new Geocoder(getActivity(), Locale.getDefault());
-                    addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-                    locationText.setText(addresses.get(0).getLocality()+" ,"+addresses.get(0).getAdminArea());
-                    //TODO: Add state/city/whatever to database
-                    //addresses.get(0).getLocality() -> returns city
-                    //addresses.get(0).getAdminArea() -> returns state
-                }catch (IOException e){
-                    locationText.setText("GPS failed. Try again.");
-                }
-            }
-        }
-
-    }
-    public void onLocationChanged(Location location){
-        Geocoder geocoder;
-        List<Address> addresses;
-        geocoder = new Geocoder(getContext(), Locale.getDefault());
-
-        double lat = location.getLatitude();
-        double longitude = location.getLongitude();
-
-        try{
-            Log.d("GPS", "Latitude, Longitude"+lat+" "+ longitude);
-            addresses = geocoder.getFromLocation(lat, longitude,1);
-            if (addresses != null && addresses.size() > 0){
-                String city = addresses.get(0).getLocality();
-                String state = addresses.get(0).getAdminArea();
-
-                Log.d("GPS", "City: " + city);
-                Log.d("GPS", "State: " + state);
-            }
-        } catch (IOException e){
-            Log.d("errrrror",e.toString());
-            e.printStackTrace();
-        }
-    }
 }

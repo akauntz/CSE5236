@@ -1,59 +1,56 @@
 package com.example.mike9.cse_app;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.Address;
 import android.location.Criteria;
+import android.location.Geocoder;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Bundle;
-import android.os.Looper;
 import android.util.Log;
 
 import androidx.core.content.ContextCompat;
 
-public class GetLocation extends Activity implements LocationListener {
-    LocationManager mLocationManager;
-    @Override
-    public void onCreate(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.home_fragment);
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
-        mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-    }
+import static android.content.Context.LOCATION_SERVICE;
 
-    @Override
-    public void onLocationChanged(Location location){
-        Log.d("Location Changes", location.toString());
-    }
-
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras){
-        Log.d("Status Changed", String.valueOf(status));
-    }
-
-    @Override
-    public void onProviderEnabled(String provider) {
-        Log.d("Provider Enabled", provider);
-    }
-
-    @Override
-    public void onProviderDisabled(String provider) {
-        Log.d("Provider Disabled", provider);
-    }
-
-    public void getLocation(Criteria criteria, Looper looper, Activity activity){
-        if(ContextCompat.checkSelfPermission(activity, android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            Log.d("GPSTest", "Here");
-            mLocationManager.requestSingleUpdate(criteria, this, looper);
-            Log.d("GPSTest", "Here Again");
-        } else {
-            Log.d("GPSTest", "Nah");
+public class GetLocation {
+    public static String getCityState(Context context){
+        LocationManager locationManager = (LocationManager) context.getSystemService(LOCATION_SERVICE);
+        /*if(locationAllowed()){
+            return;
+        }*/
+        Criteria criteria = new Criteria();
+        String bestProvider = locationManager.getBestProvider(criteria,true);
+        if(ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            Log.d("GPS", "Name GPS_PRovider:" + LocationManager.GPS_PROVIDER + "isEnabled? " +locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER));
+            if(location == null){
+                Log.d("GPS","No Location Found");
+                return "Location Not Found";
+                //locationText.setText("Location Not Found");
+            }
+            if (location != null){
+                try {
+                    Log.d("GPS", "Location found" + location);
+                    Geocoder geocoder;
+                    List<Address> addresses;
+                    geocoder = new Geocoder(context, Locale.getDefault());
+                    addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+                    //locationText.setText(addresses.get(0).getLocality()+" ,"+addresses.get(0).getAdminArea());
+                    return addresses.get(0).getLocality() + ", " + addresses.get(0).getAdminArea();
+                    //TODO: Add state/city/whatever to database
+                    //addresses.get(0).getLocality() -> returns city
+                    //addresses.get(0).getAdminArea() -> returns state
+                }catch (IOException e){
+                    //locationText.setText("GPS failed. Try again.");
+                    return "GPS failed. Please try again.";
+                }
+            }
         }
-    }
-
-    public boolean locationAllowed(Activity activity){
-        return (activity.checkCallingOrSelfPermission("android.permission.ACCESS_FINE_LOCATION") == PackageManager.PERMISSION_GRANTED);
+        return "Error setting up GPS";
     }
 }
