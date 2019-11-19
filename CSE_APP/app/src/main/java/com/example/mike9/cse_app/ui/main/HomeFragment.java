@@ -164,25 +164,25 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.testButton:
-                //CollectionReference test = db.collection("users").document("@2").collection("test");
+                CollectionReference test = db.collection("users").document("@2").collection("test");
                 Map<String, Object> user = new HashMap<>();
-                user.put("first", "Ada");
-                user.put("last", "Lovelace");
-                user.put("born", 1815);
+                user.put("first", "test");
+                user.put("email", "@test");
+                user.put("bool1", true);
 
 // Add a new document with a generated ID
-                db.collection("test")
-                        .add(user)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                test.document("test")
+                        .set(user)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Log.d("PLZZZ", "DocumentSnapshot added with ID: " + documentReference.getId());
+                            public void onSuccess(Void aVoid) {
+                                Log.d("PLZZ", "DocumentSnapshot successfully written!");
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Log.w("PLZZZZ", "Error adding document", e);
+                                Log.w("PLZZ", "Error writing document", e);
                             }
                         });
                 break;

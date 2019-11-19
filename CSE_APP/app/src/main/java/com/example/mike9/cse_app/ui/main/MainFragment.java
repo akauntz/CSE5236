@@ -20,6 +20,7 @@ import android.widget.EditText;
 
 import com.example.mike9.cse_app.HomeActivity;
 import com.example.mike9.cse_app.MainActivity;
+import com.example.mike9.cse_app.MatchCalc;
 import com.example.mike9.cse_app.QuestionsActivity;
 import com.example.mike9.cse_app.R;
 import com.example.mike9.cse_app.ShowMessage;
@@ -52,6 +53,9 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.main_fragment, container, false);
+        Log.d("TEST STUFF:", MatchCalc.getPercent(21, 10) + "");
+        Log.d("TEST STUFF:", MatchCalc.getPercent(27, 10) + "");
+        Log.d("TEST STUFF:", MatchCalc.getPercent(21, 27) + "");
         Button matchesButton = v.findViewById(R.id.matches_button);
         matchesButton.setOnClickListener((View.OnClickListener) this);
         Button signUpButton = v.findViewById(R.id.signUp_button);
