@@ -23,6 +23,7 @@ import com.example.mike9.cse_app.HomeActivity;
 import com.example.mike9.cse_app.MainActivity;
 import com.example.mike9.cse_app.QuestionsActivity;
 import com.example.mike9.cse_app.R;
+import com.example.mike9.cse_app.ShowMessage;
 import com.example.mike9.cse_app.SignUpActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -34,9 +35,9 @@ import static android.content.ContentValues.TAG;
 
 public class QuestionsFragment extends Fragment implements View.OnClickListener  {
 
-    //private String[] questions;
-    //private int questionNum;
-    //extView questionText1;
+    private String[] questions;
+    private int questionNum, currentScore;
+    TextView questionText1;
     private String email, answer1, answer2, answer3;
     public RadioButton radioFalse1,radioFalse2, radioFalse3, radioTrue1, radioTrue2, radioTrue3;
     public RadioGroup radioGroup1, radioGroup2, radioGroup3;
@@ -49,24 +50,25 @@ public class QuestionsFragment extends Fragment implements View.OnClickListener 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState){
-        View v = inflater.inflate(R.layout.questions_fragment,container,false);
-        //questions  = getResources().getStringArray(R.array.matching_questions);
+        View v = inflater.inflate(R.layout.questions2_fragment,container,false);
+        questions  = getResources().getStringArray(R.array.matching_questions);
+        Log.d("Questions 0:", questions[0]);
         email = getArguments().getString("EMAIL");
-        //questionNum = getArguments().getInt("NUMQUESTIONS");
-        //questionText1 = v.findViewById(R.id.questionText1);
-        //questionText1.setText(questions[questionNum]);
+        questionNum = getArguments().getInt("NUMQUESTIONS");
+        questionText1 = v.findViewById(R.id.questionText1);
+        questionText1.setText(questions[questionNum]);
         Button submitButton = v.findViewById(R.id.submitQuestion_button);
         submitButton.setOnClickListener(this);
 
         radioFalse1 = v.findViewById(R.id.radioFalse1);
-        radioFalse2 = v.findViewById(R.id.radioFalse2);
-        radioFalse3 = v.findViewById(R.id.radioFalse3);
+        //radioFalse2 = v.findViewById(R.id.radioFalse2);
+        //radioFalse3 = v.findViewById(R.id.radioFalse3);
         radioTrue1 = v.findViewById(R.id.radioTrue1);
-        radioTrue2 = v.findViewById(R.id.radioTrue2);
-        radioTrue3 = v.findViewById(R.id.radioTrue3);
+        //radioTrue2 = v.findViewById(R.id.radioTrue2);
+        //radioTrue3 = v.findViewById(R.id.radioTrue3);
         radioGroup1 = v.findViewById(R.id.radioGroup1);
-        radioGroup2 = v.findViewById(R.id.radioGroup2);
-        radioGroup3 = v.findViewById(R.id.radioGroup3);
+        //radioGroup2 = v.findViewById(R.id.radioGroup2);
+        //radioGroup3 = v.findViewById(R.id.radioGroup3);
 
         radioGroup1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -79,7 +81,7 @@ public class QuestionsFragment extends Fragment implements View.OnClickListener 
             }
         });
 
-        radioGroup2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        /*radioGroup2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if(radioFalse2.isChecked()) {
@@ -99,30 +101,72 @@ public class QuestionsFragment extends Fragment implements View.OnClickListener 
                     answer3="t3";
                 }
             }
-        });
+        });*/
 
         return v;
     }
 
     @Override
-    public void onClick(View v){
+    public void onClick(View v) {
 
-        if(!answer1.equals("") && !answer2.equals("") && !answer3.equals("")){
-        Activity activity = getActivity();
-        //questionNum++;
-        //if(questionNum < questions.length){
-         //   questionText.setText(questions[questionNum]);
-        //} else {
+        //if(!answer1.equals("") && !answer2.equals("") && !answer3.equals("")){
+        if (!answer1.equals("")) {
+            Activity activity = getActivity();
+            //questionNum++;
+            //if(questionNum < questions.length){
+            //   questionText.setText(questions[questionNum]);
+            //} else {
+            DocumentReference docRef = db.collection("users").document(email);
+            if (answer1.equals("t1")) {
+                currentScore = 0;
 
-        DocumentReference docRef = db.collection("users").document(email);
-        docRef.update("q1", answer1);
-        docRef.update("q2", answer2);
-        docRef.update("q3", answer3);
-        docRef.update("answered?", "true");
+                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                                //String storedPassword = document.get("password").toString();
+                                updateCurScore(Integer.parseInt(document.get("score").toString()));
 
-        Intent homeIntent = new Intent(activity, HomeActivity.class);
+                            } else {
+                                Log.d(TAG, "No such document");
+                            }
+                        } else {
+                            Log.d(TAG, "get failed with ", task.getException());
+                        }
+                    }
+                });
+                docRef.update("score", currentScore + 2 ^ (questionNum));
+
+                //docRef.update("q1", answer1);
+                //docRef.update("q2", answer2);
+                //docRef.update("q3", answer3);
+            }
+            questionNum++;
+            if(questionNum < questions.length) {
+                Intent questionIntent = new Intent(activity, QuestionsActivity.class);
+                questionIntent.putExtra("EMAIL", email.toString());
+                questionIntent.putExtra("NUMQUESTIONS", questionNum);
+                startActivity(questionIntent);
+            }else{
+                docRef.update("answered?", true);
+                Intent homeIntent = new Intent(activity, HomeActivity.class);
+                homeIntent.putExtra("EMAIL", email.toString());
+                startActivity(homeIntent);
+            }
+
+        } else {
+            ShowMessage.show(getActivity(), "Select an option.");
+        }
+    }
+
+        /*Intent homeIntent = new Intent(activity, HomeActivity.class);
             homeIntent.putExtra("EMAIL", email.toString());
             startActivity(homeIntent);
-        }
+        }*/
+
+    private void updateCurScore(int score){
+        currentScore = score;
     }
 }

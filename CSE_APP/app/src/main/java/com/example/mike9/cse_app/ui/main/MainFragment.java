@@ -101,7 +101,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
                                         if (document.get("answered?").toString().equals("false")) {
                                             Intent questionsIntent = new Intent(activity, QuestionsActivity.class);
                                             questionsIntent.putExtra("EMAIL", email.getText().toString());
-                                            //questionsIntent.putExtra("NUMQUESTIONS", questionNum);
+                                            questionsIntent.putExtra("NUMQUESTIONS", 0);
                                             startActivity(questionsIntent);
                                         } else {
                                             //logIn
