@@ -22,6 +22,7 @@ import com.example.mike9.cse_app.HomeActivity;
 import com.example.mike9.cse_app.MainActivity;
 import com.example.mike9.cse_app.QuestionsActivity;
 import com.example.mike9.cse_app.R;
+import com.example.mike9.cse_app.ShowMessage;
 import com.example.mike9.cse_app.SignUpActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -77,41 +78,46 @@ public class MainFragment extends Fragment implements View.OnClickListener {
             case R.id.login_button:
                 final String userEmail = email.getText().toString();
                 DocumentReference docRef = db.collection("users").document(userEmail);
-                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>(){
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            DocumentSnapshot document = task.getResult();
-                            if (document.exists()) {
-                                Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                                String storedPassword = document.get("password").toString();
+                    docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                DocumentSnapshot document = task.getResult();
+                                if (document.exists()) {
+                                    Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                                    String storedPassword = document.get("password").toString();
 
-                                if(storedPassword.equals(password.getText().toString())) {
-                                    Log.d(TAG, "Correct password");
-                                    //String questions[] = getResources().getStringArray(R.array.matching_questions);
-                                    //int questionNum = 1;
+                                    if (storedPassword.equals(password.getText().toString())) {
+                                        Log.d(TAG, "Correct password");
+                                        //String questions[] = getResources().getStringArray(R.array.matching_questions);
+                                        //int questionNum = 1;
+                                        Log.d("Answer: ", document.get("answered?").toString());
+                                        Log.d("Answer: ", document.get("answered?").toString().equals("false")+"");
+                                        Log.d("Answer: ", document.get("answered?").toString().equals("true")+"");
 
-                                    if (document.get("answered?").toString().equals("false")) {
-                                        Intent questionsIntent = new Intent(activity, QuestionsActivity.class);
-                                        questionsIntent.putExtra("EMAIL", email.getText().toString());
-                                        //questionsIntent.putExtra("NUMQUESTIONS", questionNum);
-                                        startActivity(questionsIntent);
+                                        if (document.get("answered?").toString().equals("false")) {
+                                            Intent questionsIntent = new Intent(activity, QuestionsActivity.class);
+                                            questionsIntent.putExtra("EMAIL", email.getText().toString());
+                                            //questionsIntent.putExtra("NUMQUESTIONS", questionNum);
+                                            startActivity(questionsIntent);
+                                        } else {
+                                            //logIn
+                                            Intent logInIntent = new Intent(activity, HomeActivity.class);
+                                            logInIntent.putExtra("EMAIL", email.getText().toString());
+                                            startActivity(logInIntent);
+                                        }
                                     } else {
-                                        //logIn
-                                        Intent logInIntent = new Intent(activity, HomeActivity.class);
-                                        logInIntent.putExtra("EMAIL", email.getText().toString());
-                                        startActivity(logInIntent);
+                                        Log.d(TAG, "Password Mismatch");
+                                        ShowMessage.show(activity, "Incorrect Login");
                                     }
-                                } else{
-                                    Log.d(TAG, "Password Mismatch");
-                                }
 
+                                } else {
+                                    Log.d(TAG, "No such document");
+                                }
                             } else {
-                                Log.d(TAG, "No such document");
+                                Log.d(TAG, "get failed with ", task.getException());
                             }
-                        } else {Log.d(TAG, "get failed with ", task.getException());
                         }
-                    }
-                });
+                    });
 
                 break;
             case R.id.signUp_button:

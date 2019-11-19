@@ -104,4 +104,12 @@
         android:layout_gravity="center"
         android:text="Update Password"/>
 
+    <Button
+        android:id = "@+id/testButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Test add collection"
+        />
+
 </LinearLayout>

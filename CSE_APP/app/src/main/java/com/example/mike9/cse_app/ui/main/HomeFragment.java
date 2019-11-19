@@ -34,11 +34,15 @@ import com.example.mike9.cse_app.MainActivity;
 import com.example.mike9.cse_app.MatchCalculator;
 import com.example.mike9.cse_app.MatchesActivity;
 import com.example.mike9.cse_app.R;
+import com.example.mike9.cse_app.ShowMessage;
 import com.example.mike9.cse_app.SignUpActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -80,6 +84,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         getMatchesButton.setOnClickListener(this);
         Button getLocationButton = v.findViewById(R.id.location_button);
         getLocationButton.setOnClickListener(this);
+        Button testButton = v.findViewById(R.id.testButton);
+        testButton.setOnClickListener(this);
         locationText = v.findViewById(R.id.locationText);
         email = getArguments().getString("EMAIL");
         updatePass = v.findViewById(R.id.updatePass_text);
@@ -103,6 +109,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
                 DocumentReference docRef = db.collection("users").document(email);
                 docRef.update("password", newPass);
+
+                ShowMessage.show(getActivity(), "Password updated");
 
                 break;
 
@@ -153,6 +161,30 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 //gets here immediately when asking for gps
                 Log.d("GPS", "here");
 
+                break;
+
+            case R.id.testButton:
+                //CollectionReference test = db.collection("users").document("@2").collection("test");
+                Map<String, Object> user = new HashMap<>();
+                user.put("first", "Ada");
+                user.put("last", "Lovelace");
+                user.put("born", 1815);
+
+// Add a new document with a generated ID
+                db.collection("test")
+                        .add(user)
+                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            @Override
+                            public void onSuccess(DocumentReference documentReference) {
+                                Log.d("PLZZZ", "DocumentSnapshot added with ID: " + documentReference.getId());
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.w("PLZZZZ", "Error adding document", e);
+                            }
+                        });
                 break;
 
 

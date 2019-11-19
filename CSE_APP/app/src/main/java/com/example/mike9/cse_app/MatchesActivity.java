@@ -73,6 +73,7 @@ public class MatchesActivity extends AppCompatActivity {
                         //String sizeStr = document.get("matchSize").toString();
                         //int num_matches= Integer.parseInt(sizeStr);
                         String top10Str = document.get("top10").toString();
+                        Log.d("Matches: ", top10Str);
 
                         HashMap<String,Float> top10 = new HashMap<>();
                         int num_matches= top10.size();
@@ -111,6 +112,7 @@ public class MatchesActivity extends AppCompatActivity {
                             //for(int i = 0; i<num_matches; i++){
                             topEmail = entry.getKey();
                             compFloat = entry.getValue();
+                            Log.d("Matches loop: ", topEmail + "," + compFloat);
 
                             final float compFloat2=compFloat;
 

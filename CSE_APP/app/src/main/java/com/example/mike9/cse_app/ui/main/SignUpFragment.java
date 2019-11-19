@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.mike9.cse_app.MainActivity;
 import com.example.mike9.cse_app.R;
+import com.example.mike9.cse_app.ShowMessage;
 import com.example.mike9.cse_app.SignUpActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -99,12 +100,14 @@ public class SignUpFragment extends Fragment implements View.OnClickListener  {
         if (fb_name.toString().equals("") || fb_password.toString().equals("") || fb_age.toString().equals("") || fb_email.toString().equals("") || gender.equals("")) {
             //Activity activity = getActivity();
             //startActivity(new Intent(activity, SignUpActivity.class));
+            ShowMessage.show(getActivity(), "Missing required fields.");
         } else if (!fb_password.toString().equals(fb_passwordCheck.toString())) {
             //startActivity(new Intent(activity, SignUpActivity.class));
+            ShowMessage.show(getActivity(), "Error, passwords don't match.");
         } else if (!fb_email.toString().contains("@")) {
-
+            ShowMessage.show(getActivity(), "Invalid email.");
         } else if (Integer.parseInt(fb_age.toString()) < 18) {
-
+            ShowMessage.show(getActivity(), "Must be 18 or older");
         } else {
 
             DocumentReference docRef = db.collection("users").document(fb_email.toString());
