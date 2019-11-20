@@ -27,6 +27,7 @@ public class UpdateMatches {
     private static int score;
     private static String name1;
     final static float MATCH_PERCENT = 65;
+    private static String name;
 
     public static void fillMatches(String email){
         Map<String, Object> user = new HashMap<>();
@@ -44,7 +45,7 @@ public class UpdateMatches {
                         updateState(document.get("state").toString());
                         updateInterest(document.get("interest").toString());
                         updateScore(document.get("score").toString());
-                        updateName(document.get("name").toString());
+                        updateName1(document.get("name").toString());
                         db.collection("users").whereEqualTo("state",state).whereEqualTo("gender", interested).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>(){
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task){
@@ -79,8 +80,96 @@ public class UpdateMatches {
         });
     }
 
+    public static void NoMatch(String e1, String e2){
+        DocumentReference docRef = db.collection("users").document(e1).collection("matches").document(e2);
+        DocumentReference docRef2 = db.collection("users").document(e2).collection("matches").document(e1);
+        docRef.update("show", false);
+        docRef2.update("show", false);
+    }
+
+    public static void YesMatch(String e1, String e2, String n1){
+        final String em1 = e1;
+        final String em2 = e2;
+        DocumentReference docRef = db.collection("users").document(e1).collection("matches").document(e2);
+        DocumentReference docRef2 = db.collection("users").document(e2).collection("matches").document(e1);
+        docRef.update("show", false);
+        docRef.update("bool1", true);
+        docRef2.update("bool2", true);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        if(document.get("bool2").toString() == "true"){
+                            getName(em1);
+                            try {
+                                Thread.sleep(500); //sleep 1/2 second because update name taking too long
+                            }catch(InterruptedException e){
+                                Log.d("PLZZZZNO: ", "nah sleep");
+                            }
+                            String name2 = document.get("name").toString();
+                            int percent = Integer.parseInt(makeInt(document.get("percent").toString()));
+
+                            FillMatched(em1, em2, name, name2, percent);
+                        }
+
+                    } else {
+                        Log.d(TAG, "No such document");
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
+    }
+
+    private static void FillMatched(String e1, String e2, String name1, String name2, int percent){
+        final DocumentReference docRef1 = db.collection("users").document(e1).collection("matched").document(e2);
+        final DocumentReference docRef2 = db.collection("users").document(e2).collection("matched").document(e1);
+
+        Map<String, Object> user1 = new HashMap<>();
+        user1.put("name", name1);
+        user1.put("percent", percent);
+        user1.put("email", e1);
+
+        Map<String, Object> user2 = new HashMap<>();
+        user2.put("name", name2);
+        user2.put("percent", percent);
+        user2.put("email", e2);
+
+        docRef1.set(user2);
+        docRef2.set(user1);
+
+    }
     static private void updateState(String st){
         state = st;
+    }
+
+    private static void getName(String e1){
+        DocumentReference docRef = db.collection("users").document(e1);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Log.d("PLZZZ", "HEREEEE: snapshot" + document.getData());
+                        Log.d("PLZZZ ", "HEREEEE");
+                        updateName(document.get("name").toString());
+
+                    } else {
+                        Log.d(TAG, "No such document");
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
+    }
+
+    static private void updateName(String n){
+        Log.d("PLZZZ", "HERREEEE : " + n +"...." + name);
+        name = n;
+        Log.d("PLZZZZ", "HEREEEEE: " + name);
     }
 
     static private void updateInterest(String intrst){
@@ -91,11 +180,11 @@ public class UpdateMatches {
         score = Integer.parseInt(makeInt(s));
     }
 
-    static private void updateName(String n){
+    static private void updateName1(String n){
         name1 = n;
     }
 
-    static private String makeInt(String str){
+    static public String makeInt(String str){
         int strEnd = 0;
         while (strEnd<str.length() && str.charAt(strEnd)!='.'){
             strEnd++;

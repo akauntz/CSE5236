@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:text = "% Match"
             android:paddingLeft="30dp"/>
-        <!-- <Button
+        <Button
              android:id="@+id/matched_button"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
@@ -28,6 +28,6 @@
              android:id="@+id/no_match_button"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
-             android:text = "Delete"/> -->
+             android:text = "Delete"/>
     </LinearLayout>
 </LinearLayout>

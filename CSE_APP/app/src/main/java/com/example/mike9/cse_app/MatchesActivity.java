@@ -69,7 +69,7 @@ public class MatchesActivity extends AppCompatActivity {
     protected void showMatches2(String userEmail) {
 
 
-        db.collection("users").document(email).collection("matches").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("users").document(email).collection("matches").whereEqualTo("show", true).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
@@ -81,7 +81,8 @@ public class MatchesActivity extends AppCompatActivity {
                         Bundle bundle = new Bundle();
                         Log.d("PLZZZ: ", "Doc Snap: " + document.getData());
                         Log.d("PLZZ ", "email1: " + email1+ "first_name: " +first_name + "percent_match: " + percent_match);
-                        bundle.putString("EMAIL", email1);
+                        bundle.putString("EMAIL2", email1);
+                        bundle.putString("EMAIL", email);
                         bundle.putString("FIRSTNAME", first_name);
                         bundle.putInt("PERCENT", percent_match);
                         fragment.setArguments(bundle);

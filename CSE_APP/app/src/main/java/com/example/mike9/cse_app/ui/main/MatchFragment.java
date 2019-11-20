@@ -19,8 +19,10 @@ import androidx.fragment.app.Fragment;
 import com.example.mike9.cse_app.HomeActivity;
 import com.example.mike9.cse_app.MainActivity;
 import com.example.mike9.cse_app.MatchActivity;
+import com.example.mike9.cse_app.MatchesActivity;
 import com.example.mike9.cse_app.R;
 import com.example.mike9.cse_app.SignUpActivity;
+import com.example.mike9.cse_app.UpdateMatches;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -33,7 +35,7 @@ import static android.content.ContentValues.TAG;
 
 public class MatchFragment extends Fragment implements View.OnClickListener  {
 
-    private String email;
+    private String email, email2, name;
     private EditText updatePass;
     private Map<Object, Object> user;
     //FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -53,14 +55,16 @@ public class MatchFragment extends Fragment implements View.OnClickListener  {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState){
         View v = inflater.inflate(R.layout.match_fragment,container,false);;
-        String name = getArguments().getString("FIRSTNAME");
+        name = getArguments().getString("FIRSTNAME");
         int percent = getArguments().getInt("PERCENT");
+        email = getArguments().getString("EMAIL");
+        email2 = getArguments().getString("EMAIL2");
         nameText = v.findViewById(R.id.first_name);
         percentText = v.findViewById(R.id.match_percent);
-        //noMatchButton = v.findViewById(R.id.no_match_button);
-        //yesMatchButton = v.findViewById(R.id.matched_button);
-        //noMatchButton.setOnClickListener(this);
-        //yesMatchButton.setOnClickListener(this);
+        noMatchButton = v.findViewById(R.id.no_match_button);
+        yesMatchButton = v.findViewById(R.id.matched_button);
+        noMatchButton.setOnClickListener(this);
+        yesMatchButton.setOnClickListener(this);
         setMatch(name,percent);
         return v;
     }
@@ -69,17 +73,25 @@ public class MatchFragment extends Fragment implements View.OnClickListener  {
     public void onClick(View v){
         Activity activity = getActivity();
         switch (v.getId()){
-            //case R.id.no_match_button:
-                //startActivity(new Intent(getActivity(), MatchActivity.class));
+            case R.id.no_match_button:
+                startActivity(new Intent(getActivity(), MatchActivity.class));
                 //delete/flag potential match as nada
-                //break;
-            //case R.id.matched_button:
+                UpdateMatches.NoMatch(email,email2);
+                Intent matchesIntent = new Intent(getActivity(), MatchesActivity.class);
+                matchesIntent.putExtra("EMAIL", email);
+                startActivity(matchesIntent);
+                break;
+            case R.id.matched_button:
+                UpdateMatches.YesMatch(email,email2,name);
+                Intent matchesIntent2 = new Intent(getActivity(), MatchesActivity.class);
+                matchesIntent2.putExtra("EMAIL", email);
+                startActivity(matchesIntent2);
                 //flag as lovebirds and move to different match
                 //DocumentReference docRef = db.collection("users").document();
                 //docRef.update("password", newPass);
 
 
-                //break;
+                break;
         }
     }
 

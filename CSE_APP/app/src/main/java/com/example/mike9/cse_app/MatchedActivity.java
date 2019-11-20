@@ -19,6 +19,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import static android.content.ContentValues.TAG;
 
@@ -62,44 +64,31 @@ public class MatchedActivity extends AppCompatActivity {
         Log.d("Match", "in showMatches");
 
 
-        DocumentReference docRef = db.collection("users").document(email);
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>(){
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+        db.collection("users").document(email).collection("matched").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                        String sizeStr = document.get("matchSize").toString();
-                        int num_matches= Integer.parseInt(sizeStr);
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Log.d("PLZZZ: ", "yes " + document.get("name"));
+                        String first_name = document.get("name").toString();
+                        String email1 = document.get("email").toString();
+                        int percent_match = Integer.parseInt(UpdateMatches.makeInt(document.get("percent").toString()));
+                        MatchedPairFragment fragment = new MatchedPairFragment();
+                        Bundle bundle = new Bundle();
+                        Log.d("PLZZZ: ", "Doc Snap: " + document.getData());
+                        Log.d("PLZZ ", "email1: " + email1+ "first_name: " +first_name + "percent_match: " + percent_match);
+                        bundle.putString("EMAIL", email1);
+                        bundle.putString("FIRSTNAME", first_name);
+                        bundle.putInt("PERCENT", percent_match);
+                        fragment.setArguments(bundle);
+                        getSupportFragmentManager().beginTransaction().add(R.id.matched_list, fragment).commitNow();
 
-                        String first_name;
-                        String matchedEmail;
-                        int percent_match;
-                        Bundle bundle;
-                        MatchedPairFragment fragment;
-                        //setUp bundle of name and match %
-                        //fragment.setArguments(bundle);
-                        for(int i = 0; i<num_matches; i++){
-                            fragment = new MatchedPairFragment();
-                            bundle = new Bundle();
-                            //get actual name and percent
-                            first_name = "first"; //TODO: change to get the first name of match i
-                            percent_match = 76; //TODO: change to get the match % of match i
-                            matchedEmail = "email@osu.edu"; //TODO: change to get the (other) email of match i
-                            bundle.putString("FIRSTNAME", first_name);
-                            bundle.putInt("PERCENT", percent_match);
-                            bundle.putString("EMAIL", matchedEmail);
-                            fragment.setArguments(bundle);
-                            getSupportFragmentManager().beginTransaction().add(R.id.matched_list, fragment).commitNow();
-                        }
-
-                    } else {
-                        Log.d(TAG, "No such document");
                     }
-                } else {Log.d(TAG, "get failed with ", task.getException());
+                } else {
+
                 }
             }
         });
+
 
     }
 }

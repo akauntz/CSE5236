@@ -10,7 +10,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -44,13 +45,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-       <!-- <Button
+        android:orientation="horizontal"
+        android:gravity="center">
+        <Button
             android:id="@+id/check_matched_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity = "center"
-            android:text="Check Matched"/>-->
+            android:text="Check Matched"/>
 
         <Button
             android:id="@+id/return_home_button"
