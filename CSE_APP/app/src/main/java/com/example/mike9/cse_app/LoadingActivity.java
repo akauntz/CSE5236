@@ -16,10 +16,11 @@ public class LoadingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle bundle = new Bundle();
-        email = getIntent().getExtras().getString("EMAIL");
+        //email = getIntent().getExtras().getString("EMAIL");
+        email = DataCache.getEmail();
         state = getIntent().getExtras().getString("STATE");
         points = getIntent().getExtras().getInt("POINTS");
-        bundle.putString("EMAIL", email);
+        //bundle.putString("EMAIL", email);
         LoadingFragment fragment = new LoadingFragment();
         fragment.setArguments(bundle);
         setContentView(R.layout.main_activity);
@@ -30,7 +31,7 @@ public class LoadingActivity extends AppCompatActivity {
         }
         calcAndUpdateMatches();
         Intent homeIntent = new Intent(this, HomeActivity.class);
-        homeIntent.putExtra("EMAIL", email);
+        //homeIntent.putExtra("EMAIL", email);
         startActivity(homeIntent);
 
     }

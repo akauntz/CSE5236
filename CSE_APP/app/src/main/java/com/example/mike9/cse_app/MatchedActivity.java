@@ -21,9 +21,10 @@ public class MatchedActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        email = getIntent().getExtras().getString("EMAIL");
+        //email = getIntent().getExtras().getString("EMAIL");
+        email = DataCache.getEmail();
         Bundle bundle = new Bundle();
-        bundle.putString("EMAIL", getIntent().getExtras().getString("EMAIL"));
+        //bundle.putString("EMAIL", getIntent().getExtras().getString("EMAIL"));
         MatchedFragment fragment = new MatchedFragment();
         fragment.setArguments(bundle);
         setContentView(R.layout.main_activity);

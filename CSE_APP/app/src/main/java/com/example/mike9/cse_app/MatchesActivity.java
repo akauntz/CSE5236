@@ -24,11 +24,12 @@ public class MatchesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle bundle = new Bundle();
-        email = getIntent().getExtras().getString("EMAIL");
-        fName = getIntent().getExtras().getString("FIRSTNAME");
+        //email = getIntent().getExtras().getString("EMAIL");
+        email = DataCache.getEmail();
+        //fName = getIntent().getExtras().getString("FIRSTNAME");
         Log.d("PLZZZMATCHES", "Matches name: " + fName);
-        bundle.putString("EMAIL", email);
-        bundle.putString("FIRSTNAME", fName);
+        //bundle.putString("EMAIL", email);
+        //bundle.putString("FIRSTNAME", fName);
         MatchesFragment fragment = new MatchesFragment();
         fragment.setArguments(bundle);
         setContentView(R.layout.main_activity);

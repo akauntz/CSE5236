@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.mike9.cse_app.DataCache;
 import com.example.mike9.cse_app.LocationActivity;
 import com.example.mike9.cse_app.R;
 import com.example.mike9.cse_app.ShowMessage;
@@ -50,7 +51,8 @@ public class InterestedFragment extends Fragment implements View.OnClickListener
         View v = inflater.inflate(R.layout.interested_fragment, container, false);
         Button submitButton = v.findViewById(R.id.submitInterest_button);
         submitButton.setOnClickListener(this);
-        email = getArguments().getString("EMAIL");
+        //email = getArguments().getString("EMAIL");
+        email = DataCache.getEmail();
         points = getArguments().getInt("POINTS");
         radioMen = v.findViewById(R.id.radioMen);
         radioWomen = v.findViewById(R.id.radioWomen);
@@ -91,7 +93,7 @@ public class InterestedFragment extends Fragment implements View.OnClickListener
                                 if (document.exists()) {
                                     docRef.update("interest", interest);
                                     Intent locationIntent = new Intent(getActivity(), LocationActivity.class);
-                                    locationIntent.putExtra("EMAIL", email);
+                                    //locationIntent.putExtra("EMAIL", email);
                                     locationIntent.putExtra("INTEREST", interest);
                                     locationIntent.putExtra("POINTS", points);
                                     startActivity(locationIntent);

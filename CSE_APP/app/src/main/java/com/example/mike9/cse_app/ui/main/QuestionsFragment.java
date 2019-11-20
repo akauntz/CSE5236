@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.mike9.cse_app.DataCache;
 import com.example.mike9.cse_app.InterestedActivity;
 import com.example.mike9.cse_app.QuestionsActivity;
 import com.example.mike9.cse_app.R;
@@ -33,9 +34,9 @@ public class QuestionsFragment extends Fragment implements View.OnClickListener 
     private String[] questions;
     private int questionNum, currentScore;
     TextView questionText1;
-    private String email, answer1, answer2, answer3;
-    public RadioButton radioFalse1,radioFalse2, radioFalse3, radioTrue1, radioTrue2, radioTrue3;
-    public RadioGroup radioGroup1, radioGroup2, radioGroup3;
+    private String email, answer1;
+    public RadioButton radioFalse1, radioTrue1;
+    public RadioGroup radioGroup1;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public static QuestionsFragment newInstance() {
@@ -47,7 +48,8 @@ public class QuestionsFragment extends Fragment implements View.OnClickListener 
                              @Nullable Bundle savedInstanceState){
         View v = inflater.inflate(R.layout.questions2_fragment,container,false);
         questions  = getResources().getStringArray(R.array.matching_questions);
-        email = getArguments().getString("EMAIL");
+        //email = getArguments().getString("EMAIL");
+        email = DataCache.getEmail();
         questionNum = getArguments().getInt("NUMQUESTIONS");
         questionText1 = v.findViewById(R.id.questionText1);
         questionText1.setText(questions[questionNum]);
@@ -104,13 +106,13 @@ public class QuestionsFragment extends Fragment implements View.OnClickListener 
             questionNum++;
             if(questionNum < questions.length) {
                 Intent questionIntent = new Intent(activity, QuestionsActivity.class);
-                questionIntent.putExtra("EMAIL", email);
+                //questionIntent.putExtra("EMAIL", email);
                 questionIntent.putExtra("NUMQUESTIONS", questionNum);
                 startActivity(questionIntent);
             }else{
                 docRef.update("answered?", true);
                 Intent interestIntent = new Intent(getActivity(), InterestedActivity.class);
-                interestIntent.putExtra("EMAIL", email);
+                //interestIntent.putExtra("EMAIL", email);
                 if(answer1 == "t1") {
                     Log.d("SUPERLOG: ", "Current Score: " + currentScore + " ... " + exponent(2, questionNum));
                     interestIntent.putExtra("POINTS", currentScore + exponent(2, questionNum));

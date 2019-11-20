@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
+import com.example.mike9.cse_app.DataCache;
 import com.example.mike9.cse_app.GetLocation;
 import com.example.mike9.cse_app.LoadingActivity;
 import com.example.mike9.cse_app.R;
@@ -32,7 +33,7 @@ import static android.content.ContentValues.TAG;
 public class LocationFragment extends Fragment implements View.OnClickListener{
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    private String email, interest;
+    private String email;//, interest;
     private EditText state;
     private int points;
     TextView locationText;
@@ -53,8 +54,9 @@ public class LocationFragment extends Fragment implements View.OnClickListener{
         Button confirmButton = v.findViewById(R.id.ConfirmLocation_button);
         confirmButton.setOnClickListener(this);
         state = v.findViewById(R.id.Location_editText);
-        email = getArguments().getString("EMAIL");
-        interest = getArguments().getString("INTEREST");
+        //email = getArguments().getString("EMAIL");
+        email = DataCache.getEmail();
+        //interest = getArguments().getString("INTEREST");
         points = getArguments().getInt("POINTS");
 
         return v;

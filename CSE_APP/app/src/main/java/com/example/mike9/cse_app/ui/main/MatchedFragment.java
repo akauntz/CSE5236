@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.mike9.cse_app.DataCache;
 import com.example.mike9.cse_app.HomeActivity;
 import com.example.mike9.cse_app.R;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -34,7 +35,8 @@ public class MatchedFragment extends Fragment implements View.OnClickListener  {
         View v = inflater.inflate(R.layout.matched_fragment,container,false);
         returnHomeButton = v.findViewById(R.id.return_home_button_2);
         returnHomeButton.setOnClickListener(this);
-        email = getArguments().getString("EMAIL");
+        //email = getArguments().getString("EMAIL");
+        //email = DataCache.getEmail();
         return v;
     }
 
@@ -44,7 +46,7 @@ public class MatchedFragment extends Fragment implements View.OnClickListener  {
         switch (v.getId()){
             case R.id.return_home_button_2:
                 Intent homeIntent = new Intent(activity, HomeActivity.class);
-                homeIntent.putExtra("EMAIL",email);
+                //homeIntent.putExtra("EMAIL",email);
                 startActivity(homeIntent);
                 break;
         }

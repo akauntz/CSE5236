@@ -82,10 +82,11 @@ public class MainFragment extends Fragment implements View.OnClickListener {
                                 if (document.exists()) {
                                     Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                                     String storedPassword = document.get("password").toString();
-                                    final String fName = document.get("name").toString();
-                                    DataCache.updateName(fName);
 
                                     if (storedPassword.equals(password.getText().toString())) {
+                                        final String fName = document.get("name").toString();
+                                        DataCache.updateName(fName);
+                                        DataCache.updateEmail(userEmail);
                                         Log.d(TAG, "Correct password");
                                         Log.d("Answer: ", document.get("answered?").toString());
                                         Log.d("Answer: ", document.get("answered?").toString().equals("false")+"");
@@ -93,7 +94,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 
                                         if (document.get("answered?").toString().equals("false")) {
                                             Intent questionsIntent = new Intent(activity, QuestionsActivity.class);
-                                            questionsIntent.putExtra("EMAIL", email.getText().toString());
+                                            //questionsIntent.putExtra("EMAIL", email.getText().toString());
                                             questionsIntent.putExtra("NUMQUESTIONS", 0);
                                             startActivity(questionsIntent);
                                         } else {

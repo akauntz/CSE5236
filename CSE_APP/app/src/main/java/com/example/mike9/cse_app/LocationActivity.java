@@ -12,7 +12,7 @@ public class LocationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle bundle = new Bundle();
-        bundle.putString("EMAIL", getIntent().getExtras().getString("EMAIL"));
+        //bundle.putString("EMAIL", getIntent().getExtras().getString("EMAIL"));
         bundle.putString("INTEREST", getIntent().getExtras().getString("INTEREST"));
         bundle.putInt("POINTS", getIntent().getExtras().getInt("POINTS"));
         LocationFragment fragment = new LocationFragment();

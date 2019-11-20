@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.mike9.cse_app.DataCache;
 import com.example.mike9.cse_app.MainActivity;
 import com.example.mike9.cse_app.MatchesActivity;
 import com.example.mike9.cse_app.R;
@@ -29,9 +30,9 @@ import static android.content.ContentValues.TAG;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
-    private String email, firstName;
+    private String email;//, firstName;
     private EditText updatePass;
-    TextView locationText;
+    //TextView locationText;
 
 
 
@@ -54,8 +55,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         signOutButton.setOnClickListener(this);
         Button getMatchesButton = v.findViewById(R.id.check_matches_button);
         getMatchesButton.setOnClickListener(this);
-        email = getArguments().getString("EMAIL");
-        firstName = getArguments().getString("FIRSTNAME");
+        //email = getArguments().getString("EMAIL");
+        email = DataCache.getEmail();
+        //firstName = getArguments().getString("FIRSTNAME");
         updatePass = v.findViewById(R.id.updatePass_text);
 
         return v;
@@ -104,8 +106,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             case R.id.check_matches_button:
                 //MatchCalculator.Calc("", email);
                 Intent matchesIntent = new Intent(activity, MatchesActivity.class);
-                matchesIntent.putExtra("EMAIL", email);
-                matchesIntent.putExtra("FIRSTNAME", firstName);
+                //matchesIntent.putExtra("EMAIL", email);
+                //matchesIntent.putExtra("FIRSTNAME", firstName);
                 startActivity(matchesIntent);
                 break;
 

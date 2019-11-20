@@ -59,13 +59,13 @@ public class MatchFragment extends Fragment implements View.OnClickListener  {
 
                 UpdateMatches.NoMatch(email,email2);
                 Intent matchesIntent = new Intent(getActivity(), MatchesActivity.class);
-                matchesIntent.putExtra("EMAIL", email);
+                //matchesIntent.putExtra("EMAIL", email);
                 startActivity(matchesIntent);
                 break;
             case R.id.matched_button:
                 UpdateMatches.YesMatch(email,email2,name);
                 Intent matchesIntent2 = new Intent(getActivity(), MatchesActivity.class);
-                matchesIntent2.putExtra("EMAIL", email);
+                //matchesIntent2.putExtra("EMAIL", email);
                 startActivity(matchesIntent2);
 
 

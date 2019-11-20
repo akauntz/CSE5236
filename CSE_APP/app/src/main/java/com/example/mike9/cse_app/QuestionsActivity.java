@@ -12,7 +12,7 @@ public class QuestionsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle bundle = new Bundle();
-        bundle.putString("EMAIL", getIntent().getExtras().getString("EMAIL"));
+        //bundle.putString("EMAIL", getIntent().getExtras().getString("EMAIL"));
         bundle.putInt("NUMQUESTIONS", getIntent().getExtras().getInt("NUMQUESTIONS"));
         QuestionsFragment fragment = new QuestionsFragment();
         fragment.setArguments(bundle);
