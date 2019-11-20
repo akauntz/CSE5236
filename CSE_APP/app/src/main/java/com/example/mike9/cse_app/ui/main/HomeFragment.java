@@ -82,14 +82,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         signOutButton.setOnClickListener(this);
         Button getMatchesButton = v.findViewById(R.id.check_matches_button);
         getMatchesButton.setOnClickListener(this);
-        Button getLocationButton = v.findViewById(R.id.location_button);
+        /*Button getLocationButton = v.findViewById(R.id.location_button);
         getLocationButton.setOnClickListener(this);
         Button testButton = v.findViewById(R.id.testButton);
         testButton.setOnClickListener(this);
-        locationText = v.findViewById(R.id.locationText);
+        locationText = v.findViewById(R.id.locationText);*/
         email = getArguments().getString("EMAIL");
         updatePass = v.findViewById(R.id.updatePass_text);
-        MatchCalculator.Calc("", email);
+        //MatchCalculator.Calc("", email);
 
         return v;
     }
@@ -139,13 +139,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.check_matches_button:
-                MatchCalculator.Calc("", email);
+                //MatchCalculator.Calc("", email);
                 Intent matchesIntent = new Intent(activity, MatchesActivity.class);
                 matchesIntent.putExtra("EMAIL", email);
                 startActivity(matchesIntent);
                 break;
 
-            case R.id.location_button:
+            /*case R.id.location_button:
 
                 Log.d("test", "here");
 
@@ -185,7 +185,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                                 Log.w("PLZZ", "Error writing document", e);
                             }
                         });
-                break;
+                break;*/
 
 
         }

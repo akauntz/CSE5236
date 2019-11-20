@@ -47,7 +47,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener  {
 
     // Access a Cloud Firestore instance from your Activity
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    public Map<String, String> user = new HashMap<>();
+    public Map<String, Object> user = new HashMap<>();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -130,6 +130,9 @@ public class SignUpFragment extends Fragment implements View.OnClickListener  {
                                 user.put("age", fb_age.toString());
                                 user.put("gender", gender);
                                 user.put("answered?", "false");
+                                user.put("interest", "");
+                                user.put("state", "");
+                                user.put("score",0);
                                 db.collection("users").document(fb_email.toString())
                                         .set(user)
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {

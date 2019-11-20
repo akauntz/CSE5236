@@ -25,6 +25,9 @@
         <activity android:name=".MatchesActivity"/>
         <activity android:name=".MatchActivity"/>
         <activity android:name=".MatchedActivity"/>
+        <activity android:name=".InterestedActivity"/>
+        <activity android:name=".LocationActivity"/>
+        <activity android:name=".LoadingActivity"/>
     </application>
 
 </manifest>

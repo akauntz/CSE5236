@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Please enter your state or Click the Find Location Button"
+        android:gravity = "center"/>
+
+    <EditText
+        android:id="@+id/Location_editText"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:hint = "State Name"
+        android:inputType="text"
+        android:gravity="center"/>
+    <Button
+        android:id="@+id/FindLocation_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Find Location"/>
+
+    <Button
+        android:id="@+id/ConfirmLocation_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirm"/>
+
+</LinearLayout>

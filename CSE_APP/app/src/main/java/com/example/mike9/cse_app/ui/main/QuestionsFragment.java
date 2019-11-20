@@ -20,6 +20,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.mike9.cse_app.HomeActivity;
+import com.example.mike9.cse_app.InterestedActivity;
 import com.example.mike9.cse_app.MainActivity;
 import com.example.mike9.cse_app.QuestionsActivity;
 import com.example.mike9.cse_app.R;
@@ -53,6 +54,9 @@ public class QuestionsFragment extends Fragment implements View.OnClickListener 
         View v = inflater.inflate(R.layout.questions2_fragment,container,false);
         questions  = getResources().getStringArray(R.array.matching_questions);
         Log.d("Questions 0:", questions[0]);
+        Log.d("TestParse: ", makeInt("1.0"));
+        Log.d("TestParse: ", makeInt("546.8834134"));
+        Log.d("TestParse: ", makeInt("4321"));
         email = getArguments().getString("EMAIL");
         questionNum = getArguments().getInt("NUMQUESTIONS");
         questionText1 = v.findViewById(R.id.questionText1);
@@ -116,10 +120,12 @@ public class QuestionsFragment extends Fragment implements View.OnClickListener 
             //if(questionNum < questions.length){
             //   questionText.setText(questions[questionNum]);
             //} else {
-            DocumentReference docRef = db.collection("users").document(email);
+            final DocumentReference docRef = db.collection("users").document(email);
             if (answer1.equals("t1")) {
                 currentScore = 0;
-
+                final int power = questionNum;
+                Log.d("QuestionsVal:", "currentScore: " + currentScore);
+                Log.d("QuestionsVal:", "questionNum1: " + questionNum);
                 docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()) {
@@ -127,7 +133,17 @@ public class QuestionsFragment extends Fragment implements View.OnClickListener 
                             if (document.exists()) {
                                 Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                                 //String storedPassword = document.get("password").toString();
+                                Log.d("QuestionsVal:", "questionNum2: " + questionNum);
+                                String scoreStr = document.get("score").toString();
                                 updateCurScore(Integer.parseInt(document.get("score").toString()));
+                                Log.d("QuestionsVal:", "questionNum3: " + questionNum);
+                                int updatedScore = currentScore+exponent(2,power);
+                                float testScore = 2^1;
+                                float testScore2 = 2+2^1;
+                                Log.d("QuestionsVal:", "power: " + power);
+                                Log.d("QuestionsVal:", "questionNum4: " + questionNum);
+                                Log.d("QuestionsVal:", "CurrentScore: " + currentScore +"updatedScore: " + updatedScore);
+                                docRef.update("score", updatedScore);
 
                             } else {
                                 Log.d(TAG, "No such document");
@@ -137,7 +153,11 @@ public class QuestionsFragment extends Fragment implements View.OnClickListener 
                         }
                     }
                 });
-                docRef.update("score", currentScore + 2 ^ (questionNum));
+                //Log.d("Questions:", "currentScore: "  + currentScore);
+                //float updateScore = currentScore+2^questionNum;
+                //Log.d("Questions:", "updatedScore: " + updateScore);
+                //Log.d("Questions: ", "QuestionNum: " + questionNum);
+                //docRef.update("score", currentScore + 2 ^questionNum);
 
                 //docRef.update("q1", answer1);
                 //docRef.update("q2", answer2);
@@ -146,14 +166,18 @@ public class QuestionsFragment extends Fragment implements View.OnClickListener 
             questionNum++;
             if(questionNum < questions.length) {
                 Intent questionIntent = new Intent(activity, QuestionsActivity.class);
-                questionIntent.putExtra("EMAIL", email.toString());
+                questionIntent.putExtra("EMAIL", email);
                 questionIntent.putExtra("NUMQUESTIONS", questionNum);
                 startActivity(questionIntent);
             }else{
                 docRef.update("answered?", true);
-                Intent homeIntent = new Intent(activity, HomeActivity.class);
+                /*Intent homeIntent = new Intent(activity, HomeActivity.class);
                 homeIntent.putExtra("EMAIL", email.toString());
-                startActivity(homeIntent);
+                startActivity(homeIntent);*/
+                Intent interestIntent = new Intent(getActivity(), InterestedActivity.class);
+                interestIntent.putExtra("EMAIL", email);
+                startActivity(interestIntent);
+
             }
 
         } else {
@@ -167,6 +191,24 @@ public class QuestionsFragment extends Fragment implements View.OnClickListener 
         }*/
 
     private void updateCurScore(int score){
+        Log.d("QuestionsVal2:", "currentScore: " + currentScore +"   score: "+score);
         currentScore = score;
+        Log.d("QuestionsVal2:", "currentScore: " + currentScore +"   score: "+score);
+    }
+
+    private int exponent(int a, int b){
+        int temp = 1;
+        for(int i=0; i<b; i++){
+            temp *= a;
+        }
+        return temp;
+    }
+
+    private String makeInt(String str){
+        int strEnd = 0;
+        while (strEnd<str.length() && str.charAt(strEnd)!='.'){
+            strEnd++;
+        }
+        return str.substring(0,strEnd);
     }
 }
