@@ -8,7 +8,7 @@
         android:id = "@+id/interestText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text = "Are you interested in: "
+        android:text = "@string/interestQ"
         android:gravity = "center"
         android:paddingTop = "50dp"/>
 
@@ -23,17 +23,17 @@
             android:id="@+id/radioMen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text = "Men"/>
+            android:text = "@string/men"/>
         <RadioButton
             android:id="@+id/radioWomen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text = "Women"/>
+            android:text = "@string/women"/>
         <RadioButton
             android:id="@+id/radioOther"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text = "Other"/>
+            android:text = "@string/other"/>
     </RadioGroup>
 
     <Button
@@ -41,6 +41,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text = "submit"/>
+        android:text = "@string/submit"/>
 
 </LinearLayout>

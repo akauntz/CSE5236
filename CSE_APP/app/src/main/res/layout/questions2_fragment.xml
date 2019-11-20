@@ -7,7 +7,7 @@
         android:id = "@+id/questionText1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text = "You prefer C over Java"
+        android:text = "@string/question1"
         android:gravity = "center"
         android:paddingTop = "50dp"/>
 
@@ -22,12 +22,12 @@
             android:id="@+id/radioTrue1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text = "True"/>
+            android:text = "@string/yes"/>
         <RadioButton
             android:id="@+id/radioFalse1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text = "False"/>
+            android:text = "@string/no"/>
     </RadioGroup>
 
     <Button
@@ -35,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text = "submit"/>
+        android:text = "@string/submit"/>
 
 
 </LinearLayout>

@@ -50,6 +50,26 @@
     <string name="english">English</string>
     <string name="chinese">Chinese</string>
 
+    <string name="men">Men</string>
+    <string name="women">Women</string>
+    <string name="interestQ">Are you interested in: </string>
+
+    <string name="loading">Loading Account Info</string>
+
+    <string name="locationPrompt">Please enter your state or Click the Find Location Button</string>
+    <string name="stateHint">State Name</string>
+    <string name="findLocation">Find Location</string>
+    <string name="confirm">Confirm</string>
+
+    <string name="match2">Match</string>
+    <string name="delete">Delete</string>
+
+    <string name="nah">Nah</string>
+
+    <string name="check_matched">Check Matched</string>
+
+    <string name="back">Back</string>
+
 
     <string-array name = "matching_questions">
         <item>You prefer C over Java</item>
