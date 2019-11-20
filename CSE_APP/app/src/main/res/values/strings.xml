@@ -70,6 +70,9 @@
 
     <string name="back">Back</string>
 
+    <string name="network_error">You are not connected to the Internet. Please Try Again Later.</string>
+    <string name="try_again">Try Again</string>
+
 
     <string-array name = "matching_questions">
         <item>You prefer C over Java</item>
