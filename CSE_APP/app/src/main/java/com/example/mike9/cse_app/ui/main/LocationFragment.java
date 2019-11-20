@@ -97,7 +97,6 @@ public class LocationFragment extends Fragment implements View.OnClickListener{
                         }
                     });
                     Intent loadIntent = new Intent(getActivity(), LoadingActivity.class);
-                    Log.d("PLZZZZHEREL: ", location + "..." + points);
                     loadIntent.putExtra("EMAIL", email);
                     loadIntent.putExtra("STATE", location);
                     loadIntent.putExtra("POINTS", points);

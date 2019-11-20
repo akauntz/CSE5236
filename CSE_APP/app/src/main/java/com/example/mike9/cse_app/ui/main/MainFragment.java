@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.mike9.cse_app.DataCache;
 import com.example.mike9.cse_app.HomeActivity;
 import com.example.mike9.cse_app.MatchCalc;
 import com.example.mike9.cse_app.QuestionsActivity;
@@ -81,6 +82,8 @@ public class MainFragment extends Fragment implements View.OnClickListener {
                                 if (document.exists()) {
                                     Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                                     String storedPassword = document.get("password").toString();
+                                    final String fName = document.get("name").toString();
+                                    DataCache.updateName(fName);
 
                                     if (storedPassword.equals(password.getText().toString())) {
                                         Log.d(TAG, "Correct password");
@@ -97,6 +100,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
                                             //logIn
                                             Intent logInIntent = new Intent(activity, HomeActivity.class);
                                             logInIntent.putExtra("EMAIL", email.getText().toString());
+                                            logInIntent.putExtra("FIRSTNAME", fName);
                                             startActivity(logInIntent);
                                         }
                                     } else {

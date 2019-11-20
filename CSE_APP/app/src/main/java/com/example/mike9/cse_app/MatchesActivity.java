@@ -17,7 +17,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 public class MatchesActivity extends AppCompatActivity {
     String email;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private String emails[];
+    private String fName;
     private int emailCount = 0;
 
     @Override
@@ -25,7 +25,10 @@ public class MatchesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Bundle bundle = new Bundle();
         email = getIntent().getExtras().getString("EMAIL");
+        fName = getIntent().getExtras().getString("FIRSTNAME");
+        Log.d("PLZZZMATCHES", "Matches name: " + fName);
         bundle.putString("EMAIL", email);
+        bundle.putString("FIRSTNAME", fName);
         MatchesFragment fragment = new MatchesFragment();
         fragment.setArguments(bundle);
         setContentView(R.layout.main_activity);
@@ -86,8 +89,4 @@ public class MatchesActivity extends AppCompatActivity {
         return str.substring(0,strEnd);
     }
 
-    private void addEmail(String e1){
-        emails[emailCount++] = e1;
-
-    }
 }

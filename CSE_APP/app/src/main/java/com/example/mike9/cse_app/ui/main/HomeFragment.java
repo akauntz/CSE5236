@@ -29,7 +29,7 @@ import static android.content.ContentValues.TAG;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
-    private String email;
+    private String email, firstName;
     private EditText updatePass;
     TextView locationText;
 
@@ -55,6 +55,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         Button getMatchesButton = v.findViewById(R.id.check_matches_button);
         getMatchesButton.setOnClickListener(this);
         email = getArguments().getString("EMAIL");
+        firstName = getArguments().getString("FIRSTNAME");
         updatePass = v.findViewById(R.id.updatePass_text);
 
         return v;
@@ -104,6 +105,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 //MatchCalculator.Calc("", email);
                 Intent matchesIntent = new Intent(activity, MatchesActivity.class);
                 matchesIntent.putExtra("EMAIL", email);
+                matchesIntent.putExtra("FIRSTNAME", firstName);
                 startActivity(matchesIntent);
                 break;
 

@@ -27,7 +27,6 @@ public class UpdateMatches {
     private static int score;
     private static String name1;
     final static float MATCH_PERCENT = 65;
-    private static String name;
 
     public static void fillMatches(String email, int point_score, String st){
         Map<String, Object> user = new HashMap<>();
@@ -48,22 +47,16 @@ public class UpdateMatches {
                         updateState(document.get("state").toString());
                         updateScore(document.get("score").toString());
                         updateName1(document.get("name").toString());
-                        Log.d("PLZZZ ", stateQ);
                         db.collection("users").whereEqualTo("state",stateQ).whereEqualTo("gender", document.get("interest")).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>(){
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task){
                                 if(task.isSuccessful()){
                                     for (QueryDocumentSnapshot document : task.getResult()){
-                                        Log.d("PLZZZ: ", "yes");
                                         int points = Integer.parseInt(makeInt(document.get("score").toString()));
-                                        Log.d("PLZZZ: ", "points: " + points + "  score:"+ score);
                                         float percent_match = MatchCalc.getPercent(score, points);
-                                        Log.d("PLZZZ: ", "Percent_match: " + percent_match);
                                         if(percent_match > MATCH_PERCENT){
-                                            Log.d("PLZZZ: ", "yep");
                                             String email2 = document.get("email").toString();
                                             String name2 = document.get("name").toString();
-                                            Log.d("PLZZZ: ", "email1: " + email2 + "name2: " + name2 + "email1: " + email1);
                                             addMatches(email1, name1, email2, name2, percent_match);
                                         }
                                     }
@@ -104,16 +97,10 @@ public class UpdateMatches {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         if(document.get("bool2").toString() == "true"){
-                            getName(em1);
-                            try {
-                                Thread.sleep(500); //sleep 1/2 second because update name taking too long
-                            }catch(InterruptedException e){
-                                Log.d("PLZZZZNO: ", "nah sleep");
-                            }
                             String name2 = document.get("name").toString();
                             int percent = Integer.parseInt(makeInt(document.get("percent").toString()));
 
-                            FillMatched(em1, em2, name, name2, percent);
+                            FillMatched(em1, em2, DataCache.getName(), name2, percent);
                         }
 
                     } else {
@@ -148,28 +135,7 @@ public class UpdateMatches {
         state = st;
     }
 
-    private static void getName(String e1){
-        DocumentReference docRef = db.collection("users").document(e1);
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        updateName(document.get("name").toString());
 
-                    } else {
-                        Log.d(TAG, "No such document");
-                    }
-                } else {
-                    Log.d(TAG, "get failed with ", task.getException());
-                }
-            }
-        });
-    }
-
-    static private void updateName(String n){
-        name = n;
-    }
 
     static private void updateInterest(String intrst){
         interested=intrst;
