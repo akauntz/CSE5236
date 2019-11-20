@@ -72,8 +72,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
                     DocumentReference docRef = db.collection("users").document(email);
                     docRef.update("password", newPass);
-
-                    ShowMessage.show(getActivity(), "Password updated");
+                    ShowMessage.show(getActivity(), getActivity().getString(R.string.pass_update));
                 }else{
                     startActivity(new Intent(getActivity(), NoConnectionActivity.class));
                 }

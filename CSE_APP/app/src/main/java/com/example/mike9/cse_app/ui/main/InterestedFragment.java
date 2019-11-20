@@ -105,7 +105,8 @@ public class InterestedFragment extends Fragment implements View.OnClickListener
                             }
                         });
                     } else {
-                        ShowMessage.show(getActivity(), "Please select an interest.");
+                        ShowMessage.show(getActivity(), getActivity().getString(R.string.select_interest));
+
                     }
                 }else{
                     startActivity(new Intent(getActivity(), NoConnectionActivity.class));

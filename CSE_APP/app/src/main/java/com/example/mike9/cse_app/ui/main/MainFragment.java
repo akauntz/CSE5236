@@ -106,11 +106,11 @@ public class MainFragment extends Fragment implements View.OnClickListener {
                                         }
                                     } else {
                                         Log.d(TAG, "Password Mismatch");
-                                        ShowMessage.show(activity, "Incorrect Login");
+                                        ShowMessage.show(getActivity(), getActivity().getString(R.string.incorrect_login));
                                     }
 
                                 } else {
-                                    ShowMessage.show(activity, "Account does not exist.");
+                                    ShowMessage.show(getActivity(), getActivity().getString(R.string.no_account));
                                     Log.d(TAG, "No such document");
                                 }
                             } else {

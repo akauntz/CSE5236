@@ -97,13 +97,13 @@ public class SignUpFragment extends Fragment implements View.OnClickListener  {
 
 
             if (fb_name.toString().equals("") || fb_password.toString().equals("") || fb_age.toString().equals("") || fb_email.toString().equals("") || gender.equals("")) {
-                ShowMessage.show(getActivity(), "Missing required fields.");
+                ShowMessage.show(getActivity(), getActivity().getString(R.string.missing_fields));
             } else if (!fb_password.toString().equals(fb_passwordCheck.toString())) {
-                ShowMessage.show(getActivity(), "Error, passwords don't match.");
+                ShowMessage.show(getActivity(), getActivity().getString(R.string.pass_mismatch));
             } else if (!fb_email.toString().contains("@")) {
-                ShowMessage.show(getActivity(), "Invalid email.");
+                ShowMessage.show(getActivity(), getActivity().getString(R.string.invalid_email));
             } else if (Integer.parseInt(fb_age.toString()) < 18) {
-                ShowMessage.show(getActivity(), "Must be 18 or older");
+                ShowMessage.show(getActivity(), getActivity().getString(R.string.be_older));
             } else {
 
                 DocumentReference docRef = db.collection("users").document(fb_email.toString());
@@ -113,7 +113,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener  {
                         if (task.isSuccessful()) {
                             DocumentSnapshot document = task.getResult();
                             if (document.exists()) {
-                                ShowMessage.show(getActivity(), "Email already used");
+                                ShowMessage.show(getActivity(), getActivity().getString(R.string.email_taken));
                                 Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                             } else {
                                 Log.d(TAG, "No such document");

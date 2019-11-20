@@ -50,7 +50,6 @@
     <string name="english">英语</string>
     <string name="chinese">中文</string>
 
-    //TODO: translate below
     <string name="men">男性</string>
     <string name="women">女性</string>
     <string name="interestQ">你对这个感兴趣吗: </string>
@@ -77,6 +76,28 @@
     <string name="no_connection">No internet connection. Request failed. Please try again</string>
 
     <string name="no_internet">Still no internet</string>
+
+    <string name="pass_update">Password Updated</string>
+
+    <string name="select_interest">Please select an interest.</string>
+
+    <string name="enter_state">Please enter a state</string>
+
+    <string name="incorrect_login">Incorrect Login</string>
+
+    <string name="no_account">Account does not exist</string>
+
+    <string name="select_option">Select an option</string>
+
+    <string name="missing_fields">Missing required fields.</string>
+
+    <string name="pass_mismatch">Error, passwords don\'t match.</string>
+
+    <string name="invalid_email">Invalid email.</string>
+
+    <string name="be_older">Must be 18 or older</string>
+
+    <string name="email_taken">Email already used</string>
 
     <string-array name = "matching_questions">
         <item>相比Java，您更喜欢C</item>

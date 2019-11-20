@@ -78,7 +78,7 @@ public class LocationFragment extends Fragment implements View.OnClickListener{
 
             case R.id.ConfirmLocation_button:
                 if(location == ""){ //TODO: add more confirmation
-                    ShowMessage.show(getActivity(), "Please enter a state");
+                    ShowMessage.show(getActivity(), getActivity().getString(R.string.enter_state));
                 } else {
                     final DocumentReference docRef = db.collection("users").document(email);
                     docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {

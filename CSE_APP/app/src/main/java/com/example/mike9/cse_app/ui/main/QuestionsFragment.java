@@ -125,7 +125,7 @@ public class QuestionsFragment extends Fragment implements View.OnClickListener 
                 }
 
             } else {
-                ShowMessage.show(getActivity(), "Select an option.");
+                ShowMessage.show(getActivity(), getActivity().getString(R.string.select_option));
             }
         }else{
             startActivity(new Intent(getActivity(), NoConnectionActivity.class));
