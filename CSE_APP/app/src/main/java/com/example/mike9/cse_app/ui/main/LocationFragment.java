@@ -36,7 +36,6 @@ public class LocationFragment extends Fragment implements View.OnClickListener{
     private String email;
     private EditText state;
     private int points;
-    TextView locationText;
 
 
 
@@ -53,6 +52,7 @@ public class LocationFragment extends Fragment implements View.OnClickListener{
         getGPSButton.setOnClickListener(this);
         Button confirmButton = v.findViewById(R.id.ConfirmLocation_button);
         confirmButton.setOnClickListener(this);
+        //locationText = v.findViewById(R.id.Location_editText);
         state = v.findViewById(R.id.Location_editText);
         email = DataCache.getEmail();
         points = getArguments().getInt("POINTS");
@@ -69,7 +69,7 @@ public class LocationFragment extends Fragment implements View.OnClickListener{
                 if(locationAllowed()){
                     Log.d("GPS", "Allowed");
                     //TODO: CHECK THIS, MAKE SURE IS ONLY STATE
-                    locationText.setText(GetLocation.getCityState(getActivity()));
+                    state.setText(GetLocation.getCityState(getActivity()));
                 } else {
                     Log.d("GPS", "Denied");
                     ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION}, 1);
