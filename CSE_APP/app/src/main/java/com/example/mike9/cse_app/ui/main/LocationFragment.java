@@ -19,7 +19,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.mike9.cse_app.GetLocation;
 import com.example.mike9.cse_app.LoadingActivity;
-import com.example.mike9.cse_app.MatchCalculator;
 import com.example.mike9.cse_app.R;
 import com.example.mike9.cse_app.ShowMessage;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -33,8 +32,9 @@ import static android.content.ContentValues.TAG;
 public class LocationFragment extends Fragment implements View.OnClickListener{
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    private String email;
+    private String email, interest;
     private EditText state;
+    private int points;
     TextView locationText;
 
 
@@ -54,18 +54,21 @@ public class LocationFragment extends Fragment implements View.OnClickListener{
         confirmButton.setOnClickListener(this);
         state = v.findViewById(R.id.Location_editText);
         email = getArguments().getString("EMAIL");
+        interest = getArguments().getString("INTEREST");
+        points = getArguments().getInt("POINTS");
 
         return v;
     }
 
     @Override
     public void onClick(View v){
+        final String location = state.getText().toString().toLowerCase();
 
         switch(v.getId()){
             case R.id.FindLocation_button:
                 if(locationAllowed()){
                     Log.d("GPS", "Allowed");
-
+                    //TODO: CHECK THIS, MAKE SURE IS ONLY STATE
                     locationText.setText(GetLocation.getCityState(getActivity()));
                 } else {
                     Log.d("GPS", "Denied");
@@ -74,10 +77,9 @@ public class LocationFragment extends Fragment implements View.OnClickListener{
                 break;
 
             case R.id.ConfirmLocation_button:
-                if(state.getText().toString() == ""){ //add more confirmation
+                if(location == ""){ //add more confirmation
                     ShowMessage.show(getActivity(), "Please enter a state");
                 } else {
-                    //add state to document
                     final DocumentReference docRef = db.collection("users").document(email);
                     docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -85,8 +87,7 @@ public class LocationFragment extends Fragment implements View.OnClickListener{
                                 DocumentSnapshot document = task.getResult();
                                 if (document.exists()) {
                                     Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                                    //String storedPassword = document.get("password").toString();
-                                    docRef.update("state", state.getText().toString().toLowerCase());
+                                    docRef.update("state", location);
                                 } else {
                                     Log.d(TAG, "No such document");
                                 }
@@ -96,9 +97,11 @@ public class LocationFragment extends Fragment implements View.OnClickListener{
                         }
                     });
                     Intent loadIntent = new Intent(getActivity(), LoadingActivity.class);
+                    Log.d("PLZZZZHEREL: ", location + "..." + points);
                     loadIntent.putExtra("EMAIL", email);
+                    loadIntent.putExtra("STATE", location);
+                    loadIntent.putExtra("POINTS", points);
                     startActivity(loadIntent);
-                    //TODO: MOVE TO LOADING INTENT
                 }
                 break;
         }

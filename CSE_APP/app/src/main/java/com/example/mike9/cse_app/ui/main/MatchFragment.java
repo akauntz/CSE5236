@@ -3,42 +3,24 @@ package com.example.mike9.cse_app.ui.main;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.mike9.cse_app.HomeActivity;
-import com.example.mike9.cse_app.MainActivity;
-import com.example.mike9.cse_app.MatchActivity;
 import com.example.mike9.cse_app.MatchesActivity;
 import com.example.mike9.cse_app.R;
-import com.example.mike9.cse_app.SignUpActivity;
 import com.example.mike9.cse_app.UpdateMatches;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import static android.content.ContentValues.TAG;
 
 public class MatchFragment extends Fragment implements View.OnClickListener  {
 
     private String email, email2, name;
-    private EditText updatePass;
-    private Map<Object, Object> user;
-    //FirebaseFirestore db = FirebaseFirestore.getInstance();
+
 
 
     public static MatchFragment newInstance() {
@@ -74,8 +56,7 @@ public class MatchFragment extends Fragment implements View.OnClickListener  {
         Activity activity = getActivity();
         switch (v.getId()){
             case R.id.no_match_button:
-                startActivity(new Intent(getActivity(), MatchActivity.class));
-                //delete/flag potential match as nada
+
                 UpdateMatches.NoMatch(email,email2);
                 Intent matchesIntent = new Intent(getActivity(), MatchesActivity.class);
                 matchesIntent.putExtra("EMAIL", email);
@@ -86,9 +67,6 @@ public class MatchFragment extends Fragment implements View.OnClickListener  {
                 Intent matchesIntent2 = new Intent(getActivity(), MatchesActivity.class);
                 matchesIntent2.putExtra("EMAIL", email);
                 startActivity(matchesIntent2);
-                //flag as lovebirds and move to different match
-                //DocumentReference docRef = db.collection("users").document();
-                //docRef.update("password", newPass);
 
 
                 break;

@@ -1,19 +1,9 @@
 package com.example.mike9.cse_app.ui.main;
 
-import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Criteria;
-import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Looper;
-import android.text.Editable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,39 +11,21 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import com.example.mike9.cse_app.GetLocation;
 import com.example.mike9.cse_app.MainActivity;
-import com.example.mike9.cse_app.MatchCalculator;
 import com.example.mike9.cse_app.MatchesActivity;
 import com.example.mike9.cse_app.R;
 import com.example.mike9.cse_app.ShowMessage;
-import com.example.mike9.cse_app.SignUpActivity;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-
 import static android.content.ContentValues.TAG;
-import static android.content.Context.LOCATION_SERVICE;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
@@ -82,22 +54,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         signOutButton.setOnClickListener(this);
         Button getMatchesButton = v.findViewById(R.id.check_matches_button);
         getMatchesButton.setOnClickListener(this);
-        /*Button getLocationButton = v.findViewById(R.id.location_button);
-        getLocationButton.setOnClickListener(this);
-        Button testButton = v.findViewById(R.id.testButton);
-        testButton.setOnClickListener(this);
-        locationText = v.findViewById(R.id.locationText);*/
         email = getArguments().getString("EMAIL");
         updatePass = v.findViewById(R.id.updatePass_text);
-        //MatchCalculator.Calc("", email);
 
         return v;
     }
 
-   /* @Override
-    public void onCreate(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState);
-    }*/
 
     @Override
     public void onClick(View v) {
@@ -145,47 +107,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 startActivity(matchesIntent);
                 break;
 
-            /*case R.id.location_button:
-
-                Log.d("test", "here");
-
-                Log.d("test", "there");
-                if(locationAllowed()){
-                    Log.d("GPS", "Allowed");
-
-                    locationText.setText(GetLocation.getCityState(getActivity()));
-                } else {
-                    Log.d("GPS", "Denied");
-                    ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-                }
-                //gets here immediately when asking for gps
-                Log.d("GPS", "here");
-
-                break;
-
-            case R.id.testButton:
-                CollectionReference test = db.collection("users").document("@2").collection("test");
-                Map<String, Object> user = new HashMap<>();
-                user.put("first", "test");
-                user.put("email", "@test");
-                user.put("bool1", true);
-
-// Add a new document with a generated ID
-                test.document("test")
-                        .set(user)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                Log.d("PLZZ", "DocumentSnapshot successfully written!");
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.w("PLZZ", "Error writing document", e);
-                            }
-                        });
-                break;*/
 
 
         }

@@ -1,16 +1,8 @@
 package com.example.mike9.cse_app.ui.main;
 
-import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,16 +10,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
+
 import com.example.mike9.cse_app.HomeActivity;
-import com.example.mike9.cse_app.MainActivity;
 import com.example.mike9.cse_app.MatchCalc;
 import com.example.mike9.cse_app.QuestionsActivity;
 import com.example.mike9.cse_app.R;
 import com.example.mike9.cse_app.ShowMessage;
 import com.example.mike9.cse_app.SignUpActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -71,8 +65,6 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
-        // TODO: Use the ViewModel? -> not my TODO but leaving in case one of you two
-        //I think this was just part of the template, so don't think we need anything here
     }
 
     @Override
@@ -92,8 +84,6 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 
                                     if (storedPassword.equals(password.getText().toString())) {
                                         Log.d(TAG, "Correct password");
-                                        //String questions[] = getResources().getStringArray(R.array.matching_questions);
-                                        //int questionNum = 1;
                                         Log.d("Answer: ", document.get("answered?").toString());
                                         Log.d("Answer: ", document.get("answered?").toString().equals("false")+"");
                                         Log.d("Answer: ", document.get("answered?").toString().equals("true")+"");
@@ -125,20 +115,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 
                 break;
             case R.id.signUp_button:
-                //signUp
                 startActivity(new Intent(activity, SignUpActivity.class));
-//                FragmentManager fm = getFragmentManager();
-//                Fragment fragment = new SignUpFragment();
-//                fm.beginTransaction().replace(R.id.container,fragment).commit(); //addToBackStack("signup_fragment")?
-                break;
-            case R.id.matches_button:
-                Log.d("buttonClick", "clicked Button");
-                int test_int = 7;
-                Log.d("checkpoint3", "Look at the step through here 1");
-                test_int = 12;
-                Log.d("checkpoint3", "Now we step here to 2");
-                test_int = 5;
-                Log.d("checkpoint3", "Now we step here to 3");
                 break;
         }
 

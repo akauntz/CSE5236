@@ -1,14 +1,11 @@
 package com.example.mike9.cse_app;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mike9.cse_app.ui.main.HomeFragment;
-import com.example.mike9.cse_app.ui.main.MainFragment;
 
 public class HomeActivity extends AppCompatActivity {
     @Override

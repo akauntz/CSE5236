@@ -20,7 +20,6 @@ import androidx.fragment.app.Fragment;
 import com.example.mike9.cse_app.MainActivity;
 import com.example.mike9.cse_app.R;
 import com.example.mike9.cse_app.ShowMessage;
-import com.example.mike9.cse_app.SignUpActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -45,7 +44,6 @@ public class SignUpFragment extends Fragment implements View.OnClickListener  {
         return new SignUpFragment();
     }
 
-    // Access a Cloud Firestore instance from your Activity
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     public Map<String, Object> user = new HashMap<>();
 
@@ -94,19 +92,10 @@ public class SignUpFragment extends Fragment implements View.OnClickListener  {
             final Editable fb_name = name.getText();
             final Editable fb_passwordCheck = passwordCheck.getText();
 
-            Log.d("data", fb_email.toString());
-            Log.d("data", fb_password.toString());
-            Log.d("data", fb_name.toString());
-            Log.d("data", fb_age.toString());
-            Log.d("data", fb_passwordCheck.toString());
-            Log.d("data", gender);
 
             if (fb_name.toString().equals("") || fb_password.toString().equals("") || fb_age.toString().equals("") || fb_email.toString().equals("") || gender.equals("")) {
-                //Activity activity = getActivity();
-                //startActivity(new Intent(activity, SignUpActivity.class));
                 ShowMessage.show(getActivity(), "Missing required fields.");
             } else if (!fb_password.toString().equals(fb_passwordCheck.toString())) {
-                //startActivity(new Intent(activity, SignUpActivity.class));
                 ShowMessage.show(getActivity(), "Error, passwords don't match.");
             } else if (!fb_email.toString().contains("@")) {
                 ShowMessage.show(getActivity(), "Invalid email.");

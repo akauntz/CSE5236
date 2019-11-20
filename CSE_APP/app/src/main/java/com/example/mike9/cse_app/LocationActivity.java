@@ -5,7 +5,6 @@ import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.mike9.cse_app.ui.main.InterestedFragment;
 import com.example.mike9.cse_app.ui.main.LocationFragment;
 
 public class LocationActivity extends AppCompatActivity {
@@ -14,6 +13,8 @@ public class LocationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Bundle bundle = new Bundle();
         bundle.putString("EMAIL", getIntent().getExtras().getString("EMAIL"));
+        bundle.putString("INTEREST", getIntent().getExtras().getString("INTEREST"));
+        bundle.putInt("POINTS", getIntent().getExtras().getInt("POINTS"));
         LocationFragment fragment = new LocationFragment();
         fragment.setArguments(bundle);
         setContentView(R.layout.main_activity);

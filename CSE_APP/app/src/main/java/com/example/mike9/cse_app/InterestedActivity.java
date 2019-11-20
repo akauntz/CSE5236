@@ -5,7 +5,6 @@ import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.mike9.cse_app.ui.main.HomeFragment;
 import com.example.mike9.cse_app.ui.main.InterestedFragment;
 
 public class InterestedActivity extends AppCompatActivity {
@@ -14,6 +13,7 @@ public class InterestedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Bundle bundle = new Bundle();
         bundle.putString("EMAIL", getIntent().getExtras().getString("EMAIL"));
+        bundle.putInt("POINTS", getIntent().getExtras().getInt("POINTS"));
         InterestedFragment fragment = new InterestedFragment();
         fragment.setArguments(bundle);
         setContentView(R.layout.main_activity);

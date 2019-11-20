@@ -29,24 +29,27 @@ public class UpdateMatches {
     final static float MATCH_PERCENT = 65;
     private static String name;
 
-    public static void fillMatches(String email){
+    public static void fillMatches(String email, int point_score, String st){
         Map<String, Object> user = new HashMap<>();
         state = "";
         interested = "";
         score = 0;
         name1 = "";
         final String email1 = email;
+        final String stateQ = st;
+        final int pts = point_score;
         final DocumentReference docRef = db.collection("users").document(email);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        updateState(document.get("state").toString());
                         updateInterest(document.get("interest").toString());
+                        updateState(document.get("state").toString());
                         updateScore(document.get("score").toString());
                         updateName1(document.get("name").toString());
-                        db.collection("users").whereEqualTo("state",state).whereEqualTo("gender", interested).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>(){
+                        Log.d("PLZZZ ", stateQ);
+                        db.collection("users").whereEqualTo("state",stateQ).whereEqualTo("gender", document.get("interest")).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>(){
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task){
                                 if(task.isSuccessful()){
@@ -152,8 +155,6 @@ public class UpdateMatches {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        Log.d("PLZZZ", "HEREEEE: snapshot" + document.getData());
-                        Log.d("PLZZZ ", "HEREEEE");
                         updateName(document.get("name").toString());
 
                     } else {
@@ -167,9 +168,7 @@ public class UpdateMatches {
     }
 
     static private void updateName(String n){
-        Log.d("PLZZZ", "HERREEEE : " + n +"...." + name);
         name = n;
-        Log.d("PLZZZZ", "HEREEEEE: " + name);
     }
 
     static private void updateInterest(String intrst){
