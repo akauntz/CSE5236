@@ -15,14 +15,10 @@ public class LoadingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bundle bundle = new Bundle();
-        //email = getIntent().getExtras().getString("EMAIL");
         email = DataCache.getEmail();
         state = getIntent().getExtras().getString("STATE");
         points = getIntent().getExtras().getInt("POINTS");
-        //bundle.putString("EMAIL", email);
         LoadingFragment fragment = new LoadingFragment();
-        fragment.setArguments(bundle);
         setContentView(R.layout.main_activity);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
@@ -30,9 +26,7 @@ public class LoadingActivity extends AppCompatActivity {
                     .commitNow();
         }
         calcAndUpdateMatches();
-        Intent homeIntent = new Intent(this, HomeActivity.class);
-        //homeIntent.putExtra("EMAIL", email);
-        startActivity(homeIntent);
+        startActivity(new Intent(this, HomeActivity.class));
 
     }
 

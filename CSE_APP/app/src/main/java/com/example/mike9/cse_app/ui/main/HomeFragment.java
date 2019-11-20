@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,9 +29,8 @@ import static android.content.ContentValues.TAG;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
-    private String email;//, firstName;
+    private String email;
     private EditText updatePass;
-    //TextView locationText;
 
 
 
@@ -45,7 +43,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        //TODO: fix the screen + check the default preferences for the user/move those to separate screen
         View v = inflater.inflate(R.layout.home_fragment, container, false);
         Button updatePasswordButton = v.findViewById(R.id.updatePass_button);
         updatePasswordButton.setOnClickListener(this);
@@ -55,9 +52,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         signOutButton.setOnClickListener(this);
         Button getMatchesButton = v.findViewById(R.id.check_matches_button);
         getMatchesButton.setOnClickListener(this);
-        //email = getArguments().getString("EMAIL");
         email = DataCache.getEmail();
-        //firstName = getArguments().getString("FIRSTNAME");
         updatePass = v.findViewById(R.id.updatePass_text);
 
         return v;
@@ -104,11 +99,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.check_matches_button:
-                //MatchCalculator.Calc("", email);
-                Intent matchesIntent = new Intent(activity, MatchesActivity.class);
-                //matchesIntent.putExtra("EMAIL", email);
-                //matchesIntent.putExtra("FIRSTNAME", firstName);
-                startActivity(matchesIntent);
+                startActivity(new Intent(activity, MatchesActivity.class));
                 break;
 
 
@@ -130,8 +121,5 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    public boolean locationAllowed(){
-        return (getActivity().checkCallingOrSelfPermission("android.permission.ACCESS_COARSE_LOCATION") == PackageManager.PERMISSION_GRANTED && getActivity().checkCallingOrSelfPermission("android.permission.ACCESS_FINE_LOCATION") == PackageManager.PERMISSION_GRANTED);
-    }
 
 }

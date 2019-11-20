@@ -33,7 +33,7 @@ import static android.content.ContentValues.TAG;
 public class LocationFragment extends Fragment implements View.OnClickListener{
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    private String email;//, interest;
+    private String email;
     private EditText state;
     private int points;
     TextView locationText;
@@ -54,9 +54,7 @@ public class LocationFragment extends Fragment implements View.OnClickListener{
         Button confirmButton = v.findViewById(R.id.ConfirmLocation_button);
         confirmButton.setOnClickListener(this);
         state = v.findViewById(R.id.Location_editText);
-        //email = getArguments().getString("EMAIL");
         email = DataCache.getEmail();
-        //interest = getArguments().getString("INTEREST");
         points = getArguments().getInt("POINTS");
 
         return v;
@@ -79,7 +77,7 @@ public class LocationFragment extends Fragment implements View.OnClickListener{
                 break;
 
             case R.id.ConfirmLocation_button:
-                if(location == ""){ //add more confirmation
+                if(location == ""){ //TODO: add more confirmation
                     ShowMessage.show(getActivity(), "Please enter a state");
                 } else {
                     final DocumentReference docRef = db.collection("users").document(email);

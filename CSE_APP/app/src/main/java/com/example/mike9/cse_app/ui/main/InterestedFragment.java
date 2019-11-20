@@ -8,10 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -51,7 +49,6 @@ public class InterestedFragment extends Fragment implements View.OnClickListener
         View v = inflater.inflate(R.layout.interested_fragment, container, false);
         Button submitButton = v.findViewById(R.id.submitInterest_button);
         submitButton.setOnClickListener(this);
-        //email = getArguments().getString("EMAIL");
         email = DataCache.getEmail();
         points = getArguments().getInt("POINTS");
         radioMen = v.findViewById(R.id.radioMen);
@@ -93,7 +90,6 @@ public class InterestedFragment extends Fragment implements View.OnClickListener
                                 if (document.exists()) {
                                     docRef.update("interest", interest);
                                     Intent locationIntent = new Intent(getActivity(), LocationActivity.class);
-                                    //locationIntent.putExtra("EMAIL", email);
                                     locationIntent.putExtra("INTEREST", interest);
                                     locationIntent.putExtra("POINTS", points);
                                     startActivity(locationIntent);

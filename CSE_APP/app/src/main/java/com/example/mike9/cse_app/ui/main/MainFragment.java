@@ -28,8 +28,6 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.Map;
-
 import static android.content.ContentValues.TAG;
 
 public class MainFragment extends Fragment implements View.OnClickListener {
@@ -40,7 +38,6 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     public static MainFragment newInstance() {
         return new MainFragment();
     }
-    public Map<String, String> user;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Nullable
@@ -73,7 +70,11 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         final Activity activity = getActivity();
         switch (v.getId()){
             case R.id.login_button:
-                final String userEmail = email.getText().toString();
+                String temp = "no_email";
+                if(email.getText().toString().trim().length() > 0){
+                    temp = email.getText().toString();
+                }
+                final String userEmail = temp;
                 DocumentReference docRef = db.collection("users").document(userEmail);
                     docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -94,11 +95,9 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 
                                         if (document.get("answered?").toString().equals("false")) {
                                             Intent questionsIntent = new Intent(activity, QuestionsActivity.class);
-                                            //questionsIntent.putExtra("EMAIL", email.getText().toString());
                                             questionsIntent.putExtra("NUMQUESTIONS", 0);
                                             startActivity(questionsIntent);
                                         } else {
-                                            //logIn
                                             Intent logInIntent = new Intent(activity, HomeActivity.class);
                                             logInIntent.putExtra("EMAIL", email.getText().toString());
                                             logInIntent.putExtra("FIRSTNAME", fName);
@@ -110,6 +109,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
                                     }
 
                                 } else {
+                                    ShowMessage.show(activity, "Account does not exist.");
                                     Log.d(TAG, "No such document");
                                 }
                             } else {

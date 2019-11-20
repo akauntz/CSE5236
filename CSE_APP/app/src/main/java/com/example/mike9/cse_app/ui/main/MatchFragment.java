@@ -1,6 +1,5 @@
 package com.example.mike9.cse_app.ui.main;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -53,20 +52,15 @@ public class MatchFragment extends Fragment implements View.OnClickListener  {
 
     @Override
     public void onClick(View v){
-        Activity activity = getActivity();
         switch (v.getId()){
             case R.id.no_match_button:
 
                 UpdateMatches.NoMatch(email,email2);
-                Intent matchesIntent = new Intent(getActivity(), MatchesActivity.class);
-                //matchesIntent.putExtra("EMAIL", email);
-                startActivity(matchesIntent);
+                startActivity(new Intent(getActivity(), MatchesActivity.class));
                 break;
             case R.id.matched_button:
                 UpdateMatches.YesMatch(email,email2,name);
-                Intent matchesIntent2 = new Intent(getActivity(), MatchesActivity.class);
-                //matchesIntent2.putExtra("EMAIL", email);
-                startActivity(matchesIntent2);
+                startActivity(new Intent(getActivity(), MatchesActivity.class));
 
 
                 break;

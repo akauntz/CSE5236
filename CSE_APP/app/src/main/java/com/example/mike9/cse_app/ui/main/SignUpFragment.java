@@ -110,6 +110,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener  {
                         if (task.isSuccessful()) {
                             DocumentSnapshot document = task.getResult();
                             if (document.exists()) {
+                                ShowMessage.show(getActivity(), "Email already used");
                                 Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                             } else {
                                 Log.d(TAG, "No such document");

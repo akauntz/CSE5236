@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,21 +11,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.mike9.cse_app.R;
-import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.Map;
 
 public class MatchedPairFragment extends Fragment  {
 
-    private String email;
-    private EditText updatePass;
-    private Map<Object, Object> user;
 
     public static MatchedPairFragment newInstance() {
         return new MatchedPairFragment();
     }
 
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
     TextView nameText;
     TextView percentText;
     TextView emailText;

@@ -22,16 +22,12 @@ import static android.content.ContentValues.TAG;
 
 public class UpdateMatches {
     final static FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private static String state;
-    private static String interested ;
     private static int score;
     private static String name1;
     final static float MATCH_PERCENT = 65;
 
     public static void fillMatches(String email, int point_score, String st){
         Map<String, Object> user = new HashMap<>();
-        state = "";
-        interested = "";
         score = 0;
         name1 = "";
         final String email1 = email;
@@ -43,8 +39,6 @@ public class UpdateMatches {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        updateInterest(document.get("interest").toString());
-                        updateState(document.get("state").toString());
                         updateScore(document.get("score").toString());
                         updateName1(document.get("name").toString());
                         db.collection("users").whereEqualTo("state",stateQ).whereEqualTo("gender", document.get("interest")).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>(){
@@ -130,15 +124,6 @@ public class UpdateMatches {
         docRef1.set(user2);
         docRef2.set(user1);
 
-    }
-    static private void updateState(String st){
-        state = st;
-    }
-
-
-
-    static private void updateInterest(String intrst){
-        interested=intrst;
     }
 
     static private void updateScore(String s){

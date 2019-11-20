@@ -48,7 +48,6 @@ public class QuestionsFragment extends Fragment implements View.OnClickListener 
                              @Nullable Bundle savedInstanceState){
         View v = inflater.inflate(R.layout.questions2_fragment,container,false);
         questions  = getResources().getStringArray(R.array.matching_questions);
-        //email = getArguments().getString("EMAIL");
         email = DataCache.getEmail();
         questionNum = getArguments().getInt("NUMQUESTIONS");
         questionText1 = v.findViewById(R.id.questionText1);
@@ -106,13 +105,11 @@ public class QuestionsFragment extends Fragment implements View.OnClickListener 
             questionNum++;
             if(questionNum < questions.length) {
                 Intent questionIntent = new Intent(activity, QuestionsActivity.class);
-                //questionIntent.putExtra("EMAIL", email);
                 questionIntent.putExtra("NUMQUESTIONS", questionNum);
                 startActivity(questionIntent);
             }else{
                 docRef.update("answered?", true);
                 Intent interestIntent = new Intent(getActivity(), InterestedActivity.class);
-                //interestIntent.putExtra("EMAIL", email);
                 if(answer1 == "t1") {
                     Log.d("SUPERLOG: ", "Current Score: " + currentScore + " ... " + exponent(2, questionNum));
                     interestIntent.putExtra("POINTS", currentScore + exponent(2, questionNum));

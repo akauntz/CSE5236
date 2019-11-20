@@ -12,7 +12,6 @@ public class InterestedActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle bundle = new Bundle();
-        //bundle.putString("EMAIL", getIntent().getExtras().getString("EMAIL"));
         bundle.putInt("POINTS", getIntent().getExtras().getInt("POINTS"));
         InterestedFragment fragment = new InterestedFragment();
         fragment.setArguments(bundle);
