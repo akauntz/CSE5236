@@ -12,7 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.mike9.cse_app.InternetCheck;
 import com.example.mike9.cse_app.MatchesActivity;
+import com.example.mike9.cse_app.NoConnectionActivity;
 import com.example.mike9.cse_app.R;
 import com.example.mike9.cse_app.UpdateMatches;
 
@@ -52,18 +54,23 @@ public class MatchFragment extends Fragment implements View.OnClickListener  {
 
     @Override
     public void onClick(View v){
-        switch (v.getId()){
-            case R.id.no_match_button:
+        if(InternetCheck.isConnected(getActivity())) {
+            switch (v.getId()) {
 
-                UpdateMatches.NoMatch(email,email2);
-                startActivity(new Intent(getActivity(), MatchesActivity.class));
-                break;
-            case R.id.matched_button:
-                UpdateMatches.YesMatch(email,email2,name);
-                startActivity(new Intent(getActivity(), MatchesActivity.class));
+                case R.id.no_match_button:
+
+                    UpdateMatches.NoMatch(email, email2);
+                    startActivity(new Intent(getActivity(), MatchesActivity.class));
+                    break;
+                case R.id.matched_button:
+                    UpdateMatches.YesMatch(email, email2, name);
+                    startActivity(new Intent(getActivity(), MatchesActivity.class));
 
 
-                break;
+                    break;
+            }
+        }else{
+            startActivity(new Intent(getActivity(), NoConnectionActivity.class));
         }
     }
 

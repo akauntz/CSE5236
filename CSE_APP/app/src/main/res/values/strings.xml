@@ -73,6 +73,10 @@
     <string name="network_error">You are not connected to the Internet. Please Try Again Later.</string>
     <string name="try_again">Try Again</string>
 
+    <string name="no_connection">No internet connection. Request failed. Please try again</string>
+
+    <string name="no_internet">Still no internet</string>
+
 
     <string-array name = "matching_questions">
         <item>You prefer C over Java</item>

@@ -13,7 +13,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.mike9.cse_app.HomeActivity;
+import com.example.mike9.cse_app.InternetCheck;
 import com.example.mike9.cse_app.MatchedActivity;
+import com.example.mike9.cse_app.NoConnectionActivity;
 import com.example.mike9.cse_app.R;
 
 public class MatchesFragment extends Fragment implements View.OnClickListener  {
@@ -41,11 +43,11 @@ public class MatchesFragment extends Fragment implements View.OnClickListener  {
         Activity activity = getActivity();
         switch (v.getId()){
             case R.id.return_home_button:
-                startActivity(new Intent(activity, HomeActivity.class));
+                getActivity().finish();
+                //startActivity(new Intent(activity, HomeActivity.class));
                 break;
             case R.id.check_matched_button:
-                Intent matchedIntent = new Intent(activity, MatchedActivity.class);
-                startActivity(matchedIntent);
+                    startActivity(new Intent(getActivity(), NoConnectionActivity.class));
                 break;
         }
     }

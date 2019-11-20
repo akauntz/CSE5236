@@ -16,8 +16,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.mike9.cse_app.DataCache;
+import com.example.mike9.cse_app.InternetCheck;
 import com.example.mike9.cse_app.MainActivity;
 import com.example.mike9.cse_app.MatchesActivity;
+import com.example.mike9.cse_app.NoConnectionActivity;
 import com.example.mike9.cse_app.R;
 import com.example.mike9.cse_app.ShowMessage;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -64,13 +66,17 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         Activity activity = getActivity();
         switch (v.getId()) {
             case R.id.updatePass_button:
+                if(InternetCheck.isConnected(getActivity())) {
 
-                String newPass = updatePass.getText().toString();
+                    String newPass = updatePass.getText().toString();
 
-                DocumentReference docRef = db.collection("users").document(email);
-                docRef.update("password", newPass);
+                    DocumentReference docRef = db.collection("users").document(email);
+                    docRef.update("password", newPass);
 
-                ShowMessage.show(getActivity(), "Password updated");
+                    ShowMessage.show(getActivity(), "Password updated");
+                }else{
+                    startActivity(new Intent(getActivity(), NoConnectionActivity.class));
+                }
 
                 break;
 

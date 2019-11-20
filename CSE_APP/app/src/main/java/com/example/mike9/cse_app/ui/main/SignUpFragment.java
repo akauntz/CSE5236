@@ -17,7 +17,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.mike9.cse_app.InternetCheck;
 import com.example.mike9.cse_app.MainActivity;
+import com.example.mike9.cse_app.NoConnectionActivity;
 import com.example.mike9.cse_app.R;
 import com.example.mike9.cse_app.ShowMessage;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -86,6 +88,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener  {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.createAccount_button:
+                if(InternetCheck.isConnected(getActivity())){
             final Editable fb_email = email.getText();
             final Editable fb_password = password.getText();
             final Editable fb_age = age.getText();
@@ -122,7 +125,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener  {
                                 user.put("answered?", "false");
                                 user.put("interest", "");
                                 user.put("state", "");
-                                user.put("score",0);
+                                user.put("score", 0);
                                 db.collection("users").document(fb_email.toString())
                                         .set(user)
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -147,11 +150,15 @@ public class SignUpFragment extends Fragment implements View.OnClickListener  {
                     }
                 });
 
+                    }
 
-            }
+
+            } else {
+                    startActivity(new Intent(getActivity(), NoConnectionActivity.class));
+                }
             break;
             case R.id.returnHome_button:
-                startActivity(new Intent(getActivity(), MainActivity.class));
+                getActivity().finish();
                 break;
         }
     }

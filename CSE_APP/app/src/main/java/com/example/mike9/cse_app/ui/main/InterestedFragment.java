@@ -16,7 +16,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.mike9.cse_app.DataCache;
+import com.example.mike9.cse_app.InternetCheck;
 import com.example.mike9.cse_app.LocationActivity;
+import com.example.mike9.cse_app.NoConnectionActivity;
 import com.example.mike9.cse_app.R;
 import com.example.mike9.cse_app.ShowMessage;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -79,30 +81,34 @@ public class InterestedFragment extends Fragment implements View.OnClickListener
         final DocumentReference docRef = db.collection("users").document(email);
         switch (v.getId()) {
             case R.id.submitInterest_button:
+                if(InternetCheck.isConnected(getActivity())) {
 
 
-                if(interest!=""){
+                    if (interest != "") {
 
-                    docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            if (task.isSuccessful()) {
-                                DocumentSnapshot document = task.getResult();
-                                if (document.exists()) {
-                                    docRef.update("interest", interest);
-                                    Intent locationIntent = new Intent(getActivity(), LocationActivity.class);
-                                    locationIntent.putExtra("INTEREST", interest);
-                                    locationIntent.putExtra("POINTS", points);
-                                    startActivity(locationIntent);
+                        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    DocumentSnapshot document = task.getResult();
+                                    if (document.exists()) {
+                                        docRef.update("interest", interest);
+                                        Intent locationIntent = new Intent(getActivity(), LocationActivity.class);
+                                        locationIntent.putExtra("INTEREST", interest);
+                                        locationIntent.putExtra("POINTS", points);
+                                        startActivity(locationIntent);
+                                    } else {
+                                        Log.d(TAG, "No such document");
+                                    }
                                 } else {
-                                    Log.d(TAG, "No such document");
+                                    Log.d(TAG, "get failed with ", task.getException());
                                 }
-                            } else {
-                                Log.d(TAG, "get failed with ", task.getException());
                             }
-                        }
-                    });
-                } else {
-                    ShowMessage.show(getActivity(), "Please select an interest.");
+                        });
+                    } else {
+                        ShowMessage.show(getActivity(), "Please select an interest.");
+                    }
+                }else{
+                    startActivity(new Intent(getActivity(), NoConnectionActivity.class));
                 }
 
                 break;

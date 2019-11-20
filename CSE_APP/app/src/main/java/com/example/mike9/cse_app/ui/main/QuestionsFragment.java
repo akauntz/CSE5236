@@ -18,6 +18,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.mike9.cse_app.DataCache;
 import com.example.mike9.cse_app.InterestedActivity;
+import com.example.mike9.cse_app.InternetCheck;
+import com.example.mike9.cse_app.NoConnectionActivity;
 import com.example.mike9.cse_app.QuestionsActivity;
 import com.example.mike9.cse_app.R;
 import com.example.mike9.cse_app.ShowMessage;
@@ -75,54 +77,58 @@ public class QuestionsFragment extends Fragment implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
+        if(InternetCheck.isConnected(getActivity())) {
 
-        if (!answer1.equals("")) {
-            Activity activity = getActivity();
-            final DocumentReference docRef = db.collection("users").document(email);
-            if (answer1.equals("t1")) {
-                currentScore = 0;
-                final int power = questionNum;
-                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            DocumentSnapshot document = task.getResult();
-                            if (document.exists()) {
-                                Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                                updateCurScore(Integer.parseInt(document.get("score").toString()));
-                                Log.d("QuestionsVal:", "questionNum3: " + questionNum);
-                                int updatedScore = currentScore+exponent(2,power);
-                                docRef.update("score", updatedScore);
+            if (!answer1.equals("")) {
+                Activity activity = getActivity();
+                final DocumentReference docRef = db.collection("users").document(email);
+                if (answer1.equals("t1")) {
+                    currentScore = 0;
+                    final int power = questionNum;
+                    docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                DocumentSnapshot document = task.getResult();
+                                if (document.exists()) {
+                                    Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                                    updateCurScore(Integer.parseInt(document.get("score").toString()));
+                                    Log.d("QuestionsVal:", "questionNum3: " + questionNum);
+                                    int updatedScore = currentScore + exponent(2, power);
+                                    docRef.update("score", updatedScore);
 
+                                } else {
+                                    Log.d(TAG, "No such document");
+                                }
                             } else {
-                                Log.d(TAG, "No such document");
+                                Log.d(TAG, "get failed with ", task.getException());
                             }
-                        } else {
-                            Log.d(TAG, "get failed with ", task.getException());
                         }
-                    }
-                });
-            }
-            questionNum++;
-            if(questionNum < questions.length) {
-                Intent questionIntent = new Intent(activity, QuestionsActivity.class);
-                questionIntent.putExtra("NUMQUESTIONS", questionNum);
-                startActivity(questionIntent);
-            }else{
-                docRef.update("answered?", true);
-                Intent interestIntent = new Intent(getActivity(), InterestedActivity.class);
-                if(answer1 == "t1") {
-                    Log.d("SUPERLOG: ", "Current Score: " + currentScore + " ... " + exponent(2, questionNum));
-                    interestIntent.putExtra("POINTS", currentScore + exponent(2, questionNum));
-                } else {
-                    Log.d("SUPERLOG: ", "Current Score: " + currentScore);
-                    interestIntent.putExtra("POINTS", currentScore);
+                    });
                 }
-                startActivity(interestIntent);
+                questionNum++;
+                if (questionNum < questions.length) {
+                    Intent questionIntent = new Intent(activity, QuestionsActivity.class);
+                    questionIntent.putExtra("NUMQUESTIONS", questionNum);
+                    startActivity(questionIntent);
+                } else {
+                    docRef.update("answered?", true);
+                    Intent interestIntent = new Intent(getActivity(), InterestedActivity.class);
+                    if (answer1 == "t1") {
+                        Log.d("SUPERLOG: ", "Current Score: " + currentScore + " ... " + exponent(2, questionNum));
+                        interestIntent.putExtra("POINTS", currentScore + exponent(2, questionNum));
+                    } else {
+                        Log.d("SUPERLOG: ", "Current Score: " + currentScore);
+                        interestIntent.putExtra("POINTS", currentScore);
+                    }
+                    startActivity(interestIntent);
 
+                }
+
+            } else {
+                ShowMessage.show(getActivity(), "Select an option.");
             }
-
-        } else {
-            ShowMessage.show(getActivity(), "Select an option.");
+        }else{
+            startActivity(new Intent(getActivity(), NoConnectionActivity.class));
         }
     }
 

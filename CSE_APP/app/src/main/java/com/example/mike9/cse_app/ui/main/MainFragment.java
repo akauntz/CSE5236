@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.mike9.cse_app.DataCache;
 import com.example.mike9.cse_app.HomeActivity;
+import com.example.mike9.cse_app.InternetCheck;
 import com.example.mike9.cse_app.MatchCalc;
 import com.example.mike9.cse_app.QuestionsActivity;
 import com.example.mike9.cse_app.R;
@@ -120,6 +121,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 
                 break;
             case R.id.signUp_button:
+                Log.d("InternetConnection: ", "Connected?"+ InternetCheck.isConnected(activity));
                 startActivity(new Intent(activity, SignUpActivity.class));
                 break;
         }
