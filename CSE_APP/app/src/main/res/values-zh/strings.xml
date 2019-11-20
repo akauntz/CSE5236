@@ -1,0 +1,59 @@
+<resources>
+    <string name="app_name">CSE_APP</string>
+    <string name="sign_out">登出</string>
+    <string name="delete_account">删除帐号</string>
+    <string name="welcome">欢迎来到 +Plus</string>
+    <string name="setting">设置</string>
+    <string name="matches">快速配对</string>
+    <string name="location">位置</string>
+    <string name="get_location">获取位置</string>
+    <string name="password_hint">请输入新的密码</string>
+    <string name="update_password">更新密码</string>
+
+    <string name="sign_in">登入</string>
+    <string name="email">电子邮箱:</string>
+    <string name="password">密码:</string>
+    <string name="login">登入</string>
+    <string name="sign_up">注册</string>
+    
+    <string name="first_name">名</string>
+    <string name="match">% 配对比</string>
+    
+    <string name="contact_info">联系信息</string>
+    <string name="perfect_match">完美配对</string>
+    <string name="list_of_match">这是所有和您配对的人</string>
+    <string name="return_home">返回主界面</string>
+
+    <string name="pair_email">电子邮件</string>
+    <string name="pair_match">配对比 %</string>
+
+    <string name="top_match">最佳配对</string>
+    <string name="name">姓名</string>
+    <string name="home">主界面</string>
+
+    <string name="yes">是</string>
+    <string name="no">否</string>
+    <string name="submit">提交</string>
+    <string name="question1">相比Java，您更喜欢C</string>
+    <string name="question2">您更喜欢从reddit找表情包，而不是从instagram</string>
+    <string name="question3">您喜欢边写代码边注释，而不是全写完了再注释</string>
+
+    <string name="gender">性别</string>
+    <string name="female">女</string>
+    <string name="male">男</string>
+    <string name="other">其它</string>
+    <string name="age">年龄</string>
+    <string name="pair_password">密码</string>
+    <string name="confirm_password">确认密码</string>
+    <string name="create_account">创建帐号</string>
+
+    <string name="english">英语</string>
+    <string name="chinese">中文</string>
+
+    <string-array name = "matching_questions">
+        <item>Question 1</item>
+        <item>Question 2</item>
+        <item>Question 3</item>
+    </string-array>
+
+</resources>

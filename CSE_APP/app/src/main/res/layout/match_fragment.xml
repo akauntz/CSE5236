@@ -11,13 +11,13 @@
             android:id="@+id/first_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text = "First Name"
+            android:text = "@string/first_name"
             android:paddingLeft="20dp"/>
         <TextView
             android:id="@+id/match_percent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text = "% Match"
+            android:text = "@string/match"
             android:paddingLeft="30dp"/>
         <!-- <Button
              android:id="@+id/matched_button"

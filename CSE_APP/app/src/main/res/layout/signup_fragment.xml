@@ -8,7 +8,7 @@
         android:id = "@+id/signUp_name"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:hint="First Name"
+        android:hint="@string/first_name"
         android:inputType="text"/>
 
     <LinearLayout
@@ -18,7 +18,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text = "Gender"/>
+            android:text = "@string/gender"/>
         <RadioGroup
             android:id = "@+id/radioGender"
             android:layout_height="match_parent"
@@ -28,17 +28,17 @@
                 android:id="@+id/radioFemale"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text = "Female"/>
+                android:text = "@string/female"/>
             <RadioButton
                 android:id="@+id/radioMale"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text = "Male"/>
+                android:text = "@string/male"/>
             <RadioButton
                 android:id="@+id/radioOther"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text = "Other"/>
+                android:text = "@string/other"/>
         </RadioGroup>
     </LinearLayout>
 
@@ -48,36 +48,35 @@
         android:id = "@+id/signUp_age"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:hint="Age"
+        android:hint="@string/age"
         android:inputType="number"/>
 
     <EditText
         android:id = "@+id/signUp_email"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:hint="Email"
+        android:hint="@string/pair_email"
         android:inputType="textEmailAddress"/>
 
     <EditText
         android:id = "@+id/signUp_password"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:hint="Password"
+        android:hint="@string/pair_password"
         android:inputType="textPassword"/>
 
     <EditText
         android:id = "@+id/signUp_passwordConfirmation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Confirm Password"
+        android:hint="@string/confirm_password"
         android:inputType="textPassword"/>
 
     <Button
         android:id = "@+id/createAccount_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Create Account"/>
-
+        android:text="@string/create_account"/>
 
 
 </LinearLayout>

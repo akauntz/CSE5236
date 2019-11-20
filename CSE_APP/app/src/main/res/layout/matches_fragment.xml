@@ -5,7 +5,7 @@
 <TextView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text = "Top Matches"
+    android:text = "@string/top_match"
     android:gravity="center"/>
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,12 +14,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text = "Name"
+            android:text = "@string/name"
             android:paddingLeft="20dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text = "% Match"
+            android:text = "@string/match"
             android:paddingLeft="30dp"/>
         <!--<TextView
             android:layout_width="wrap_content"
@@ -57,7 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity = "center"
-            android:text="Home"/>
+            android:text="@string/home"/>
     </LinearLayout>
     </LinearLayout>
 </LinearLayout>

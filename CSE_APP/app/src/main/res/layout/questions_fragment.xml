@@ -6,7 +6,7 @@
         android:id = "@+id/questionText1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text = "You prefer C over Java"
+        android:text = "@string/question1"
         android:gravity = "center"
         android:paddingTop = "50dp"/>
 
@@ -21,18 +21,18 @@
             android:id="@+id/radioTrue1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text = "True"/>
+            android:text = "@string/yes"/>
         <RadioButton
             android:id="@+id/radioFalse1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text = "False"/>
+            android:text = "@string/no"/>
     </RadioGroup>
     <TextView
         android:id = "@+id/questionText2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text = "You get your memes from Reddit, not Instagram"
+        android:text = "@string/question2"
         android:gravity = "center"
         android:paddingTop = "50dp"/>
 
@@ -47,18 +47,18 @@
             android:id="@+id/radioTrue2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text = "True"/>
+            android:text = "@string/yes"/>
         <RadioButton
             android:id="@+id/radioFalse2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text = "False"/>
+            android:text = "@string/no"/>
     </RadioGroup>
     <TextView
         android:id = "@+id/questionText3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text = "You tend to comment as you code, not at the end"
+        android:text = "@string/question3"
         android:gravity = "center"
         android:paddingTop = "50dp"/>
 
@@ -73,12 +73,12 @@
             android:id="@+id/radioTrue3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text = "True"/>
+            android:text = "@string/yes"/>
         <RadioButton
             android:id="@+id/radioFalse3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text = "False"/>
+            android:text = "@string/no"/>
     </RadioGroup>
 
     <Button
@@ -86,7 +86,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text = "submit"/>
+        android:text = "@string/submit"/>
 
 
 </LinearLayout>

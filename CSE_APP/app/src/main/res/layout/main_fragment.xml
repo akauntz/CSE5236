@@ -6,16 +6,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.main.MainFragment">
+
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center">
+
     <TextView
         android:id="@+id/message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign In"
+        android:text="@string/sign_in"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,7 +30,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text = "Email:"/>
+        android:text = "@string/email"/>
     <EditText
         android:id="@+id/userLogin"
         android:layout_width="150dp"
@@ -43,7 +45,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text = "Password:"/>
+            android:text = "@string/password"/>
         <EditText
             android:id="@+id/userPassword"
             android:layout_width="150dp"
@@ -62,12 +64,12 @@
         android:id="@+id/login_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Login"/>
+        android:text="@string/login"/>
     <Button
         android:id="@+id/signUp_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sign Up"/>
+        android:text="@string/sign_up"/>
 </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

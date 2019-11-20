@@ -1,5 +1,55 @@
 <resources>
     <string name="app_name">CSE_APP</string>
+    <string name="sign_out">SIGN OUT</string>
+    <string name="delete_account">DELETE_ACCOUNT</string>
+    <string name="welcome">Welcome to +Plus</string>
+    <string name="setting">Settings</string>
+    <string name="matches">Check Matches</string>
+    <string name="location">location</string>
+    <string name="get_location">Get Location</string>
+    <string name="password_hint">Enter Updated Password Here</string>
+    <string name="update_password">Update Password</string>
+
+    <string name="sign_in">Sign In</string>
+    <string name="email">Email:</string>
+    <string name="password">Password:</string>
+    <string name="login">Login</string>
+    <string name="sign_up">Sign Up</string>
+    
+    <string name="first_name">First Name</string>
+    <string name="match">% Match</string>
+    
+    <string name="contact_info">Contact Info</string>
+    <string name="perfect_match">Perfect Match</string>
+    <string name="list_of_match">Here is a list of everybody you have matched with</string>
+    <string name="return_home">Return Home</string>
+
+    <string name="pair_email">Email</string>
+    <string name="pair_match">Match %</string>
+
+    <string name="top_match">Top Matches</string>
+    <string name="name">Name</string>
+    <string name="home">Home</string>
+
+    <string name="yes">True</string>
+    <string name="no">False</string>
+    <string name="submit">submit</string>
+    <string name="question1">You prefer C over Java</string>
+    <string name="question2">You get your memes from Reddit, not Instagram</string>
+    <string name="question3">You tend to comment as you code, not at the end</string>
+
+    <string name="gender">Gender</string>
+    <string name="female">Female</string>
+    <string name="male">Male</string>
+    <string name="other">Other</string>
+    <string name="age">Age</string>
+    <string name="pair_password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="create_account">Create Account</string>
+
+    <string name="english">English</string>
+    <string name="chinese">Chinese</string>
+
     <string-array name = "matching_questions">
         <item>Question 1</item>
         <item>Question 2</item>
