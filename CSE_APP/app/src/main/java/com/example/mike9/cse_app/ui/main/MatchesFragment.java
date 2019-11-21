@@ -47,7 +47,7 @@ public class MatchesFragment extends Fragment implements View.OnClickListener  {
                 //startActivity(new Intent(activity, HomeActivity.class));
                 break;
             case R.id.check_matched_button:
-                    startActivity(new Intent(getActivity(), NoConnectionActivity.class));
+                    startActivity(new Intent(getActivity(), MatchedActivity.class));
                 break;
         }
     }

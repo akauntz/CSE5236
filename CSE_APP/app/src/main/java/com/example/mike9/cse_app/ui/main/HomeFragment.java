@@ -80,24 +80,27 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.deleteAcct_button:
+                if(InternetCheck.isConnected(getActivity())) {
+                    db.collection("users").document(email)
+                            .delete()
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.w(TAG, "Error deleting document", e);
+                                }
+                            });
 
-                db.collection("users").document(email)
-                        .delete()
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                Log.d(TAG, "DocumentSnapshot successfully deleted!");
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.w(TAG, "Error deleting document", e);
-                            }
-                        });
 
-
-                startActivity(new Intent(activity, MainActivity.class));
+                    startActivity(new Intent(activity, MainActivity.class));
+                }else{
+                    startActivity(new Intent(activity,NoConnectionActivity.class));
+                }
                 break;
             case R.id.signOut_button:
                 startActivity(new Intent(activity, MainActivity.class));

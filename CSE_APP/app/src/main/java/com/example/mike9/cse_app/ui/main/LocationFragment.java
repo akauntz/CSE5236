@@ -19,7 +19,9 @@ import androidx.fragment.app.Fragment;
 
 import com.example.mike9.cse_app.DataCache;
 import com.example.mike9.cse_app.GetLocation;
+import com.example.mike9.cse_app.InternetCheck;
 import com.example.mike9.cse_app.LoadingActivity;
+import com.example.mike9.cse_app.NoConnectionActivity;
 import com.example.mike9.cse_app.R;
 import com.example.mike9.cse_app.ShowMessage;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -77,30 +79,34 @@ public class LocationFragment extends Fragment implements View.OnClickListener{
                 break;
 
             case R.id.ConfirmLocation_button:
-                if(location == ""){ //TODO: add more confirmation
-                    ShowMessage.show(getActivity(), getActivity().getString(R.string.enter_state));
-                } else {
-                    final DocumentReference docRef = db.collection("users").document(email);
-                    docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            if (task.isSuccessful()) {
-                                DocumentSnapshot document = task.getResult();
-                                if (document.exists()) {
-                                    Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                                    docRef.update("state", location);
+                if(InternetCheck.isConnected(getActivity())) {
+                    if (location == "") { //TODO: add more confirmation
+                        ShowMessage.show(getActivity(), getActivity().getString(R.string.enter_state));
+                    } else {
+                        final DocumentReference docRef = db.collection("users").document(email);
+                        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    DocumentSnapshot document = task.getResult();
+                                    if (document.exists()) {
+                                        Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                                        docRef.update("state", location);
+                                    } else {
+                                        Log.d(TAG, "No such document");
+                                    }
                                 } else {
-                                    Log.d(TAG, "No such document");
+                                    Log.d(TAG, "get failed with ", task.getException());
                                 }
-                            } else {
-                                Log.d(TAG, "get failed with ", task.getException());
                             }
-                        }
-                    });
-                    Intent loadIntent = new Intent(getActivity(), LoadingActivity.class);
-                    loadIntent.putExtra("EMAIL", email);
-                    loadIntent.putExtra("STATE", location);
-                    loadIntent.putExtra("POINTS", points);
-                    startActivity(loadIntent);
+                        });
+                        Intent loadIntent = new Intent(getActivity(), LoadingActivity.class);
+                        loadIntent.putExtra("EMAIL", email);
+                        loadIntent.putExtra("STATE", location);
+                        loadIntent.putExtra("POINTS", points);
+                        startActivity(loadIntent);
+                    }
+                }else{
+                    startActivity(new Intent(getActivity(), NoConnectionActivity.class));
                 }
                 break;
         }
