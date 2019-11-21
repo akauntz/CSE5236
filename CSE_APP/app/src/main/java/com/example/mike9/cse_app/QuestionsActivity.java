@@ -1,23 +1,17 @@
 package com.example.mike9.cse_app;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 
-import com.example.mike9.cse_app.ui.main.HomeFragment;
-import com.example.mike9.cse_app.ui.main.MainFragment;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.mike9.cse_app.ui.main.QuestionsFragment;
-import com.example.mike9.cse_app.ui.main.SignUpFragment;
 
 public class QuestionsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle bundle = new Bundle();
-        bundle.putString("EMAIL", getIntent().getExtras().getString("EMAIL"));
         bundle.putInt("NUMQUESTIONS", getIntent().getExtras().getInt("NUMQUESTIONS"));
         QuestionsFragment fragment = new QuestionsFragment();
         fragment.setArguments(bundle);

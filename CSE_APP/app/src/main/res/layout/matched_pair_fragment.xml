@@ -10,19 +10,19 @@
             android:id="@+id/matched_first_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text = "First Name"
+            android:text = "@string/first_name"
             android:paddingLeft="20dp"/>
         <TextView
             android:id="@+id/matched_contact"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text = "Email"
+            android:text = "@string/email"
             android:paddingLeft="30dp"/>
         <TextView
             android:id="@+id/matched_match_percent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text = "Match %"
+            android:text = "@string/match"
             android:paddingLeft="30dp"/>
     </LinearLayout>
 

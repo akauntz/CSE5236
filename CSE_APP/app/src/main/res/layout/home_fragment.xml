@@ -11,90 +11,35 @@
             android:id = "@+id/signOut_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text = "Sign Out"/>
+            android:text = "@string/sign_out"/>
         <Button
             android:id="@+id/deleteAcct_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Delete Account"/>
+            android:text="@string/delete_account"/>
     </LinearLayout>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text = "Welcome to +Plus"
+        android:text = "@string/welcome"
         android:layout_gravity = "center"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text = "Settings"
+        android:text = "@string/setting"
         android:layout_gravity = "center"/>
-    <!--<TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Interested in:"/>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft = "50dp"
-        android:orientation = "vertical">
-    <CheckBox
-        android:id = "@+id/women_checkBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Women"/>
-    <CheckBox
-        android:id = "@+id/men_checkBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Men"/>
-    <CheckBox
-        android:id = "@+id/other_checkBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Other"/>
-    </LinearLayout>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text = "Profile:"/>
-    <Switch
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textOn = "Visible"
-        android:textOff="Invisible"
-        android:layout_gravity = "center"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text = "Age Range:"/>
-    <SeekBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:max = "40"
-        android:min = "18"/> -->
     <Button
         android:id="@+id/check_matches_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Check Matches"
+        android:text="@string/matches"
         android:layout_gravity="center"/>
-    <TextView
-        android:id="@+id/locationText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text = "location"
-        android:layout_gravity = "center"/>
-    <Button
-        android:id = "@+id/location_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Get Location"/>
+
     <EditText
         android:id = "@+id/updatePass_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint = "Enter Updated Password Here"
+        android:hint = "@string/password_hint"
         android:layout_gravity="center"
         android:inputType = "textPassword"/>
     <Button
@@ -102,6 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Update Password"/>
+        android:text="@string/update_password"/>
+
 
 </LinearLayout>

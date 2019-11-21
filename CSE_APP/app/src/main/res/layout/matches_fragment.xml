@@ -5,32 +5,33 @@
 <TextView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text = "Top Matches"
+    android:text = "@string/top_match"
     android:gravity="center"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text = "Name"
+            android:text = "@string/name"
             android:paddingLeft="20dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text = "% Match"
-            android:paddingLeft="30dp"/>
-        <!--<TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text = "Match"
+            android:text = "@string/match"
             android:paddingLeft="30dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text = "Nah"
-            android:paddingLeft="30dp"/>-->
+            android:text = "@string/match2"
+            android:paddingLeft="30dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text = "@string/nah"
+            android:paddingLeft="30dp"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -44,20 +45,21 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-       <!-- <Button
+        android:orientation="horizontal"
+        android:gravity="center">
+        <Button
             android:id="@+id/check_matched_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity = "center"
-            android:text="Check Matched"/>-->
+            android:text="@string/check_matched"/>
 
         <Button
             android:id="@+id/return_home_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity = "center"
-            android:text="Home"/>
+            android:text="@string/home"/>
     </LinearLayout>
     </LinearLayout>
 </LinearLayout>

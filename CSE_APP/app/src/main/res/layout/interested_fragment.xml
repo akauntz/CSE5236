@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <TextView
+        android:id = "@+id/interestText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text = "@string/interestQ"
+        android:gravity = "center"
+        android:paddingTop = "50dp"/>
+
+    <RadioGroup
+        android:id = "@+id/radioGroupInterest"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation = "vertical"
+        android:paddingTop = "40dp"
+        android:gravity = "center">
+        <RadioButton
+            android:id="@+id/radioMen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text = "@string/men"/>
+        <RadioButton
+            android:id="@+id/radioWomen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text = "@string/women"/>
+        <RadioButton
+            android:id="@+id/radioOther"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text = "@string/other"/>
+    </RadioGroup>
+
+    <Button
+        android:id = "@+id/submitInterest_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text = "@string/submit"/>
+
+</LinearLayout>

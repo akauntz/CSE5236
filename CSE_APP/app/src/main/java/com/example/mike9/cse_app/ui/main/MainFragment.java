@@ -1,16 +1,8 @@
 package com.example.mike9.cse_app.ui.main;
 
-import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,20 +10,24 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
+
+import com.example.mike9.cse_app.DataCache;
 import com.example.mike9.cse_app.HomeActivity;
-import com.example.mike9.cse_app.MainActivity;
+import com.example.mike9.cse_app.InternetCheck;
+import com.example.mike9.cse_app.MatchCalc;
 import com.example.mike9.cse_app.QuestionsActivity;
 import com.example.mike9.cse_app.R;
+import com.example.mike9.cse_app.ShowMessage;
 import com.example.mike9.cse_app.SignUpActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.Map;
 
 import static android.content.ContentValues.TAG;
 
@@ -43,7 +39,6 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     public static MainFragment newInstance() {
         return new MainFragment();
     }
-    public Map<String, String> user;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Nullable
@@ -51,6 +46,9 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.main_fragment, container, false);
+        Log.d("TEST STUFF:", MatchCalc.getPercent(21, 10) + "");
+        Log.d("TEST STUFF:", MatchCalc.getPercent(27, 10) + "");
+        Log.d("TEST STUFF:", MatchCalc.getPercent(21, 27) + "");
         Button matchesButton = v.findViewById(R.id.matches_button);
         matchesButton.setOnClickListener((View.OnClickListener) this);
         Button signUpButton = v.findViewById(R.id.signUp_button);
@@ -66,8 +64,6 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
-        // TODO: Use the ViewModel? -> not my TODO but leaving in case one of you two
-        //I think this was just part of the template, so don't think we need anything here
     }
 
     @Override
@@ -75,60 +71,58 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         final Activity activity = getActivity();
         switch (v.getId()){
             case R.id.login_button:
-                final String userEmail = email.getText().toString();
+                String temp = "no_email";
+                if(email.getText().toString().trim().length() > 0){
+                    temp = email.getText().toString();
+                }
+                final String userEmail = temp;
                 DocumentReference docRef = db.collection("users").document(userEmail);
-                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>(){
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            DocumentSnapshot document = task.getResult();
-                            if (document.exists()) {
-                                Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                                String storedPassword = document.get("password").toString();
+                    docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                DocumentSnapshot document = task.getResult();
+                                if (document.exists()) {
+                                    Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                                    String storedPassword = document.get("password").toString();
 
-                                if(storedPassword.equals(password.getText().toString())) {
-                                    Log.d(TAG, "Correct password");
-                                    //String questions[] = getResources().getStringArray(R.array.matching_questions);
-                                    //int questionNum = 1;
+                                    if (storedPassword.equals(password.getText().toString())) {
+                                        final String fName = document.get("name").toString();
+                                        DataCache.updateName(fName);
+                                        DataCache.updateEmail(userEmail);
+                                        Log.d(TAG, "Correct password");
+                                        Log.d("Answer: ", document.get("answered?").toString());
+                                        Log.d("Answer: ", document.get("answered?").toString().equals("false")+"");
+                                        Log.d("Answer: ", document.get("answered?").toString().equals("true")+"");
 
-                                    if (document.get("answered?").toString().equals("false")) {
-                                        Intent questionsIntent = new Intent(activity, QuestionsActivity.class);
-                                        questionsIntent.putExtra("EMAIL", email.getText().toString());
-                                        //questionsIntent.putExtra("NUMQUESTIONS", questionNum);
-                                        startActivity(questionsIntent);
+                                        if (document.get("answered?").toString().equals("false")) {
+                                            Intent questionsIntent = new Intent(activity, QuestionsActivity.class);
+                                            questionsIntent.putExtra("NUMQUESTIONS", 0);
+                                            startActivity(questionsIntent);
+                                        } else {
+                                            Intent logInIntent = new Intent(activity, HomeActivity.class);
+                                            logInIntent.putExtra("EMAIL", email.getText().toString());
+                                            logInIntent.putExtra("FIRSTNAME", fName);
+                                            startActivity(logInIntent);
+                                        }
                                     } else {
-                                        //logIn
-                                        Intent logInIntent = new Intent(activity, HomeActivity.class);
-                                        logInIntent.putExtra("EMAIL", email.getText().toString());
-                                        startActivity(logInIntent);
+                                        Log.d(TAG, "Password Mismatch");
+                                        ShowMessage.show(getActivity(), getActivity().getString(R.string.incorrect_login));
                                     }
-                                } else{
-                                    Log.d(TAG, "Password Mismatch");
-                                }
 
+                                } else {
+                                    ShowMessage.show(getActivity(), getActivity().getString(R.string.no_account));
+                                    Log.d(TAG, "No such document");
+                                }
                             } else {
-                                Log.d(TAG, "No such document");
+                                Log.d(TAG, "get failed with ", task.getException());
                             }
-                        } else {Log.d(TAG, "get failed with ", task.getException());
                         }
-                    }
-                });
+                    });
 
                 break;
             case R.id.signUp_button:
-                //signUp
+                Log.d("InternetConnection: ", "Connected?"+ InternetCheck.isConnected(activity));
                 startActivity(new Intent(activity, SignUpActivity.class));
-//                FragmentManager fm = getFragmentManager();
-//                Fragment fragment = new SignUpFragment();
-//                fm.beginTransaction().replace(R.id.container,fragment).commit(); //addToBackStack("signup_fragment")?
-                break;
-            case R.id.matches_button:
-                Log.d("buttonClick", "clicked Button");
-                int test_int = 7;
-                Log.d("checkpoint3", "Look at the step through here 1");
-                test_int = 12;
-                Log.d("checkpoint3", "Now we step here to 2");
-                test_int = 5;
-                Log.d("checkpoint3", "Now we step here to 3");
                 break;
         }
 
