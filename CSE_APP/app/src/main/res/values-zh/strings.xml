@@ -73,31 +73,31 @@
     <string name="network_error">您现在还没有联网 请一会再试试</string>
     <string name="try_again">请再试一次</string>
 
-    <string name="no_connection">No internet connection. Request failed. Please try again</string>
+    <string name="no_connection">网络断开连接 请求失效 请再试一遍</string>
 
-    <string name="no_internet">Still no internet</string>
+    <string name="no_internet">网络断开连接</string>
 
-    <string name="pass_update">Password Updated</string>
+    <string name="pass_update">密码更新</string>
 
-    <string name="select_interest">Please select an interest.</string>
+    <string name="select_interest">请选择您的兴趣</string>
 
-    <string name="enter_state">Please enter a state</string>
+    <string name="enter_state">请输入您所在的州</string>
 
-    <string name="incorrect_login">Incorrect Login</string>
+    <string name="incorrect_login">错误的登录信息</string>
 
-    <string name="no_account">Account does not exist</string>
+    <string name="no_account">这个账号不存在</string>
 
-    <string name="select_option">Select an option</string>
+    <string name="select_option">选择其中一种登录方式</string>
 
-    <string name="missing_fields">Missing required fields.</string>
+    <string name="missing_fields">缺少信息</string>
 
-    <string name="pass_mismatch">Error, passwords don\'t match.</string>
+    <string name="pass_mismatch">登录错误 密码和用户名不匹配</string>
 
-    <string name="invalid_email">Invalid email.</string>
+    <string name="invalid_email">无效的邮箱账号</string>
 
-    <string name="be_older">Must be 18 or older</string>
+    <string name="be_older">用户必须18岁</string>
 
-    <string name="email_taken">Email already used</string>
+    <string name="email_taken">这个邮箱已经注册了</string>
 
     <string-array name = "matching_questions">
         <item>相比Java，您更喜欢C</item>
