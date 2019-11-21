@@ -73,7 +73,7 @@ public class MatchesActivity extends AppCompatActivity {
         });
     }
 
-    private String makeInt(String str){
+    static public String makeInt(String str){
         int strEnd = 0;
         while (strEnd<str.length() && str.charAt(strEnd)!='.'){
             strEnd++;
